@@ -249,7 +249,7 @@ ArrayList<Goods> todayImageList = (ArrayList<Goods>) request.getAttribute("today
  %> <%
  	}
  %> <a
-								href="noticeDetail.do?notice_num=<%=articleList.get(i).getNotice_num()%>&page=<%=nowPage%>">
+								href="noticeDetail.do?notice_num=<%=articleList.get(i).getNotice_num()%>&page=<%=nowPage%>" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
 									<%=articleList.get(i).getNotice_subject()%>
 							</a>
 							</td>
@@ -261,14 +261,14 @@ ArrayList<Goods> todayImageList = (ArrayList<Goods>) request.getAttribute("today
 						<%
 							}
 						%>
-					
+
 				</table>
 					<!-- Modal -->
 					<form action="noticeList.do">
 						<div class="modal fade" id="staticBackdrop"
 							data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
 							aria-labelledby="staticBackdropLabel" aria-hidden="true">
-							<div class="modal-dialog">
+							<div class="modal-dialog modal-lg">
 								<div class="modal-content">
 									<div class="modal-header">
 										<h5 class="modal-title" id="staticBackdropLabel">ezCOM
@@ -762,4 +762,4 @@ ArrayList<Goods> todayImageList = (ArrayList<Goods>) request.getAttribute("today
 		src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script src="js/addr.js"></script>
 </body>
-</html>
+</html> 
