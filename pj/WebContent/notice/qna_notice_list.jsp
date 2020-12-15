@@ -122,6 +122,7 @@ ArrayList<Goods> todayImageList = (ArrayList<Goods>) request.getAttribute("today
 	</nav>
 	<!-- end -->
 
+	<!-- 2020/12/15 게시판 리스트 시작 -->
 	<div id="main" class = "body__margin-top">
 		<div class="container pt-4 mt-4">
 			<div class="card text-center m-3 ">
@@ -185,6 +186,7 @@ ArrayList<Goods> todayImageList = (ArrayList<Goods>) request.getAttribute("today
 					</ul>
 				</nav>
 			</div>
+			<!-- 리스트 끝 -->
 
 			<!-- 2020-12-02 haesu -->
 			<div class="controller">

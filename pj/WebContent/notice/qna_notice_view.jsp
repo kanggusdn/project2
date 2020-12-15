@@ -119,7 +119,7 @@ String nowPage = (String) request.getAttribute("page");
 		</form>
 	</nav>
 	<!-- end -->
-	<!-- 2020/12/8 게시판 상세보기 -->
+	<!-- 2020/12/8 강현우 게시판 상세보기 시작 -->
 	<div class="container pt-4 body__margin-top">
 		<div class="text-center m-3 ">
 			<section id="articleForm">

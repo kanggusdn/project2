@@ -249,7 +249,7 @@ ArrayList<Goods> todayImageList = (ArrayList<Goods>) request.getAttribute("today
  %> <%
  	}
  %> <a
-								href="noticeDetail.do?notice_num=<%=articleList.get(i).getNotice_num()%>&page=<%=nowPage%>" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+								href="noticeDetail.do?notice_num=<%=articleList.get(i).getNotice_num()%>&page=<%=nowPage%>" data-bs-toggle="modal" data-bs-target="#staticBackdrop" data-num="<%=articleList.get(i).getNotice_num() %>" class="noticeViewLink">
 									<%=articleList.get(i).getNotice_subject()%>
 							</a>
 							</td>
@@ -271,20 +271,12 @@ ArrayList<Goods> todayImageList = (ArrayList<Goods>) request.getAttribute("today
 							<div class="modal-dialog modal-lg">
 								<div class="modal-content">
 									<div class="modal-header">
-										<h5 class="modal-title" id="staticBackdropLabel">ezCOM
-											공지사항</h5>
+										<h5 class="modal-title" id="staticBackdropLabel">ezCOM 공지사항</h5>
 									</div>
 									<div class="modal-body">
-										<table class="table table-hover">
-											<thead>
-												<tr>
-													<td>번호</td>
-													<td>제목</td>
-													<td>작성자</td>
-													<td>날짜</td>
-													<td>조회수</td>
-												</tr>
-										</table>
+										<p id="noticeName"></p>
+										<h6 id="noticeSubject"></h6>
+										<p id="noticeContent"></p>
 									</div>
 									<div class="modal-footer">
 										<button type="button" class="btn btn-primary"
@@ -762,4 +754,4 @@ ArrayList<Goods> todayImageList = (ArrayList<Goods>) request.getAttribute("today
 		src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script src="js/addr.js"></script>
 </body>
-</html> 
+</html>
