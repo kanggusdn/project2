@@ -282,6 +282,10 @@ ArrayList<Goods> todayImageList = (ArrayList<Goods>) request.getAttribute("today
 									<div class="modal-header">
 										<h5 class="modal-title" id="staticBackdropLabel">ezCOM
 											공지사항</h5>
+										<button type="button" class="close" data-bs-dismiss="modal"
+											aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
 									</div>
 									<div class="modal-body">
 										<p id="noticeName"></p>
@@ -463,8 +467,9 @@ ArrayList<Goods> todayImageList = (ArrayList<Goods>) request.getAttribute("today
 								class="form-control" id="passwd" name="passwd">
 						</div>
 						<button type="submit" class="btn btn-primary">로그인</button>
-						<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#joinModal"
-							id="loginModalJoinBtn" data-dismiss="modal">회원가입</button>
+						<button type="button" class="btn btn-primary" data-toggle="modal"
+							data-target="#joinModal" id="loginModalJoinBtn"
+							data-dismiss="modal">회원가입</button>
 						<button type="button" class="btn btn-secondary"
 							data-dismiss="modal">취소</button>
 					</form>
