@@ -7,10 +7,10 @@
 	noticeDAO.setConnection(conn);
 	NoticeBean article = noticeDAO.selectArticle(Integer.parseInt(request.getParameter("selectArticle")));
 	out.println("[");
-	out.println(article.getNotice_name());
+	out.println("\""+article.getNotice_name().trim()+"\"");
 	out.println(",");
-	out.println(article.getNotice_subject());
+	out.println("\""+article.getNotice_subject().trim()+"\"");
 	out.println(",");
-	out.println(article.getNotice_content());
+	out.println("\""+article.getNotice_content().trim()+"\"");
 	out.println("]");
 %>

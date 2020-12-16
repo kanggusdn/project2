@@ -7,13 +7,13 @@ $(function() {
 		let num = $(this).index();
 		$(".tab-info").eq(num).removeClass("d-none");
 	});
-	$("#loginModalJoinBtn").click(function() {
-		$('#loginModal').modal('hide');
-		$('#joinModal').modal('show');
-	});
+	
+	/*
+		2020/12/15 공지사항 모달 시작
+	 */
 	$(".noticeViewLink").click(function(){
 		$.get("ajaxNotice.jsp", {"selectArticle":$(this).attr("data-num")}, function(data){
-			var view = jQuery.parseJSON(data);
+			var view = $.parseJSON(data);
 			console.log(view);
 			$("#noticeName").text(view[0]);
 			$("#noticeSubject").text(view[1]);
@@ -21,3 +21,4 @@ $(function() {
 		});
 	});
 });
+	/* 모달 끝 */

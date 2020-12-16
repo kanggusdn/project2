@@ -5,7 +5,7 @@
 <%@ page import="vo.NoticeBean"%>
 <%@ page import="java.util.HashMap,java.util.ArrayList"%>
 <%
-ArrayList<NoticeBean> articleList = (ArrayList<NoticeBean>) request.getAttribute("articleList");
+	ArrayList<NoticeBean> articleList = (ArrayList<NoticeBean>) request.getAttribute("articleList");
 PageInfo pageInfo = (PageInfo) request.getAttribute("pageInfo");
 int listCount = pageInfo.getListCount();
 int nowPage = pageInfo.getPage();
@@ -222,25 +222,24 @@ ArrayList<Goods> todayImageList = (ArrayList<Goods>) request.getAttribute("today
 				</div>
 				<div class="card-body tab-info">
 					<table class="table table-hover">
+						<thead>
+							<tr>
+								<td>번호</td>
+								<td>제목</td>
+								<td>작성자</td>
+								<td>날짜</td>
+								<td>조회수</td>
+							</tr>
+							<%
+								for (int i = 0; i < articleList.size(); i++) {
+							%>
+							<tr>
+								<td><%=articleList.get(i).getNotice_num()%></td>
 
-					<thead>
-						<tr>
-							<td>번호</td>
-							<td>제목</td>
-							<td>작성자</td>
-							<td>날짜</td>
-							<td>조회수</td>
-						</tr>
-						<%
-							for (int i = 0; i < articleList.size(); i++) {
-						%>
-						<tr>
-							<td><%=articleList.get(i).getNotice_num()%></td>
-
-							<td>
-								<%
-									if (articleList.get(i).getNotice_re_lev() != 0) {
-								%> <%
+								<td>
+									<%
+										if (articleList.get(i).getNotice_re_lev() != 0) {
+									%> <%
  	for (int a = 0; a <= articleList.get(i).getNotice_re_lev() * 2; a++) {
  %> &nbsp; <%
  	}
@@ -249,20 +248,30 @@ ArrayList<Goods> todayImageList = (ArrayList<Goods>) request.getAttribute("today
  %> <%
  	}
  %> <a
-								href="noticeDetail.do?notice_num=<%=articleList.get(i).getNotice_num()%>&page=<%=nowPage%>" data-bs-toggle="modal" data-bs-target="#staticBackdrop" data-num="<%=articleList.get(i).getNotice_num() %>" class="noticeViewLink">
-									<%=articleList.get(i).getNotice_subject()%>
-							</a>
-							</td>
+									href="noticeDetail.do?notice_num=<%=articleList.get(i).getNotice_num()%>&page=<%=nowPage%>"
+									data-bs-toggle="modal" data-bs-target="#staticBackdrop"
+									data-num="<%=articleList.get(i).getNotice_num()%>"
+									class="noticeViewLink"> <%=articleList.get(i).getNotice_subject()%>
+								</a>
+								</td>
 
-							<td><%=articleList.get(i).getNotice_name()%></td>
-							<td><%=articleList.get(i).getNotice_date()%></td>
-							<td><%=articleList.get(i).getNotice_readcount()%></td>
-						</tr>
-						<%
-							}
-						%>
-
-				</table>
+								<td><%=articleList.get(i).getNotice_name()%></td>
+								<td><%=articleList.get(i).getNotice_date()%></td>
+								<td><%=articleList.get(i).getNotice_readcount()%></td>
+							</tr>
+							<%
+								}
+							%>
+						</thead>
+					</table>
+					<%
+						if (loginMember != null && loginMember.getId().equals("admin")) {
+					%>
+					<button type="button" class="btn btn-primary"
+						data-bs-dismiss="modal">글쓰기</button>
+					<%
+						}
+					%>
 					<!-- Modal -->
 					<form action="noticeList.do">
 						<div class="modal fade" id="staticBackdrop"
@@ -271,7 +280,8 @@ ArrayList<Goods> todayImageList = (ArrayList<Goods>) request.getAttribute("today
 							<div class="modal-dialog modal-lg">
 								<div class="modal-content">
 									<div class="modal-header">
-										<h5 class="modal-title" id="staticBackdropLabel">ezCOM 공지사항</h5>
+										<h5 class="modal-title" id="staticBackdropLabel">ezCOM
+											공지사항</h5>
 									</div>
 									<div class="modal-body">
 										<p id="noticeName"></p>
@@ -280,8 +290,13 @@ ArrayList<Goods> todayImageList = (ArrayList<Goods>) request.getAttribute("today
 									</div>
 									<div class="modal-footer">
 										<button type="button" class="btn btn-primary"
-											data-bs-dismiss="modal">확인</button>
-										<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+											data-bs-dismiss="modal">수정</button>
+										<button type="button" class="btn btn-primary"
+											data-bs-dismiss="modal">삭제</button>
+										<button type="button" class="btn btn-primary"
+											data-bs-dismiss="modal">목록</button>
+										<button type="button" class="btn btn-secondary"
+											data-bs-dismiss="modal">닫기</button>
 									</div>
 								</div>
 							</div>
@@ -448,8 +463,8 @@ ArrayList<Goods> todayImageList = (ArrayList<Goods>) request.getAttribute("today
 								class="form-control" id="passwd" name="passwd">
 						</div>
 						<button type="submit" class="btn btn-primary">로그인</button>
-						<button type="button" class="btn btn-primary"
-							id="loginModalJoinBtn">회원가입</button>
+						<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#joinModal"
+							id="loginModalJoinBtn" data-dismiss="modal">회원가입</button>
 						<button type="button" class="btn btn-secondary"
 							data-dismiss="modal">취소</button>
 					</form>
