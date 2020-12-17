@@ -17,6 +17,9 @@ int endPage = pageInfo.getEndPage();
 	Member loginMember = (Member) session.getAttribute("loginMember");
 ArrayList<Goods> todayImageList = (ArrayList<Goods>) request.getAttribute("todayImageList");
 %>
+<%
+	NoticeBean article = (NoticeBean) request.getAttribute("article");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -40,7 +43,8 @@ ArrayList<Goods> todayImageList = (ArrayList<Goods>) request.getAttribute("today
 <link rel="stylesheet" href="css/style.css" />
 <title>컴퓨터 홈 쇼핑 사이트</title>
 </head>
-<body>
+<body oncontextmenu="return false" ondragstart="return false"
+	onselectstart="return false">
 	<!-- 2020-12-02 haesu -->
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top"
 		id="header">
@@ -267,45 +271,51 @@ ArrayList<Goods> todayImageList = (ArrayList<Goods>) request.getAttribute("today
 					<%
 						if (loginMember != null && loginMember.getId().equals("admin")) {
 					%>
-					<button type="button" class="btn btn-primary"
-						data-bs-dismiss="modal">글쓰기</button>
+					<button type="button" class="btn btn-primary" data-toggle="modal"
+						data-target="#noticeWriteModal">글쓰기</button>
 					<%
 						}
 					%>
 					<!-- Modal -->
-					<form action="noticeList.do">
-						<div class="modal fade" id="staticBackdrop"
-							data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-							aria-labelledby="staticBackdropLabel" aria-hidden="true">
-							<div class="modal-dialog modal-lg">
-								<div class="modal-content">
-									<div class="modal-header">
-										<h5 class="modal-title" id="staticBackdropLabel">ezCOM
-											공지사항</h5>
-										<button type="button" class="close" data-bs-dismiss="modal"
-											aria-label="Close">
-											<span aria-hidden="true">&times;</span>
-										</button>
-									</div>
+					<div class="modal fade" id="staticBackdrop"
+						data-bs-keyboard="false" tabindex="-1"
+						aria-labelledby="staticBackdropLabel" aria-hidden="true">
+						<div class="modal-dialog modal-lg">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="staticBackdropLabel">ezCOM
+										공지사항</h5>
+									<button type="button" class="close" data-bs-dismiss="modal"
+										aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<form action="noticeList.do">
 									<div class="modal-body">
 										<p id="noticeName"></p>
 										<h6 id="noticeSubject"></h6>
 										<p id="noticeContent"></p>
 									</div>
-									<div class="modal-footer">
-										<button type="button" class="btn btn-primary"
-											data-bs-dismiss="modal">수정</button>
-										<button type="button" class="btn btn-primary"
-											data-bs-dismiss="modal">삭제</button>
-										<button type="button" class="btn btn-primary"
-											data-bs-dismiss="modal">목록</button>
-										<button type="button" class="btn btn-secondary"
-											data-bs-dismiss="modal">닫기</button>
-									</div>
+								</form>
+								<div class="modal-footer">
+									<%
+										if (loginMember != null && loginMember.getId().equals("admin")) {
+									%>
+									<button type="button" class="btn btn-primary" id="textfix"
+										data-toggle="modal" data-target="#noticeModifyModal" data-bs-dismiss="modal"
+										data-dismiss="modal">글수정</button>
+									<button type="button" class="btn btn-primary" id="textdelete"
+										data-toggle="modal" data-target="#noticeDeleteModal" data-bs-dismiss="modal"
+										data-dismiss="modal">글삭제</button>
+									<%
+										}
+									%>
+									<button type="button" class="btn btn-secondary"
+										data-bs-dismiss="modal">닫기</button>
 								</div>
 							</div>
 						</div>
-					</form>
+					</div>
 				</div>
 				<div class="card-body d-none tab-info mx-auto">
 					<div class="card-deck card__deck-margin">
@@ -401,44 +411,42 @@ ArrayList<Goods> todayImageList = (ArrayList<Goods>) request.getAttribute("today
 				<span class="text-center">최근본상품</span>
 
 				<div></div>
-
 			</div>
 		</div>
-
-		<footer class="text-center text-white footer__color">
-			<div class="footer-above">
-				<div class="container pt-4">
-					<div class="row">
-						<div class="footer-col col-md-4">
-							<h3 style="color: white;">위치</h3>
-							<p>
-								영남기술교육원<br />대구광역시 달서구
-							</p>
-						</div>
-						<div class="footer-col col-md-4">
-							<h3 style="color: white;">소셜 미디어</h3>
-							<a href="#" class="btn btn-light m-2"><img
-								src="img/facebook.svg"></a> <a href="#"
-								class="btn btn-light m-2"><img src="img/youtube.svg"></a>
-							<a href="#" class="btn btn-light m-2"><img
-								src="img/twitter.svg"></a> <a href="#"
-								class="btn btn-light m-2"><img src="img/twitch.svg"></a> <a
-								href="#" class="btn btn-light m-2"><img
-								src="img/instagram.svg"></a>
-						</div>
-						<div class="footer-col col-md-4">
-							<h3 style="color: white;">개발자 한마디</h3>
-							<p>언제든지 연락주세요!!</p>
-						</div>
+	</div>
+	<footer class="text-center text-white footer__color">
+		<div class="footer-above">
+			<div class="container pt-4">
+				<div class="row">
+					<div class="footer-col col-md-4">
+						<h3 style="color: white;">위치</h3>
+						<p>
+							영남기술교육원<br />대구광역시 달서구
+						</p>
+					</div>
+					<div class="footer-col col-md-4">
+						<h3 style="color: white;">소셜 미디어</h3>
+						<a href="#" class="btn btn-light m-2"><img
+							src="img/facebook.svg"></a> <a href="#"
+							class="btn btn-light m-2"><img src="img/youtube.svg"></a> <a
+							href="#" class="btn btn-light m-2"><img src="img/twitter.svg"></a>
+						<a href="#" class="btn btn-light m-2"><img
+							src="img/twitch.svg"></a> <a href="#" class="btn btn-light m-2"><img
+							src="img/instagram.svg"></a>
+					</div>
+					<div class="footer-col col-md-4">
+						<h3 style="color: white;">개발자 한마디</h3>
+						<p>언제든지 연락주세요!!</p>
 					</div>
 				</div>
 			</div>
-			<div class="footer-below pb-4">
-				<div class="container text-center">
-					<div>Copyright &copy; JP 2020. All Right Reserved.</div>
-				</div>
+		</div>
+		<div class="footer-below pb-4">
+			<div class="container text-center">
+				<div>Copyright &copy; JP 2020. All Right Reserved.</div>
 			</div>
-		</footer>
+		</div>
+	</footer>
 	</div>
 	<!-- end -->
 
@@ -449,7 +457,7 @@ ArrayList<Goods> todayImageList = (ArrayList<Goods>) request.getAttribute("today
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">회원가입</h5>
+					<h5 class="modal-title" id="exampleModalLabel">로그인</h5>
 					<button type="button" class="close" data-dismiss="modal"
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
@@ -547,15 +555,157 @@ ArrayList<Goods> todayImageList = (ArrayList<Goods>) request.getAttribute("today
 		</div>
 	</div>
 
+	<!-- 2020/12/17 강현우 공지사항 글쓰기 모달 -->
+	<div class="modal fade" id="noticeWriteModal" tabindex="-1"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">공지사항 글쓰기</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form action="noticeWritePro.do" method="post"
+						enctype="multipart/form-data" name="noticeform">
+						<div class="text-center">
+							<h2>ezCom 공지글 등록</h2>
+						</div>
+						<div class="form-col">
+							<div class="form-group">
+								<label for="notice_name">글쓴이</label> <input type="text"
+									class="form-control" id="notice_name" name="notice_name"
+									required="required" />
+							</div>
+							<div class="form-group">
+								<label for="notice_pass">비밀번호</label> <input type="password"
+									class="form-control" id="notice_pass" name="notice_pass"
+									required="required" />
+							</div>
+							<div class="form-group">
+								<label for="notice_subject">제 목</label> <input type="text"
+									class="form-control" id="notice_subject" name="notice_subject"
+									required="required" />
+							</div>
+							<div class="form-group">
+								<label for="notice_content">내 용</label>
+								<textarea class="form-control is-invalid"
+									id="validationTextarea" name="notice_content"
+									placeholder="내용을 적어 주세요." style="resize: none;" required></textarea>
+							</div>
+							<div class="form-group">
+								<label for="notice_file">파일 첨부</label> <input type="file"
+									class="form-control" name="notice_file" id="notice_file"
+									accept="image/*" />
+							</div>
+						</div>
+						<button type="submit" class="btn btn-primary">공지글 등록</button>
+						<button type="reset" class="btn btn-info">다시 쓰기</button>
+						<button type="button" class="btn btn-secondary"
+							data-dismiss="modal">닫기</button>
+					</form>
 
+				</div>
+			</div>
+		</div>
+	</div>
 
+	<!-- 2020/12/17 강현우 공지사항 글수정 모달 -->
+	<div class="modal fade" id="noticeModifyModal" tabindex="-1"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">공지사항 글수정</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form action="noticeModifyPro.do" method="post"
+						enctype="multipart/form-data" name="noticeform">
+						<div class="text-center">
+							<h2>ezCom 공지사항 글수정</h2>
+						</div>
+						<div class="form-col">
+							<div class="form-group">
+								<label for="notice_name">글쓴이</label> <input type="text"
+									class="form-control" id="notice_name" name="notice_name"
+									required="required" />
+							</div>
+							<div class="form-group">
+								<label for="notice_pass">비밀번호</label> <input type="password"
+									class="form-control" id="notice_pass" name="notice_pass"
+									required="required" />
+							</div>
+							<div class="form-group">
+								<label for="notice_subject">제 목</label> <input type="text"
+									class="form-control" id="notice_subject" name="notice_subject"
+									required="required" />
+							</div>
+							<div class="form-group">
+								<label for="notice_content">내 용</label>
+								<textarea class="form-control is-invalid"
+									id="validationTextarea" name="notice_content"
+									placeholder="내용을 적어 주세요." style="resize: none;" required></textarea>
+							</div>
+							<div class="form-group">
+								<label for="notice_file">파일 첨부</label> <input type="file"
+									class="form-control" name="notice_file" id="notice_file"
+									accept="image/*" />
+							</div>
+						</div>
+						<button type="submit" class="btn btn-primary">공지글 수정</button>
+						<button type="reset" class="btn btn-info">다시 쓰기</button>
+						<button type="button" class="btn btn-secondary"
+							data-dismiss="modal">닫기</button>
+					</form>
 
+				</div>
+			</div>
+		</div>
+	</div>
 
+	<!-- 2020/12/17 강현우 공지사항 글삭제 모달 -->
+	<div class="modal fade" id="noticeDeleteModal" tabindex="-1"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">공지사항 글삭제</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form action="noticeDeletePro.do" method="post"
+						enctype="multipart/form-data" name="noticeform">
+						<div class="text-center">
+							<h2>ezCom 공지글 삭제</h2>
+						</div>
+						<div class="form-col">
+							<div class="form-group">
+								<label for="notice_pass">비밀번호</label> <input type="password"
+									class="form-control" id="notice_pass" name="notice_pass"
+									required="required" />
+							</div>
+						</div>
+						<button type="submit" class="btn btn-primary">공지글 삭제</button>
+						<button type="button" class="btn btn-secondary"
+							data-dismiss="modal">닫기</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
 
 	<!-- 2020/12/04 강현우 프로필 수정 -->
-	<div class="modal fade" id="profileModal" data-backdrop="static"
-		data-keyboard="false" tabindex="-1"
-		aria-labelledby="staticBackdropLabel" aria-hidden="true">
+	<div class="modal fade" id="profileModal" data-keyboard="false"
+		tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">

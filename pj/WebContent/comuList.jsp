@@ -4,7 +4,7 @@
 <%@ page import="vo.Member, vo.Goods"%>
 <%
 	Member loginMember = (Member) session.getAttribute("loginMember");
-ArrayList<Goods> pcList = (ArrayList<Goods>) request.getAttribute("pcList");
+ArrayList<Goods> comuList = (ArrayList<Goods>) request.getAttribute("pcList");
 
 int cnt = 0;
 %>
@@ -31,7 +31,8 @@ int cnt = 0;
 <link rel="stylesheet" href="css/style.css" />
 <title>컴퓨터 홈 쇼핑 사이트</title>
 </head>
-<body>
+<body oncontextmenu="return false" ondragstart="return false"
+	onselectstart="return false">
 	<!-- 2020-12-07 haesu -->
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top"
 		id="header">
@@ -76,9 +77,10 @@ int cnt = 0;
 					id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
 					aria-haspopup="true" aria-expanded="false"> 조립PC </a>
 					<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-						<a class="dropdown-item" href="#">사장 추천 조립PC</a> <a
-							class="dropdown-item" href="#">유저 추천 조립PC</a> <a
-							class="dropdown-item" href="#">컴퓨터 부품 회사 추천 조립PC</a>
+						<a class="dropdown-item" href="comuList.do?kind=user">사장 추천
+							조립PC</a> <a class="dropdown-item" href="comuList.do?kind=owner">유저
+							추천 조립PC</a> <a class="dropdown-item" href="comuList.do?kind=CEO">컴퓨터
+							부품 회사 추천 조립PC</a>
 					</div></li>
 				<li class="nav-item dropdown"><a
 					class="nav-link dropdown-toggle" href="#"
@@ -109,44 +111,45 @@ int cnt = 0;
 			<button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
 		</form>
 	</nav>
-	<div class = "container">
-	<section class="container__size" id="home">
-		<div class=" w-100 ">
-			<div id="carouselExampleControls"
-				class="carousel slide w-100 container__center " data-ride="carousel">
-				<div class="carousel-inner w-100 ">
-					<div class="carousel-item active w-100">
-						<img src="img/come.png" class="d-block w-100" alt="..."
-							style="height: 400px">
+	<div class="container">
+		<section class="container__size" id="home">
+			<div class=" w-100 ">
+				<div id="carouselExampleControls"
+					class="carousel slide w-100 container__center "
+					data-ride="carousel">
+					<div class="carousel-inner w-100 ">
+						<div class="carousel-item active w-100">
+							<img src="img/come.png" class="d-block w-100" alt="..."
+								style="height: 400px">
+						</div>
+						<div class="carousel-item w-100">
+							<img src="img/norefund.png" class="d-block w-100" alt="..."
+								style="height: 400px">
+						</div>
+						<div class="carousel-item w-100">
+							<img src="img/attack.jpg" class="d-block w-100" alt="..."
+								style="height: 400px">
+						</div>
 					</div>
-					<div class="carousel-item w-100">
-						<img src="img/norefund.png" class="d-block w-100" alt="..."
-							style="height: 400px">
-					</div>
-					<div class="carousel-item w-100">
-						<img src="img/attack.jpg" class="d-block w-100" alt="..."
-							style="height: 400px">
-					</div>
+					<a class="carousel-control-prev" href="#carouselExampleControls"
+						role="button" data-slide="prev"> <span
+						class="carousel-control-prev-icon" aria-hidden="true"></span> <span
+						class="sr-only">Previous</span>
+					</a> <a class="carousel-control-next" href="#carouselExampleControls"
+						role="button" data-slide="next"> <span
+						class="carousel-control-next-icon" aria-hidden="true"></span> <span
+						class="sr-only">Next</span>
+					</a>
 				</div>
-				<a class="carousel-control-prev" href="#carouselExampleControls"
-					role="button" data-slide="prev"> <span
-					class="carousel-control-prev-icon" aria-hidden="true"></span> <span
-					class="sr-only">Previous</span>
-				</a> <a class="carousel-control-next" href="#carouselExampleControls"
-					role="button" data-slide="next"> <span
-					class="carousel-control-next-icon" aria-hidden="true"></span> <span
-					class="sr-only">Next</span>
-				</a>
 			</div>
-		</div>
-	</section>
-	
+		</section>
+
 		<div class="startLine text-center">
-			<p class="startLine__text"><%=pcList.get(1).getKind()%></p>
+			<p class="startLine__text"><%=comuList.get(1).getKind()%></p>
 		</div>
 		<br>
 		<%
-			for (int i = 0; i < pcList.size(); i++) {
+			for (int i = 0; i < comuList.size(); i++) {
 			if (i % 3 == 0) {
 		%>
 		<div class="card-deck">
@@ -156,14 +159,14 @@ int cnt = 0;
 
 			<div class="card goods__card-size">
 				<a data-toggle="modal"
-					data-target="#<%=pcList.get(i).getModalip()%>"> <img
-					src="./img/<%=pcList.get(i).getImage()%>"
+					data-target="#<%=comuList.get(i).getModalip()%>"> <img
+					src="./img/<%=comuList.get(i).getImage()%>"
 					class="card-img-top card-img__size" alt="...">
 					<div class="card-body">
 						<p class="card-text">
 							상품명:
-							<%=pcList.get(i).getName()%><br /> 가격:
-							<%=pcList.get(i).getPrice()%><br />
+							<%=comuList.get(i).getName()%><br /> 가격:
+							<%=comuList.get(i).getPrice()%><br />
 						</p>
 					</div>
 				</a>
@@ -176,92 +179,93 @@ int cnt = 0;
 			}
 		%>
 		<%
-			if (i % 6 == 5) {
+			if (i % 9 == 8) {
 		%>
 
 		<%
 			break;
-			}
+		}
 		}
 		%>
-	
 
-	<div class="controller">
-		<%
-			if (loginMember == null) {
-		%>
-		<div class="controller__menu">
-			<button type="button" class="btn btn-primary btn-sm btn-block"
-				data-toggle="modal" data-target="#loginModal">로그인</button>
-		</div>
-		<!-- 회원가입 modal만들기 -->
-		<div class="controller__menu">
-			<button type="button" class="btn btn-primary btn-sm btn-block"
-				data-toggle="modal" data-target="#joinModal">회원가입</button>
+
+		<div class="controller">
+			<%
+				if (loginMember == null) {
+			%>
+			<div class="controller__menu">
+				<button type="button" class="btn btn-primary btn-sm btn-block"
+					data-toggle="modal" data-target="#loginModal">로그인</button>
+			</div>
+			<!-- 회원가입 modal만들기 -->
+			<div class="controller__menu">
+				<button type="button" class="btn btn-primary btn-sm btn-block"
+					data-toggle="modal" data-target="#joinModal">회원가입</button>
+			</div>
+
+			<%
+				} else {
+			%>
+			<div class="controller__menu">
+				<h6>
+					<%=loginMember.getId()%>님 환영합니다.
+				</h6>
+			</div>
+			<div class="controller__menu">
+				<button type="button" class="btn btn-primary btn-sm btn-block"
+					onclick="location.href='logout.do'">로그아웃</button>
+			</div>
+			<div class="controller__menu">
+				<button type="button" class="btn btn-primary btn-sm btn-block"
+					data-toggle="modal" data-target="#profileModal">프로필</button>
+			</div>
+			<%
+				}
+			%>
+
+			<div class="controller__menu">
+				<a class="btn btn-primary btn-sm btn-block " href="goodsListCart.do">장바구니</a>
+			</div>
+			<div class="controller__menu ">
+				<span class="text-center">최근본상품</span>
+				<div></div>
+			</div>
 		</div>
 
-		<%
-			} else {
-		%>
-		<div class="controller__menu">
-			<h6>
-				<%=loginMember.getId()%>님 환영합니다.
-			</h6>
-		</div>
-		<div class="controller__menu">
-			<button type="button" class="btn btn-primary btn-sm btn-block"
-				onclick="location.href='logout.do'">로그아웃</button>
-		</div>
-		<div class="controller__menu">
-			<button type="button" class="btn btn-primary btn-sm btn-block"
-				data-toggle="modal" data-target="#profileModal">프로필</button>
-		</div>
-		<%
-			}
-		%>
-
-		<div class="controller__menu">
-			<a class="btn btn-primary btn-sm btn-block " href="goodsListCart.do">장바구니</a>
-		</div>
-		<div class="controller__menu ">
-			<span class="text-center">최근본상품</span>
-			<div></div>
-		</div>
-	</div>
-
-	<footer class="text-center footer__color text-white">
-		<div class="footer-above">
-			<div class="container pt-4">
-				<div class="row">
-					<div class="footer-col col-md-4">
-						<h3 style="color: white;">위치</h3>
-						<p>
-							영남기술교육원<br />대구광역시 달서구
-						</p>
-					</div>
-					<div class="footer-col col-md-4">
-						<h3 style="color: white;">소셜 미디어</h3>
-						<a href="#" class="btn btn-light m-2"><img
-							src="img/facebook.svg"></a> <a href="#"
-							class="btn btn-light m-2"><img src="img/youtube.svg"></a> <a
-							href="#" class="btn btn-light m-2"><img src="img/twitter.svg"></a>
-						<a href="#" class="btn btn-light m-2"><img
-							src="img/twitch.svg"></a> <a href="#" class="btn btn-light m-2"><img
-							src="img/instagram.svg"></a>
-					</div>
-					<div class="footer-col col-md-4">
-						<h3 style="color: white;">개발자 한마디</h3>
-						<p>언제든지 연락주세요!!</p>
+		<footer class="text-center footer__color text-white">
+			<div class="footer-above">
+				<div class="container pt-4">
+					<div class="row">
+						<div class="footer-col col-md-4">
+							<h3 style="color: white;">위치</h3>
+							<p>
+								영남기술교육원<br />대구광역시 달서구
+							</p>
+						</div>
+						<div class="footer-col col-md-4">
+							<h3 style="color: white;">소셜 미디어</h3>
+							<a href="#" class="btn btn-light m-2"><img
+								src="img/facebook.svg"></a> <a href="#"
+								class="btn btn-light m-2"><img src="img/youtube.svg"></a>
+							<a href="#" class="btn btn-light m-2"><img
+								src="img/twitter.svg"></a> <a href="#"
+								class="btn btn-light m-2"><img src="img/twitch.svg"></a> <a
+								href="#" class="btn btn-light m-2"><img
+								src="img/instagram.svg"></a>
+						</div>
+						<div class="footer-col col-md-4">
+							<h3 style="color: white;">개발자 한마디</h3>
+							<p>언제든지 연락주세요!!</p>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-		<div class="footer-below pb-4">
-			<div class="container text-center">
-				<div>Copyright &copy; JP 2020. All Right Reserved.</div>
+			<div class="footer-below pb-4">
+				<div class="container text-center">
+					<div>Copyright &copy; JP 2020. All Right Reserved.</div>
+				</div>
 			</div>
-		</div>
-	</footer>
+		</footer>
 	</div>
 
 	<div class="modal fade" id="loginModal" tabindex="-1"
@@ -371,7 +375,7 @@ int cnt = 0;
 	</div>
 	<!-- end -->
 	<%
-		for (int i = 0; i < pcList.size(); i++) {
+		for (int i = 0; i < comuList.size(); i++) {
 	%>
 	<div class="modal fade" id="<%=pcList.get(i).getModalip()%>"
 		tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -387,10 +391,14 @@ int cnt = 0;
 				<div class="modal-body">
 					<div>
 						<img class="modal-image__size" alt="-"
-							src="<%=pcList.get(i).getModalimage()%>">
+							src="<%=comuList.get(i).getModalimage()%>">
 					</div>
 				</div>
 
+			</div>
+			<div>
+				<a class="btn btn-primary button__lo"
+					href="goodsCartAdd.do?id=<%=comuList.get(i).getId()%>">장바구니에 담기</a>
 			</div>
 		</div>
 	</div>
@@ -398,28 +406,4 @@ int cnt = 0;
 		}
 	%>
 
-
-
-
-
-
-
-	<!-- Optional JavaScript -->
-	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js"></script>
-	<script src="js/header.js"></script>
-	<script src="js/main.js"></script>
-	<script
-		src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-	<script src="js/addr.js"></script>
-	<script src="https://kit.fontawesome.com/6478f529f2.js"
-		crossorigin="anonymous"></script>
-</body>
 </html>
-
-
-
-

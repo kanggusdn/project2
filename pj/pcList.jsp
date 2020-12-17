@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.HashMap,java.util.ArrayList"%>
-<%@ page import="vo.Member, vo.Goods, vo.Cart"%>
+<%@ page import="vo.Member, vo.Goods"%>
 <%
 	Member loginMember = (Member) session.getAttribute("loginMember");
-ArrayList<Goods> goodsList = (ArrayList<Goods>) request.getAttribute("goodsList");
+ArrayList<Goods> pcList = (ArrayList<Goods>) request.getAttribute("pcList");
 
 int cnt = 0;
 %>
@@ -31,7 +31,8 @@ int cnt = 0;
 <link rel="stylesheet" href="css/style.css" />
 <title>컴퓨터 홈 쇼핑 사이트</title>
 </head>
-<body oncontextmenu="return false" ondragstart="return false" onselectstart="return false">
+<body oncontextmenu="return false" ondragstart="return false"
+	onselectstart="return false">
 	<!-- 2020-12-07 haesu -->
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top"
 		id="header">
@@ -43,7 +44,10 @@ int cnt = 0;
 			<span class="navbar-toggler-icon navbar-toggler__nohide"></span>
 		</button>
 
-		<div class = "navbar__icon d-lg-block d-none"><a href = "index.do"><img  class = "navbar__icon-image"alt="-" src="img/EzIcon.jpg"></a> </div>
+		<div class="navbar__icon d-lg-block d-none">
+			<a href="index.do"><img class="navbar__icon-image" alt="-"
+				src="img/EzIcon.jpg"></a>
+		</div>
 		<div class="collapse navbar-collapse mx-auto" id="navbarNavDropdown">
 			<ul class="navbar-nav">
 				<li class="nav-item dropdown"><a
@@ -84,10 +88,11 @@ int cnt = 0;
 					<div class="dropdown-menu "
 						aria-labelledby="navbarDropdownMenuLink">
 						<a class="dropdown-item" href="pcList.do?kind=SAMSUNG">삼성전자</a> <a
-							class="dropdown-item" href="pcList.do?kind=HP">HP</a> <a class="dropdown-item"
-							href="pcList.do?kind=LG">LG전자</a> <a class="dropdown-item" href="pcList.do?kind=LENOVO">레노버</a> <a
-							class="dropdown-item" href="pcList.do?kind=DELL">DELL</a> <a class="dropdown-item"
-							href="pcList.do?kind=ASUS">ASUS</a>
+							class="dropdown-item" href="pcList.do?kind=HP">HP</a> <a
+							class="dropdown-item" href="pcList.do?kind=LG">LG전자</a> <a
+							class="dropdown-item" href="pcList.do?kind=LENOVO">레노버</a> <a
+							class="dropdown-item" href="pcList.do?kind=DELL">DELL</a> <a
+							class="dropdown-item" href="pcList.do?kind=ASUS">ASUS</a>
 					</div></li>
 				<li class="nav-item dropdown"><a
 					class="nav-link dropdown-toggle" href="#"
@@ -136,50 +141,52 @@ int cnt = 0;
 			</div>
 		</div>
 	</section>
-	<div class="startLine text-center">
-		<p class="startLine__text"><%=goodsList.get(1).getKind()%></p>
-	</div>
-	<br>
-	<%
-		for (int i = 0; i < goodsList.size(); i++) {
-		if (i % 3 == 0) {
-	%>
-	<div class="card-deck">
+	
+		<div class="startLine text-center">
+			<p class="startLine__text"><%=pcList.get(1).getKind()%></p>
+		</div>
+		<br>
+		<%
+			for (int i = 0; i < pcList.size(); i++) {
+			if (i % 3 == 0) {
+		%>
+		<div class="card-deck">
+			<%
+				}
+			%>
+
+			<div class="card goods__card-size">
+				<a data-toggle="modal"
+					data-target="#<%=pcList.get(i).getModalip()%>"> <img
+					src="./img/<%=pcList.get(i).getImage()%>"
+					class="card-img-top card-img__size" alt="...">
+					<div class="card-body">
+						<p class="card-text">
+							상품명:
+							<%=pcList.get(i).getName()%><br /> 가격:
+							<%=pcList.get(i).getPrice()%><br />
+						</p>
+					</div>
+				</a>
+			</div>
+			<%
+				if (i % 3 == 2) {
+			%>
+		</div>
 		<%
 			}
 		%>
-
-		<div class="card goods__card-size">
-			<a data-toggle="modal"
-				data-target="#<%=goodsList.get(i).getModalip()%>"> <img
-				src="./img/<%=goodsList.get(i).getImage()%>"
-				class="card-img-top card-img__size" alt="...">
-				<div class="card-body">
-					<p class="card-text">
-						상품명:
-						<%=goodsList.get(i).getName()%><br /> 가격:
-						<%=goodsList.get(i).getPrice()%><br />
-					</p>
-				</div>
-			</a>
-		</div>
 		<%
-			if (i % 3 == 2) {
+			if (i % 6 == 5) {
 		%>
-	</div>
-	<%
-		}
-	%>
-	<%
-		if (i % 6 == 5) {
-	%>
 
-	<%
-		break;
-	}
-	}
-	%>
+		<%
+			break;
+			}
+		}
+		%>
 	
+
 	<div class="controller">
 		<%
 			if (loginMember == null) {
@@ -256,7 +263,7 @@ int cnt = 0;
 			</div>
 		</div>
 	</footer>
-</div>
+	</div>
 
 	<div class="modal fade" id="loginModal" tabindex="-1"
 		aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -365,9 +372,9 @@ int cnt = 0;
 	</div>
 	<!-- end -->
 	<%
-		for (int i = 0; i < goodsList.size(); i++) {
+		for (int i = 0; i < pcList.size(); i++) {
 	%>
-	<div class="modal fade" id="<%=goodsList.get(i).getModalip()%>"
+	<div class="modal fade" id="<%=pcList.get(i).getModalip()%>"
 		tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-dialog__size">
 			<div class="modal-content">
@@ -380,10 +387,14 @@ int cnt = 0;
 				</div>
 				<div class="modal-body">
 					<div>
-						<img class = "modal-image__size" alt="-" src="<%=goodsList.get(i).getModalimage()%>">
+						<img class="modal-image__size" alt="-"
+							src="<%=pcList.get(i).getModalimage()%>">
 					</div>
 				</div>
 
+			</div>
+			<div>
+				<a class="btn btn-primary button__lo" href="goodsCartAdd.do?id=<%=pcList.get(i).getId() %>">장바구니에 담기</a>
 			</div>
 		</div>
 	</div>

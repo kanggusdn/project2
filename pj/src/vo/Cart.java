@@ -1,10 +1,19 @@
 package vo;
 
 public class Cart {
+	private int id;
 	private String image;
 	private String kind;
 	private int price;
 	private int qty;
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
 
 	public String getImage() {
 		return image;

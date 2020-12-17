@@ -103,7 +103,7 @@ public class LoginDAO {
 			pstmt.setString(7, member.getAddr1());
 			pstmt.setString(8, member.getAddr2());
 			pstmt.setString(9, member.getAddr3());
-			
+
 			joinMember = pstmt.executeUpdate();
 			commit(conn);
 		} catch (Exception e) {
@@ -122,4 +122,29 @@ public class LoginDAO {
 		return joinMember;
 	}
 
+	public boolean checkId(String id) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			pstmt = conn.prepareStatement("select * from member where id = ?");
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				return true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null)
+					close(rs);
+				if (pstmt != null)
+					close(pstmt);
+			} catch (Exception e) {
+				// TODO: handle exception
+				e.printStackTrace();
+			}
+		}
+		return false;
+	}
 }
