@@ -6,7 +6,8 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-<body>
+<body oncontextmenu="return false" ondragstart="return false"
+	onselectstart="return false">
 	<!-- Button trigger modal -->
 	<button type="button" class="btn btn-primary" data-bs-toggle="modal"
 		data-bs-target="#staticBackdrop">Launch static backdrop modal
