@@ -4,6 +4,8 @@
 <%@ page import="vo.Member, vo.Goods, vo.PageInfo"%>
 <%@ page import="vo.NoticeBean"%>
 <%@ page import="java.util.HashMap,java.util.ArrayList"%>
+<%@page import="java.net.URLDecoder"%>
+<%@page import="java.net.URI"%>
 <%
 	ArrayList<NoticeBean> articleList = (ArrayList<NoticeBean>) request.getAttribute("articleList");
 PageInfo pageInfo = (PageInfo) request.getAttribute("pageInfo");
@@ -20,6 +22,13 @@ ArrayList<Goods> todayImageList = (ArrayList<Goods>) request.getAttribute("today
 <%
 	NoticeBean article = (NoticeBean) request.getAttribute("article");
 %>
+<%
+	String cp = request.getContextPath();
+request.setCharacterEncoding("UTF-8");
+
+Cookie[] ck = request.getCookies();
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -302,11 +311,11 @@ ArrayList<Goods> todayImageList = (ArrayList<Goods>) request.getAttribute("today
 										if (loginMember != null && loginMember.getId().equals("admin")) {
 									%>
 									<button type="button" class="btn btn-primary" id="textfix"
-										data-toggle="modal" data-target="#noticeModifyModal" data-bs-dismiss="modal"
-										data-dismiss="modal">글수정</button>
+										data-toggle="modal" data-target="#noticeModifyModal"
+										data-bs-dismiss="modal" data-dismiss="modal">글수정</button>
 									<button type="button" class="btn btn-primary" id="textdelete"
-										data-toggle="modal" data-target="#noticeDeleteModal" data-bs-dismiss="modal"
-										data-dismiss="modal">글삭제</button>
+										data-toggle="modal" data-target="#noticeDeleteModal"
+										data-bs-dismiss="modal" data-dismiss="modal">글삭제</button>
 									<%
 										}
 									%>
@@ -408,9 +417,8 @@ ArrayList<Goods> todayImageList = (ArrayList<Goods>) request.getAttribute("today
 				<a class="btn btn-primary btn-sm btn-block " href="goodsListCart.do">장바구니</a>
 			</div>
 			<div class="controller__menu ">
-				<span class="text-center">최근본상품</span>
-
-				<div></div>
+				<button type="button" class="btn btn-primary btn-sm btn-block"
+					data-toggle="modal" data-target="#todayListModal">최근본상품</button>
 			</div>
 		</div>
 	</div>
@@ -627,35 +635,21 @@ ArrayList<Goods> todayImageList = (ArrayList<Goods>) request.getAttribute("today
 				<div class="modal-body">
 					<form action="noticeModifyPro.do" method="post"
 						enctype="multipart/form-data" name="noticeform">
+						<input type="hidden" name="notice_num2" value="notice_num2" />
 						<div class="text-center">
 							<h2>ezCom 공지사항 글수정</h2>
 						</div>
 						<div class="form-col">
 							<div class="form-group">
-								<label for="notice_name">글쓴이</label> <input type="text"
-									class="form-control" id="notice_name" name="notice_name"
-									required="required" />
+								<label for="notice_subject2">제 목</label> <input type="text"
+									class="form-control" id="notice_subject2"
+									name="notice_subject2" required="required" />
 							</div>
 							<div class="form-group">
-								<label for="notice_pass">비밀번호</label> <input type="password"
-									class="form-control" id="notice_pass" name="notice_pass"
-									required="required" />
-							</div>
-							<div class="form-group">
-								<label for="notice_subject">제 목</label> <input type="text"
-									class="form-control" id="notice_subject" name="notice_subject"
-									required="required" />
-							</div>
-							<div class="form-group">
-								<label for="notice_content">내 용</label>
-								<textarea class="form-control is-invalid"
-									id="validationTextarea" name="notice_content"
-									placeholder="내용을 적어 주세요." style="resize: none;" required></textarea>
-							</div>
-							<div class="form-group">
-								<label for="notice_file">파일 첨부</label> <input type="file"
-									class="form-control" name="notice_file" id="notice_file"
-									accept="image/*" />
+								<label for="notice_content2">내 용</label>
+								<textarea class="form-control is-invalid" id="notice_content2"
+									name="notice_content2" placeholder="내용을 적어 주세요."
+									style="resize: none;" required></textarea>
 							</div>
 						</div>
 						<button type="submit" class="btn btn-primary">공지글 수정</button>
@@ -684,6 +678,7 @@ ArrayList<Goods> todayImageList = (ArrayList<Goods>) request.getAttribute("today
 				<div class="modal-body">
 					<form action="noticeDeletePro.do" method="post"
 						enctype="multipart/form-data" name="noticeform">
+						<input type="hidden" name="page" value="notice_num2" />
 						<div class="text-center">
 							<h2>ezCom 공지글 삭제</h2>
 						</div>
@@ -766,8 +761,41 @@ ArrayList<Goods> todayImageList = (ArrayList<Goods>) request.getAttribute("today
 			</div>
 		</div>
 	</div>
-
 	<!-- 프로필 수정 end -->
+
+	<!-- 2020/12/21 최근 본 상품 start -->
+	<div class="modal fade" id="todayListModal" data-keyboard="false"
+		tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="staticBackdropLabel">ezCOM 최근 본 상품
+						페이지</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+						<div class="form-group">
+							<%
+								if (ck != null) {
+								for (Cookie c : ck) {
+									if (c.getName().indexOf("goods") != -1) {
+
+								out.println(java.net.URLDecoder.decode(c.getValue(), "UTF-8") + "<br/>");
+									}
+								}
+							}
+							%>
+						</div>
+						<button type="button" class="btn btn-secondary"
+							data-dismiss="modal">닫기</button>
+				</div>
+
+			</div>
+		</div>
+	</div>
 
 	<!-- 2020-12-08 haesu -->
 	<div class="modal fade" id="Snote" tabindex="-1"

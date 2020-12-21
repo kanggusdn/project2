@@ -2,11 +2,20 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.HashMap,java.util.ArrayList"%>
 <%@ page import="vo.Member, vo.Goods, vo.Cart"%>
+<%@page import="java.net.URLEncoder"%>
 <%
 	Member loginMember = (Member) session.getAttribute("loginMember");
 ArrayList<Goods> goodsList = (ArrayList<Goods>) request.getAttribute("goodsList");
 
 int cnt = 0;
+%>
+<%
+		String cp=request.getContextPath();
+		request.setCharacterEncoding("UTF-8");
+		
+		Cookie c = new Cookie("goods2",URLEncoder.encode("*","utf-8"));
+		c.setMaxAge(60*60*24);
+		response.addCookie(c);
 %>
 <!DOCTYPE html>
 <html>

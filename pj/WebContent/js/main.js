@@ -32,6 +32,8 @@ $(function() {
 			$("#noticeName").text(view[0]);
 			$("#noticeSubject").text(view[1]);
 			$("#noticeContent").text(view[2]);
+			$("#notice_subject2").val(view[1]);
+			$("#notice_content2").val(view[2]);
 		});
 	});
 });

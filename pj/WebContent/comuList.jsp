@@ -2,11 +2,20 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.HashMap,java.util.ArrayList"%>
 <%@ page import="vo.Member, vo.Goods"%>
+<%@page import="java.net.URLEncoder"%>
 <%
 	Member loginMember = (Member) session.getAttribute("loginMember");
-ArrayList<Goods> comuList = (ArrayList<Goods>) request.getAttribute("pcList");
+ArrayList<Goods> comuList = (ArrayList<Goods>) request.getAttribute("comuList");
 
 int cnt = 0;
+%>
+<%
+		String cp=request.getContextPath();
+		request.setCharacterEncoding("UTF-8");
+		
+		Cookie c = new Cookie("goods1",URLEncoder.encode("*","utf-8"));
+		c.setMaxAge(60*60*24);
+		response.addCookie(c);
 %>
 <!DOCTYPE html>
 <html>
@@ -377,7 +386,7 @@ int cnt = 0;
 	<%
 		for (int i = 0; i < comuList.size(); i++) {
 	%>
-	<div class="modal fade" id="<%=pcList.get(i).getModalip()%>"
+	<div class="modal fade" id="<%=comuList.get(i).getModalip()%>"
 		tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-dialog__size">
 			<div class="modal-content">
