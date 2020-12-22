@@ -9,7 +9,7 @@ import vo.BoardBean;
 
 public class BoardModifyProService {
 
-	public boolean isArtcleWriter(int board_num, String pass) throws Exception {
+	public boolean isArticleWriter(int board_num, String pass) throws Exception {
 		boolean isArticleWriter = false;
 		Connection con = getConnection();
 		BoardDAO boardDAO = BoardDAO.getInstance();

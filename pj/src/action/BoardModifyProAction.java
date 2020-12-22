@@ -18,7 +18,7 @@ public class BoardModifyProAction implements Action {
 		int board_num = Integer.parseInt(request.getParameter("board_num"));
 		BoardBean article = new BoardBean();
 		BoardModifyProService boardModifyProService = new BoardModifyProService();
-		boolean isRightUser = boardModifyProService.isArtcleWriter(board_num, request.getParameter("board_pass"));
+		boolean isRightUser = boardModifyProService.isArticleWriter(board_num, request.getParameter("board_pass"));
 
 		if (!isRightUser) {
 			response.setContentType("text/html;charset=UTF-8");

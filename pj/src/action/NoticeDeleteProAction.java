@@ -7,16 +7,21 @@ import javax.servlet.http.HttpServletResponse;
 
 import svc.NoticeDeleteProService;
 import vo.ActionForward;
+import vo.NoticeBean;
 
 public class NoticeDeleteProAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ActionForward forward = null;
-		int notice_num = Integer.parseInt(request.getParameter("notice_num"));
-		String nowPage = request.getParameter("page");
+		int notice_num = Integer.parseInt(request.getParameter("notice_num2"));
+		String notice_pass = (String)request.getParameter("notice_pass2");
+//		String nowPage = request.getParameter("page");
+//		NoticeBean article = new NoticeBean();
 		NoticeDeleteProService noticeDeleteProService = new NoticeDeleteProService();
-		boolean isArticleWriter = noticeDeleteProService.isArticleWriter(notice_num, request.getParameter("notice_pass"));
+//		article.setNotice_content(notice_pass);
+//		article.setNotice_num(notice_num);
+		boolean isArticleWriter = noticeDeleteProService.isArticleWriter(notice_num, notice_pass);
 
 		if (!isArticleWriter) {
 			response.setContentType("text/html;charset = UTF-8");
@@ -27,21 +32,10 @@ public class NoticeDeleteProAction implements Action {
 			out.println("</script>");
 			out.close();
 		} else {
-			boolean isDeleteSuccess = noticeDeleteProService.removeArticle(notice_num);
-
-			if (!isDeleteSuccess) {
-				response.setContentType("text/html;charset = UTF-8");
-				PrintWriter out = response.getWriter();
-				out.println("<script>");
-				out.println("alert('삭제실패');");
-				out.println("history.back();");
-				out.println("</script>");
-				out.close();
-			} else {
-				forward = new ActionForward();
-				forward.setRedirect(true);
-				forward.setPath("noticeList.do?page=" + nowPage);
-			}
+			noticeDeleteProService.removeArticle(notice_num);
+			forward = new ActionForward();
+			forward.setRedirect(true);
+			forward.setPath("index.do");
 		}
 		return forward;
 	}

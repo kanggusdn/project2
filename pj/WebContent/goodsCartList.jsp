@@ -1,14 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.HashMap,java.util.ArrayList"%>
-<%@ page import="vo.Member, vo.Goods, vo.Cart"%>
-
-
+<%@ page import="vo.Member, vo.Goods,vo.Cart"%>
+<%@ page import="vo.Cart,java.util.List, java.text.SimpleDateFormat, java.lang.*"%>
 <%
 	Member loginMember = (Member) session.getAttribute("loginMember");
 ArrayList<Goods> goodsList = (ArrayList<Goods>) request.getAttribute("goodsList");
-
-int cnt = 0;
+ArrayList<Cart> cartList = (ArrayList<Cart>) request.getAttribute("cartList");
+int totalMoney = 0;
+if(request.getAttribute("totalMoney") != null)
+totalMoney = (Integer)request.getAttribute("totalMoney");
 %>
 <!DOCTYPE html>
 <html>
@@ -18,7 +19,7 @@ int cnt = 0;
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <!-- title image -->
-<link href="img/EzIcon.jpg" rel="icon" type="image/x-icon">
+<link href = "img/EzIcon.jpg" rel="icon" type = "image/x-icon">
 <!-- reset -->
 <link rel="stylesheet"
 	href="https://meyerweb.com/eric/tools/css/reset/reset.css">
@@ -114,44 +115,13 @@ int cnt = 0;
 		</form>
 	</nav>
 	<div class="container">
-		<section class="container__size" id="home">
-			<div class=" w-100 ">
-				<div id="carouselExampleControls"
-					class="carousel slide w-100 container__center "
-					data-ride="carousel">
-					<div class="carousel-inner w-100 ">
-						<div class="carousel-item active w-100">
-							<img src="img/come.png" class="d-block w-100" alt="..."
-								style="height: 400px">
-						</div>
-						<div class="carousel-item w-100">
-							<img src="img/norefund.png" class="d-block w-100" alt="..."
-								style="height: 400px">
-						</div>
-						<div class="carousel-item w-100">
-							<img src="img/attack.jpg" class="d-block w-100" alt="..."
-								style="height: 400px">
-						</div>
-					</div>
-					<a class="carousel-control-prev" href="#carouselExampleControls"
-						role="button" data-slide="prev"> <span
-						class="carousel-control-prev-icon" aria-hidden="true"></span> <span
-						class="sr-only">Previous</span>
-					</a> <a class="carousel-control-next" href="#carouselExampleControls"
-						role="button" data-slide="next"> <span
-						class="carousel-control-next-icon" aria-hidden="true"></span> <span
-						class="sr-only">Next</span>
-					</a>
-				</div>
-			</div>
-		</section>
 
-		<div class="startLine text-center">
-			<p class="startLine__text"><%=goodsList.get(1).getKind()%></p>
+		<div class="startLine-view text-center">
+			<p class="startLine__text">장바구니</p>
 		</div>
-		<br>
 		<%
-			for (int i = 0; i < goodsList.size(); i++) {
+			if( cartList != null && cartList.size() > 0) {
+			for (int i = 0; i < cartList.size(); i++) {
 			if (i % 3 == 0) {
 		%>
 		<div class="card-deck">
@@ -160,18 +130,16 @@ int cnt = 0;
 			%>
 
 			<div class="card goods__card-size">
-				<a data-toggle="modal"
-					data-target="#<%=goodsList.get(i).getModalip()%>"> <img
-					src="./img/<%=goodsList.get(i).getImage()%>"
+				<img src="./img/<%=cartList.get(i).getImage()%>"
 					class="card-img-top card-img__size" alt="...">
-					<div class="card-body">
-						<p class="card-text">
-							상품명:
-							<%=goodsList.get(i).getName()%><br /> 가격:
-							<%=goodsList.get(i).getPrice()%><br />
-						</p>
-					</div>
-				</a>
+				<div class="card-body">
+					<p class="card-text">
+						상품명:
+						<%=cartList.get(i).getKind()%><br /> 가격:
+						<%=cartList.get(i).getPrice()%><br />
+					</p>
+				</div>
+
 			</div>
 			<%
 				if (i % 3 == 2) {
@@ -181,14 +149,26 @@ int cnt = 0;
 			}
 		%>
 		<%
-			if (i % 6 == 5) {
+			if (i % cartList.size() == cartList.size() - 1) {
 		%>
 
 		<%
 			break;
-		}
-		}
+					}
+				}
+			}
 		%>
+		
+		<%
+			if(cartList == null){
+		%>
+			<div>
+			<button onclick="history.back()" class="btn btn-primary">쇼핑 계속하기</button>
+			</div>			
+		<%
+		} 
+		%>
+
 
 		<div class="controller">
 			<%
@@ -228,22 +208,28 @@ int cnt = 0;
 				<a class="btn btn-primary btn-sm btn-block " href="goodsCartList.do">장바구니</a>
 			</div>
 			<div class="controller__menu ">
-				<button type="button" class="btn btn-primary btn-sm btn-block"
-					data-toggle="modal" data-target="#todayImageListModal">최근본상품</button>
+				<span class="text-center">최근본상품</span>
+				<div></div>
 			</div>
 		</div>
 	</div>
-	<footer class="text-center footer__color text-white">
+		<div class = "totalMoney bg-dark text-white text-center">
+			<span>스토어 합계 주문 :&nbsp;&nbsp;</span> <span class = "totalMoney__font-small">상품 금액</span> <span class = "font-weight-bold"style="color: tomato;"> <%=totalMoney%>원</span>
+			<button class="btn btn-primary">구매하기</button>
+		</div>
+
+
+	<footer class="text-center footer__color text-white footer__size">
 		<div class="footer-above">
 			<div class="container pt-4">
 				<div class="row">
-					<div class="footer-col col-md-4">
+					<div class="footer-col col-4">
 						<h3 style="color: white;">위치</h3>
 						<p>
 							영남기술교육원<br />대구광역시 달서구
 						</p>
 					</div>
-					<div class="footer-col col-md-4">
+					<div class="footer-col col-4">
 						<h3 style="color: white;">소셜 미디어</h3>
 						<a href="#" class="btn btn-light m-2"><img
 							src="img/facebook.svg"></a> <a href="#"
@@ -253,7 +239,7 @@ int cnt = 0;
 							src="img/twitch.svg"></a> <a href="#" class="btn btn-light m-2"><img
 							src="img/instagram.svg"></a>
 					</div>
-					<div class="footer-col col-md-4">
+					<div class="footer-col col-4">
 						<h3 style="color: white;">개발자 한마디</h3>
 						<p>언제든지 연락주세요!!</p>
 					</div>
@@ -374,86 +360,9 @@ int cnt = 0;
 		</div>
 	</div>
 	<!-- end -->
-	<%
-		for (int i = 0; i < goodsList.size(); i++) {
-	%>
-	<div class="modal fade" id="<%=goodsList.get(i).getModalip()%>"
-		tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog modal-dialog__size">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">제품 소개</h5>
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body">
-					<div>
-						<img class="modal-image__size" alt="-"
-							src="<%=goodsList.get(i).getModalimage()%>">
-					</div>
-				</div>
 
-			</div>
-		</div>
-		<div>
-			<a class="btn btn-primary button__lo"
-				href="goodsCartAdd.do?id=<%=goodsList.get(i).getId()%>">장바구니에
-				담기</a>
-		</div>
-	</div>
-	<%
-		}
-	%>
 
-	<!-- 2020/12/21 최근 본 상품 start -->
-	<div class="modal fade" id="todayImageListModal" tabindex="-1"
-		aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog modal-lg">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title">최근 본 상품</h5>
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body">
-					<form action="#" method="post" enctype="multipart/form-data"
-						name="todayImageListform">
-						<div class="text-center">
-							<h2>최근 본 상품 목록</h2>
-						</div>
-						<div class="form-col">
-							<div class="form-group">
-								<c:if test="${todayImageList != null }">
-									<div id="todayImageList">
-										<table>
-											<tr>
-												<c:forEach var="todayImage" items="${todayImageList }"
-													varStatus="status">
-													<td><img src="img/${todayImage }" id="todayImage" /></td>
-													<c:if test="${((status.index+1) mod 4) == 0 }">
-											</tr>
-											<tr>
-												</c:if>
-												</c:forEach>
-											</tr>
-										</table>
-									</div>
-								</c:if>
-							</div>
-							<button type="button" class="btn btn-secondary"
-								data-dismiss="modal">닫기</button>
-						</div>
-					</form>
 
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- 최근본상품 끝 -->
 
 
 
@@ -472,9 +381,6 @@ int cnt = 0;
 	<script src="js/addr.js"></script>
 	<script src="https://kit.fontawesome.com/6478f529f2.js"
 		crossorigin="anonymous"></script>
+	<script src="js/Cart.js"></script>
 </body>
 </html>
-
-
-
-

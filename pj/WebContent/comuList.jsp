@@ -2,20 +2,11 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.HashMap,java.util.ArrayList"%>
 <%@ page import="vo.Member, vo.Goods"%>
-<%@page import="java.net.URLEncoder"%>
 <%
 	Member loginMember = (Member) session.getAttribute("loginMember");
 ArrayList<Goods> comuList = (ArrayList<Goods>) request.getAttribute("comuList");
 
 int cnt = 0;
-%>
-<%
-		String cp=request.getContextPath();
-		request.setCharacterEncoding("UTF-8");
-		
-		Cookie c = new Cookie("goods1",URLEncoder.encode("*","utf-8"));
-		c.setMaxAge(60*60*24);
-		response.addCookie(c);
 %>
 <!DOCTYPE html>
 <html>
@@ -25,7 +16,7 @@ int cnt = 0;
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <!-- title image -->
-
+<link href="img/EzIcon.jpg" rel="icon" type="image/x-icon">
 <!-- reset -->
 <link rel="stylesheet"
 	href="https://meyerweb.com/eric/tools/css/reset/reset.css">
@@ -43,7 +34,7 @@ int cnt = 0;
 <body oncontextmenu="return false" ondragstart="return false"
 	onselectstart="return false">
 	<!-- 2020-12-07 haesu -->
-	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top"
+	<nav class="navbar navbar-expand-lg navbar__color bg-dark fixed-top"
 		id="header">
 
 		<button class="navbar-toggler navbar-toggler__nohide" type="button"
@@ -86,8 +77,8 @@ int cnt = 0;
 					id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
 					aria-haspopup="true" aria-expanded="false"> 조립PC </a>
 					<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-						<a class="dropdown-item" href="comuList.do?kind=user">사장 추천
-							조립PC</a> <a class="dropdown-item" href="comuList.do?kind=owner">유저
+						<a class="dropdown-item" href="comuList.do?kind=user">유저 추천
+							조립PC</a> <a class="dropdown-item" href="comuList.do?kind=owner">사장
 							추천 조립PC</a> <a class="dropdown-item" href="comuList.do?kind=CEO">컴퓨터
 							부품 회사 추천 조립PC</a>
 					</div></li>
@@ -120,6 +111,7 @@ int cnt = 0;
 			<button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
 		</form>
 	</nav>
+
 	<div class="container">
 		<section class="container__size" id="home">
 			<div class=" w-100 ">
@@ -197,7 +189,6 @@ int cnt = 0;
 		}
 		%>
 
-
 		<div class="controller">
 			<%
 				if (loginMember == null) {
@@ -233,49 +224,48 @@ int cnt = 0;
 			%>
 
 			<div class="controller__menu">
-				<a class="btn btn-primary btn-sm btn-block " href="goodsListCart.do">장바구니</a>
+				<a class="btn btn-primary btn-sm btn-block " href="goodsCartList.do">장바구니</a>
 			</div>
 			<div class="controller__menu ">
-				<span class="text-center">최근본상품</span>
-				<div></div>
+				<button type="button" class="btn btn-primary btn-sm btn-block"
+					data-toggle="modal" data-target="#todayImageListModal">최근본상품</button>
 			</div>
 		</div>
-
-		<footer class="text-center footer__color text-white">
-			<div class="footer-above">
-				<div class="container pt-4">
-					<div class="row">
-						<div class="footer-col col-md-4">
-							<h3 style="color: white;">위치</h3>
-							<p>
-								영남기술교육원<br />대구광역시 달서구
-							</p>
-						</div>
-						<div class="footer-col col-md-4">
-							<h3 style="color: white;">소셜 미디어</h3>
-							<a href="#" class="btn btn-light m-2"><img
-								src="img/facebook.svg"></a> <a href="#"
-								class="btn btn-light m-2"><img src="img/youtube.svg"></a>
-							<a href="#" class="btn btn-light m-2"><img
-								src="img/twitter.svg"></a> <a href="#"
-								class="btn btn-light m-2"><img src="img/twitch.svg"></a> <a
-								href="#" class="btn btn-light m-2"><img
-								src="img/instagram.svg"></a>
-						</div>
-						<div class="footer-col col-md-4">
-							<h3 style="color: white;">개발자 한마디</h3>
-							<p>언제든지 연락주세요!!</p>
-						</div>
+	</div>
+	<footer class="text-center footer__color text-white">
+		<div class="footer-above">
+			<div class="container pt-4">
+				<div class="row">
+					<div class="footer-col col-md-4">
+						<h3 style="color: white;">위치</h3>
+						<p>
+							영남기술교육원<br />대구광역시 달서구
+						</p>
+					</div>
+					<div class="footer-col col-md-4">
+						<h3 style="color: white;">소셜 미디어</h3>
+						<a href="#" class="btn btn-light m-2"><img
+							src="img/facebook.svg"></a> <a href="#"
+							class="btn btn-light m-2"><img src="img/youtube.svg"></a> <a
+							href="#" class="btn btn-light m-2"><img src="img/twitter.svg"></a>
+						<a href="#" class="btn btn-light m-2"><img
+							src="img/twitch.svg"></a> <a href="#" class="btn btn-light m-2"><img
+							src="img/instagram.svg"></a>
+					</div>
+					<div class="footer-col col-md-4">
+						<h3 style="color: white;">개발자 한마디</h3>
+						<p>언제든지 연락주세요!!</p>
 					</div>
 				</div>
 			</div>
-			<div class="footer-below pb-4">
-				<div class="container text-center">
-					<div>Copyright &copy; JP 2020. All Right Reserved.</div>
-				</div>
+		</div>
+		<div class="footer-below pb-4">
+			<div class="container text-center">
+				<div>Copyright &copy; JP 2020. All Right Reserved.</div>
 			</div>
-		</footer>
-	</div>
+		</div>
+	</footer>
+
 
 	<div class="modal fade" id="loginModal" tabindex="-1"
 		aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -403,16 +393,85 @@ int cnt = 0;
 							src="<%=comuList.get(i).getModalimage()%>">
 					</div>
 				</div>
-
 			</div>
-			<div>
-				<a class="btn btn-primary button__lo"
-					href="goodsCartAdd.do?id=<%=comuList.get(i).getId()%>">장바구니에 담기</a>
-			</div>
+		</div>
+		<div>
+			<a class="btn btn-primary button__lo"
+				href="goodsCartAdd.do?id=<%=comuList.get(i).getId()%>">장바구니에 담기</a>
 		</div>
 	</div>
 	<%
 		}
 	%>
 
+	<!-- 2020/12/21 최근 본 상품 start -->
+	<div class="modal fade" id="todayImageListModal" tabindex="-1"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">최근 본 상품</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form action="#" method="post" enctype="multipart/form-data"
+						name="todayImageListform">
+						<div class="text-center">
+							<h2>최근 본 상품 목록</h2>
+						</div>
+						<div class="form-col">
+							<div class="form-group">
+								<c:if test="${todayImageList != null }">
+									<div id="todayImageList">
+										<table>
+											<tr>
+												<c:forEach var="todayImage" items="${todayImageList }"
+													varStatus="status">
+													<td><img src="img/${todayImage }" id="todayImage" /></td>
+													<c:if test="${((status.index+1) mod 4) == 0 }">
+											</tr>
+											<tr>
+												</c:if>
+												</c:forEach>
+											</tr>
+										</table>
+									</div>
+								</c:if>
+							</div>
+							<button type="button" class="btn btn-secondary"
+								data-dismiss="modal">닫기</button>
+						</div>
+					</form>
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 최근본상품 끝 -->
+
+
+
+
+
+	<!-- Optional JavaScript -->
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js"></script>
+	<script src="js/header.js"></script>
+	<script src="js/main.js"></script>
+	<script
+		src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	<script src="js/addr.js"></script>
+	<script src="https://kit.fontawesome.com/6478f529f2.js"
+		crossorigin="anonymous"></script>
+</body>
 </html>
+
+
+
+

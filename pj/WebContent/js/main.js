@@ -23,9 +23,11 @@ $(function() {
 	});
 	
 	/*
-		2020/12/15 공지사항 모달 시작
+		2020/12/15 공지사항 글쓰기, 수정 모달 시작
 	 */
 	$(".noticeViewLink").click(function() {
+		console.log($(this).attr("data-num"));
+		$("#notice_num").val($(this).attr("data-num"));
 		$.get("ajaxNotice.jsp", { "selectArticle": $(this).attr("data-num") }, function(data) {
 			var view = $.parseJSON(data);
 			console.log(view);
@@ -36,5 +38,19 @@ $(function() {
 			$("#notice_content2").val(view[2]);
 		});
 	});
-});
 	/* 모달 끝 */
+	
+	/*
+		2020/12/22 공지사항 글삭제 모달 시작
+	*/
+	$(".noticeViewLink").click(function() {
+		console.log($(this).attr("data-num"));
+		$("#notice_num2").val($(this).attr("data-num"));
+		$.get("ajaxNotice.jsp", { "selectArticle": $(this).attr("data-num") }, function(data) {
+			var del = $.parseJSON(data);
+			console.log(del);
+			$("#notice_pass2").val(del[0]);
+		});
+	});
+	/* 모달 끝 */
+});

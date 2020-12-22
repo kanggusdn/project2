@@ -292,4 +292,5 @@ public class NoticeDAO {
 		
 		return deleteCount;
 	}
+
 }

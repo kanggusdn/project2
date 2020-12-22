@@ -6,6 +6,8 @@ public class Cart {
 	private String kind;
 	private int price;
 	private int qty;
+	
+	
 
 	public int getId() {
 		return id;

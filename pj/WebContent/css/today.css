@@ -1,0 +1,10 @@
+@charset "UTF-8";
+#todayImageList{
+	text-align: center;
+}
+
+#todayImage{
+	width: 100px;
+	height: 100px;
+	border: none;
+}

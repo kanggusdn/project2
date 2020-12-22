@@ -19,6 +19,8 @@ public class GoodsDAO {
 
 	}
 
+	
+
 	public void setConnection(Connection conn) {
 		this.conn = conn;
 	}
@@ -38,9 +40,8 @@ public class GoodsDAO {
 				// 객체를 생성하고
 
 				do {
-					goodsList.add(
-							new Goods(rs.getInt("id"), rs.getString("kind"), rs.getString("name"), rs.getInt("price"),
-									rs.getString("image"), rs.getString("modalip"), rs.getString("modalimage")));
+						goodsList.add(new Goods(rs.getInt("id"), rs.getString("kind"), rs.getString("name"),
+								rs.getInt("price"), rs.getString("image"), rs.getString("modalip"),rs.getString("modalimage")));
 					// 객체가 있다면 do를 해라
 				} while (rs.next());
 			}
@@ -96,19 +97,19 @@ public class GoodsDAO {
 		return updateCount;
 	}
 
-	public Goods selectGoods(int id) {
+	public Goods selectsamtb(int id) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		Goods goods = null;
 
 		try {
-			pstmt = conn.prepareStatement("select * from goods where id =?");
+			pstmt = conn.prepareStatement("select * from samtb where id =?");
 			pstmt.setInt(1, id);
 			rs = pstmt.executeQuery();
 
 			if (rs.next()) {
 				goods = new Goods(rs.getInt("id"), rs.getString("kind"), rs.getString("name"), rs.getInt("price"),
-						rs.getString("image"), rs.getString("modalip"), rs.getString("modalimage"));
+						rs.getString("image"), rs.getString("modalip"),rs.getString("modalimage"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -119,60 +120,12 @@ public class GoodsDAO {
 		}
 		return goods;
 	}
-
-	public Goods selectPc(int id) {
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		Goods goods = null;
-
-		try {
-			pstmt = conn.prepareStatement("select * from pc where id =?");
-			pstmt.setInt(1, id);
-			rs = pstmt.executeQuery();
-
-			if (rs.next()) {
-				goods = new Goods(rs.getInt("id"), rs.getString("kind"), rs.getString("name"), rs.getInt("price"),
-						rs.getString("image"), rs.getString("modalip"), rs.getString("modalimage"));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-			// TODO: handle exception
-		} finally {
-			close(pstmt);
-			close(rs);
-		}
-		return goods;
-	}
-
-	public Goods selectComu(int id) {
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		Goods goods = null;
-
-		try {
-			pstmt = conn.prepareStatement("select * from comu where id =?");
-			pstmt.setInt(1, id);
-			rs = pstmt.executeQuery();
-
-			if (rs.next()) {
-				goods = new Goods(rs.getInt("id"), rs.getString("kind"), rs.getString("name"), rs.getInt("price"),
-						rs.getString("image"), rs.getString("modalip"), rs.getString("modalimage"));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-			// TODO: handle exception
-		} finally {
-			close(pstmt);
-			close(rs);
-		}
-		return goods;
-	}
-
+	
 	public static ArrayList<Goods> selectpcList(String kind) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		ArrayList<Goods> pcList = null;
-
+		
 		try {
 			pstmt = conn.prepareStatement("select * from pc where kind = ?");
 			pstmt.setString(1, kind);
@@ -183,9 +136,8 @@ public class GoodsDAO {
 				// 객체를 생성하고
 
 				do {
-					pcList.add(
-							new Goods(rs.getInt("id"), rs.getString("kind"), rs.getString("name"), rs.getInt("price"),
-									rs.getString("image"), rs.getString("modalip"), rs.getString("modalimage")));
+					pcList.add(new Goods(rs.getInt("id"), rs.getString("kind"), rs.getString("name"),
+								rs.getInt("price"), rs.getString("image"), rs.getString("modalip"),rs.getString("modalimage")));
 					// 객체가 있다면 do를 해라
 				} while (rs.next());
 			}
@@ -198,25 +150,23 @@ public class GoodsDAO {
 		}
 		return pcList;
 	}
-
 	public static ArrayList<Goods> selectComuList(String kind) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		ArrayList<Goods> comuList = null;
-
+		
 		try {
 			pstmt = conn.prepareStatement("select * from comu where kind = ?");
 			pstmt.setString(1, kind);
 			rs = pstmt.executeQuery();
-
+			
 			if (rs.next()) {
 				comuList = new ArrayList<Goods>();
 				// 객체를 생성하고
-
+				
 				do {
-					comuList.add(
-							new Goods(rs.getInt("id"), rs.getString("kind"), rs.getString("name"), rs.getInt("price"),
-									rs.getString("image"), rs.getString("modalip"), rs.getString("modalimage")));
+					comuList.add(new Goods(rs.getInt("id"), rs.getString("kind"), rs.getString("name"),
+							rs.getInt("price"), rs.getString("image"), rs.getString("modalip"),rs.getString("modalimage")));
 					// 객체가 있다면 do를 해라
 				} while (rs.next());
 			}
@@ -230,10 +180,12 @@ public class GoodsDAO {
 		return comuList;
 	}
 
+
+
 	public static GoodsDAO getInstance() {
-		if (boardDAO == null) {
-			boardDAO = new GoodsDAO();
-		}
-		return boardDAO;
+			if (boardDAO == null) {
+				boardDAO = new GoodsDAO();
+			}
+			return boardDAO;
 	}
 }

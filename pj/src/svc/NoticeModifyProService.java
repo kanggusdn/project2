@@ -8,7 +8,7 @@ import static db.JdbcUtil.*;
 import vo.NoticeBean;
 
 public class NoticeModifyProService {
-
+	
 	public boolean modifyArticle(NoticeBean article) throws Exception {
 		boolean isModifySuccess = false;
 		Connection con = getConnection();
@@ -25,6 +25,24 @@ public class NoticeModifyProService {
 		}
 		if (con != null)
 			close(con);
+		return isModifySuccess;
+	}
+
+	public boolean registArticle(NoticeBean noticeBean) {
+		boolean isModifySuccess = false;
+		Connection conn = getConnection();
+		NoticeDAO noticeDAO = NoticeDAO.getInstance();
+		noticeDAO.setConnection(conn);
+		int insertCount = noticeDAO.insertArticle(noticeBean);
+		
+		if(insertCount > 0) {
+			commit(conn);
+			isModifySuccess = true;
+		} else {
+			rollback(conn);
+			
+		}
+		close(conn);
 		return isModifySuccess;
 	}
 

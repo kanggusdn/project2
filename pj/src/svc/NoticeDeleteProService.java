@@ -18,9 +18,7 @@ public class NoticeDeleteProService {
 		return isArticleWriter;
 	}
 
-	public boolean removeArticle(int notice_num) throws Exception {
-		
-		boolean isRemoveSuccess = false;
+	public void removeArticle(int notice_num) throws Exception {
 		Connection conn = getConnection();
 		NoticeDAO noticeDAO = NoticeDAO.getInstance();
 		noticeDAO.setConnection(conn);
@@ -28,13 +26,10 @@ public class NoticeDeleteProService {
 		
 		if(deleteCount > 0) {
 			commit(conn);
-			isRemoveSuccess=true;
 		}else {
 			rollback(conn);
-			
 		}
 		close(conn);
-		return isRemoveSuccess;
 	}
 
 }

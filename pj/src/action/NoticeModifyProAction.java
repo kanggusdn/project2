@@ -15,12 +15,14 @@ public class NoticeModifyProAction implements Action {
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ActionForward forward = null;
 		boolean isModifySuccess = false;
+		int notice_num = Integer.parseInt(request.getParameter("notice_num"));
 		String notice_subject = (String)request.getParameter("notice_subject2");
 		String notice_content = (String)request.getParameter("notice_content2");
 		NoticeBean article = new NoticeBean();
+		NoticeModifyProService noticeModifyProService = new NoticeModifyProService();
 		article.setNotice_subject(notice_subject);
 		article.setNotice_content(notice_content);
-		NoticeModifyProService noticeModifyProService = new NoticeModifyProService();
+		article.setNotice_num(notice_num);
 		isModifySuccess = noticeModifyProService.modifyArticle(article);
 
 			if (!isModifySuccess) {
