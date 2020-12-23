@@ -21,6 +21,7 @@ import action.BoardReplyProAction;
 import action.BoardWriteProAction;
 import action.ComuListAction;
 import action.GoodsCartAddAction;
+import action.GoodsCartListAction;
 import action.GoodsListAction;
 import action.GoodsCartQtyDownAction;
 import action.GoodsCartQtyUpAction;
@@ -274,6 +275,13 @@ public class FrontController extends HttpServlet {
 			}
 		} else if (command.equals("/goodsCartSearch.do")) {
 			action = new GoodsCartSearchAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if (command.equals("/goodsCartList.do")) {
+			action = new GoodsCartListAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {

@@ -5,7 +5,10 @@
 	NoticeDAO noticeDAO = NoticeDAO.getInstance();
 	Connection conn = JdbcUtil.getConnection();
 	noticeDAO.setConnection(conn);
-	NoticeBean article = noticeDAO.selectArticle(Integer.parseInt(request.getParameter("selectArticle")));
+	int selectArticle = Integer.parseInt(request.getParameter("selectArticle"));
+	NoticeBean article = noticeDAO.selectArticle(selectArticle);
+	int updateReadCount = noticeDAO.addCountArticle(selectArticle);
+	JdbcUtil.close(conn);
 	out.println("[");
 	out.println("\""+article.getNotice_name().trim()+"\"");
 	out.println(",");

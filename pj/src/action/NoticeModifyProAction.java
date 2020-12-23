@@ -35,7 +35,7 @@ public class NoticeModifyProAction implements Action {
 			} else {
 				forward = new ActionForward();
 				forward.setRedirect(true);
-				forward.setPath("noticeDetail.do?notice_num=" + article.getNotice_num() + "&page=" + request.getParameter("page"));
+				forward.setPath("index.do");
 			}
 		return forward;
 	}

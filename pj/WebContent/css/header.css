@@ -3,8 +3,8 @@
   padding: 25px 10px; /* Some padding */
   color: black;
   text-align: center; /* Centered text */
-  font-size: 20px; /* Big font size */
-  font-weight: bold;
+  font-size: 30px; /* Big font size */
+  font-weight: bold;	
   position: fixed; /* Fixed position - sit on top of the page */
   top: 0;
   width: 100%; /* Full width */
@@ -19,4 +19,7 @@
 	width: 100%;
 	height: 100%;
 	border-radius: 80%;
+}
+.navbar__color .navbar-nav .nav-link{
+	color:white;
 }

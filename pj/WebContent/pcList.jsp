@@ -16,7 +16,7 @@ int cnt = 0;
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <!-- title image -->
-<link href="img/EzIcon.jpg" rel="icon" type="image/x-icon">
+<link href = "img/EzIcon.jpg" rel="icon" type = "image/x-icon">
 <!-- reset -->
 <link rel="stylesheet"
 	href="https://meyerweb.com/eric/tools/css/reset/reset.css">
@@ -34,82 +34,129 @@ int cnt = 0;
 <body oncontextmenu="return false" ondragstart="return false"
 	onselectstart="return false">
 	<!-- 2020-12-07 haesu -->
-	<nav class="navbar navbar-expand-lg navbar__color bg-dark fixed-top"
+	<nav
+		class="navbar navbar-expand-lg bg-light fixed-top navbar-light justify-content-between"
 		id="header">
+		<div>
+			<button class="navbar-toggler" type="button" data-toggle="collapse"
+				data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
+				aria-expanded="true" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			
+			<div class="collapse navbar-collapse mr-4" id="navbarNavDropdown">
+			<div class="navbar__icon d-lg-block d-none">
+				<a href="index.do"><img class="navbar__icon-image" alt="-"
+					src="img/EzIcon.jpg"></a>
+			</div>
+				<ul class="navbar-nav">
+					<li class="nav-item dropdown"><a
+						class="nav-link dropdown-toggle" href="#"
+						id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
+						aria-haspopup="true" aria-expanded="false">컴퓨터부품</a>
+						<div class="dropdown-menu"
+							aria-labelledby="navbarDropdownMenuLink">
 
-		<button class="navbar-toggler navbar-toggler__nohide" type="button"
-			data-toggle="collapse" data-target="#navbarNavDropdown"
-			aria-controls="navbarNavDropdown" aria-expanded="true"
-			aria-label="Toggle navigation">
-			<span class="navbar-toggler-icon navbar-toggler__nohide"></span>
-		</button>
-
-		<div class="navbar__icon d-lg-block d-none">
-			<a href="index.do"><img class="navbar__icon-image" alt="-"
-				src="img/EzIcon.jpg"></a>
+							<a class="dropdown-item" href="goodsList.do?kind=cpu">CPU</a> <a
+								class="dropdown-item" href="goodsList.do?kind=cooler">쿨러/튜닝</a>
+							<a class="dropdown-item" href="goodsList.do?kind=mainboard">메인보드</a>
+							<a class="dropdown-item" href="goodsList.do?kind=memory">메모리</a>
+							<a class="dropdown-item" href="goodsList.do?kind=graphic">그래픽카드</a>
+							<a class="dropdown-item" href="goodsList.do?kind=SSD">SSd</a> <a
+								class="dropdown-item" href="goodsList.do?kind=harddisk">하드디스크</a>
+							<a class="dropdown-item" href="goodsList.do?kind=sidedisk">외장HDD/SSD</a>
+							<a class="dropdown-item" href="goodsList.do?kind=case">케이스</a> <a
+								class="dropdown-item" href="goodsList.do?kind=power">파워</a> <a
+								class="dropdown-item" href="goodsList.do?kind=keyboard">키보드</a>
+							<a class="dropdown-item" href="goodsList.do?kind=mouse">마우스</a> <a
+								class="dropdown-item" href="goodsList.do?kind=odd">ODD</a> <a
+								class="dropdown-item" href="goodsList.do?kind=moniter">모니터</a> <a
+								class="dropdown-item" href="goodsList.do?kind=software">소프트웨어</a>
+						</div></li>
+					<li class="nav-item dropdown"><a
+						class="nav-link dropdown-toggle" href="#"
+						id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
+						aria-haspopup="true" aria-expanded="false"> 조립PC </a>
+						<div class="dropdown-menu"
+							aria-labelledby="navbarDropdownMenuLink">
+							<a class="dropdown-item" href="comuList.do?kind=user">유저 추천
+								조립PC</a> <a class="dropdown-item" href="comuList.do?kind=owner">사장
+								추천 조립PC</a> <a class="dropdown-item" href="comuList.do?kind=CEO">컴퓨터
+								부품 회사 추천 조립PC</a>
+						</div></li>
+					<li class="nav-item dropdown"><a
+						class="nav-link dropdown-toggle" href="#"
+						id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
+						aria-haspopup="true" aria-expanded="false"> 브랜드PC </a>
+						<div class="dropdown-menu "
+							aria-labelledby="navbarDropdownMenuLink">
+							<a class="dropdown-item" href="pcList.do?kind=SAMSUNG">삼성전자</a> <a
+								class="dropdown-item" href="pcList.do?kind=HP">HP</a> <a
+								class="dropdown-item" href="pcList.do?kind=LG">LG전자</a> <a
+								class="dropdown-item" href="pcList.do?kind=LENOVO">레노버</a> <a
+								class="dropdown-item" href="pcList.do?kind=DELL">DELL</a> <a
+								class="dropdown-item" href="pcList.do?kind=ASUS">ASUS</a>
+						</div></li>
+					<li class="nav-item dropdown"><a
+						class="nav-link dropdown-toggle" href="#"
+						id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
+						aria-haspopup="true" aria-expanded="false"> 커뮤니티 </a>
+						<div class="dropdown-menu"
+							aria-labelledby="navbarDropdownMenuLink">
+							<a class="dropdown-item" href="boardList.do">컴퓨터 리뷰 커뮤니티</a> <a
+								class="dropdown-item" href="recommandList.do">컴퓨터 추천 커뮤니티</a>
+						</div></li>
+				</ul>
+			</div>
 		</div>
-		<div class="collapse navbar-collapse mx-auto" id="navbarNavDropdown">
-			<ul class="navbar-nav">
-				<li class="nav-item dropdown"><a
-					class="nav-link dropdown-toggle" href="#"
-					id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
-					aria-haspopup="true" aria-expanded="false">컴퓨터부품</a>
-					<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+		<div>
+			<button class="navbar-toggler" type="button" data-toggle="collapse"
+				data-target="#infoDropdown" aria-controls="navbarNavDropdown"
+				aria-expanded="true" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse dropdown-menu-end" id="infoDropdown">
+				<ul class="navbar-nav">
+					<li class="nav-item"><a class="nav-link"
+						href="goodsCartList.do"><i class="fas fa-cart-arrow-down"></i></a></li>
+						
+					<li class="nav-item dropdown"><a class="nav-link" href="#"
+						id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
+						aria-haspopup="true" aria-expanded="false"><i
+							class="fas fa-business-time"></i></a></li>
+							
+					<li class="nav-item dropdown"><a class="nav-link" href="#"
+						id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
+						aria-haspopup="true" aria-expanded="false"><i
+							class="fas fa-user-alt"></i></a>
+						<div class="dropdown-menu"
+							aria-labelledby="navbarDropdownMenuLink">
+							<%
+								if (loginMember == null) {
+							%>
+							<button type="button"
+								class="dropdown-item btn btn-primary btn-sm btn-block"
+								data-toggle="modal" data-target="#loginModal">로그인</button>
+							<button type="button"
+								class="dropdown-item btn btn-primary btn-sm btn-block"
+								data-toggle="modal" data-target="#joinModal">회원가입</button>
+							<%
+								} else {
+							%>
+							<button type="button"
+								class="dropdown-item btn btn-primary btn-sm btn-block"
+								onclick="location.href='logout.do'">로그아웃</button>
+							<button type="button"
+								class="dropdown-item btn btn-primary btn-sm btn-block"
+								data-toggle="modal" data-target="#profileModal">프로필 수정</button>
+							<%
+								}
+							%>
 
-						<a class="dropdown-item" href="goodsList.do?kind=cpu">CPU</a> <a
-							class="dropdown-item" href="goodsList.do?kind=cooler">쿨러/튜닝</a> <a
-							class="dropdown-item" href="goodsList.do?kind=mainboard">메인보드</a>
-						<a class="dropdown-item" href="goodsList.do?kind=memory">메모리</a> <a
-							class="dropdown-item" href="goodsList.do?kind=graphic">그래픽카드</a>
-						<a class="dropdown-item" href="goodsList.do?kind=SSD">SSd</a> <a
-							class="dropdown-item" href="goodsList.do?kind=harddisk">하드디스크</a>
-						<a class="dropdown-item" href="goodsList.do?kind=sidedisk">외장HDD/SSD</a>
-						<a class="dropdown-item" href="goodsList.do?kind=case">케이스</a> <a
-							class="dropdown-item" href="goodsList.do?kind=power">파워</a> <a
-							class="dropdown-item" href="goodsList.do?kind=keyboard">키보드</a> <a
-							class="dropdown-item" href="goodsList.do?kind=mouse">마우스</a> <a
-							class="dropdown-item" href="goodsList.do?kind=odd">ODD</a> <a
-							class="dropdown-item" href="goodsList.do?kind=moniter">모니터</a> <a
-							class="dropdown-item" href="goodsList.do?kind=software">소프트웨어</a>
-					</div></li>
-				<li class="nav-item dropdown"><a
-					class="nav-link dropdown-toggle" href="#"
-					id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
-					aria-haspopup="true" aria-expanded="false"> 조립PC </a>
-					<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-						<a class="dropdown-item" href="comuList.do?kind=user">유저 추천
-							조립PC</a> <a class="dropdown-item" href="comuList.do?kind=owner">사장
-							추천 조립PC</a> <a class="dropdown-item" href="comuList.do?kind=CEO">컴퓨터
-							부품 회사 추천 조립PC</a>
-					</div></li>
-				<li class="nav-item dropdown"><a
-					class="nav-link dropdown-toggle" href="#"
-					id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
-					aria-haspopup="true" aria-expanded="false"> 브랜드PC </a>
-					<div class="dropdown-menu "
-						aria-labelledby="navbarDropdownMenuLink">
-						<a class="dropdown-item" href="pcList.do?kind=SAMSUNG">삼성전자</a> <a
-							class="dropdown-item" href="pcList.do?kind=HP">HP</a> <a
-							class="dropdown-item" href="pcList.do?kind=LG">LG전자</a> <a
-							class="dropdown-item" href="pcList.do?kind=LENOVO">레노버</a> <a
-							class="dropdown-item" href="pcList.do?kind=DELL">DELL</a> <a
-							class="dropdown-item" href="pcList.do?kind=ASUS">ASUS</a>
-					</div></li>
-				<li class="nav-item dropdown"><a
-					class="nav-link dropdown-toggle" href="#"
-					id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
-					aria-haspopup="true" aria-expanded="false"> 커뮤니티 </a>
-					<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-						<a class="dropdown-item" href="boardList.do">컴퓨터 리뷰 커뮤니티</a> <a
-							class="dropdown-item" href="recommandList.do">컴퓨터 추천 커뮤니티</a>
-					</div></li>
-			</ul>
+						</div></li>
+				</ul>
+			</div>
 		</div>
-		<form class="form-inline d-lg-block d-none">
-			<input class="form-control mr-sm-2" type="search"
-				placeholder="Search" aria-label="Search">
-			<button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
-		</form>
 	</nav>
 	<div class="container">
 		<section class="container__size" id="home">
@@ -187,50 +234,6 @@ int cnt = 0;
 		}
 		}
 		%>
-
-
-		<div class="controller">
-			<%
-				if (loginMember == null) {
-			%>
-			<div class="controller__menu">
-				<button type="button" class="btn btn-primary btn-sm btn-block"
-					data-toggle="modal" data-target="#loginModal">로그인</button>
-			</div>
-			<!-- 회원가입 modal만들기 -->
-			<div class="controller__menu">
-				<button type="button" class="btn btn-primary btn-sm btn-block"
-					data-toggle="modal" data-target="#joinModal">회원가입</button>
-			</div>
-
-			<%
-				} else {
-			%>
-			<div class="controller__menu">
-				<h6>
-					<%=loginMember.getId()%>님 환영합니다.
-				</h6>
-			</div>
-			<div class="controller__menu">
-				<button type="button" class="btn btn-primary btn-sm btn-block"
-					onclick="location.href='logout.do'">로그아웃</button>
-			</div>
-			<div class="controller__menu">
-				<button type="button" class="btn btn-primary btn-sm btn-block"
-					data-toggle="modal" data-target="#profileModal">프로필</button>
-			</div>
-			<%
-				}
-			%>
-
-			<div class="controller__menu">
-				<a class="btn btn-primary btn-sm btn-block " href="goodsCartList.do">장바구니</a>
-			</div>
-			<div class="controller__menu ">
-				<button type="button" class="btn btn-primary btn-sm btn-block"
-					data-toggle="modal" data-target="#todayImageListModal">최근본상품</button>
-			</div>
-		</div>
 	</div>
 	<footer class="text-center footer__color text-white">
 		<div class="footer-above">
@@ -397,61 +400,14 @@ int cnt = 0;
 			</div>
 		</div>
 		<div>
-			<a class="btn btn-primary button__lo"
-				href="goodsCartAdd.do?id=<%=pcList.get(i).getId()%>">장바구니에 담기</a>
+			<a class="btn btn-primary button__lo" href = "goodsCartAdd.do?id=<%= pcList.get(i).getId()%>">장바구니에 담기</a>
 		</div>
 	</div>
 	<%
 		}
 	%>
 
-	<!-- 2020/12/21 최근 본 상품 start -->
-	<div class="modal fade" id="todayImageListModal" tabindex="-1"
-		aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog modal-lg">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title">최근 본 상품</h5>
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body">
-					<form action="#" method="post" enctype="multipart/form-data"
-						name="todayImageListform">
-						<div class="text-center">
-							<h2>최근 본 상품 목록</h2>
-						</div>
-						<div class="form-col">
-							<div class="form-group">
-								<c:if test="${todayImageList != null }">
-									<div id="todayImageList">
-										<table>
-											<tr>
-												<c:forEach var="todayImage" items="${todayImageList }"
-													varStatus="status">
-													<td><img src="img/${todayImage }" id="todayImage" /></td>
-													<c:if test="${((status.index+1) mod 4) == 0 }">
-											</tr>
-											<tr>
-												</c:if>
-												</c:forEach>
-											</tr>
-										</table>
-									</div>
-								</c:if>
-							</div>
-							<button type="button" class="btn btn-secondary"
-								data-dismiss="modal">닫기</button>
-						</div>
-					</form>
 
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- 최근본상품 끝 -->
 
 
 

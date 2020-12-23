@@ -23,6 +23,7 @@ public class BoardListService {
 		BoardDAO boardDAO = BoardDAO.getInstance();
 		boardDAO.setConnection(conn);
 		articleList = boardDAO.selectArticleList(page, limit);
+		if(conn != null) close(conn);
 		return articleList;
 		
 	}

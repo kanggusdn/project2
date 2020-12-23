@@ -45,7 +45,7 @@ public class NoticeWriteProAction implements Action {
 		} else {
 			forward = new ActionForward();
 			forward.setRedirect(true);
-			forward.setPath("noticeList.do");
+			forward.setPath("index.do");
 		}
 		return forward;
 	}

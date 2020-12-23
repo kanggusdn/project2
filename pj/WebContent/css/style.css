@@ -9,14 +9,17 @@ font-family: 'Noto Sans KR', sans-serif;
 @import "controller.css";
 @import "com.css";
 @import "card.css";
-@import "today.css";
+@import "footer.css";
 
-/*goodsList.css*/
+/* goodsList.css */
 
 @import "goods/goodsList.css";
 @import "goods/goodscard.css";
 @import "goods/modal.css";
+@import "goods/totalmoney.css";
 
+/* bbs.css */
+@import "bbs/boardList.css";
 
 h1, h2, h3, h4, .navbar-brand {
 	font-family: 'Do Hyeon', sans-serif;
@@ -25,19 +28,11 @@ h1, h2, h3, h4, .navbar-brand {
 
 body {
 	font-family: 'Noto Sans KR', sans-serif;
-	background-color: #BBDEFB;
 }
 
 .navbar {
 	border-bottom: #E53935 3px solid;
 }
-.footer__color{
-	background:rgba(187,234,255,0.5);
-}
-
 input::-webkit-input-placeholder{
 	text-align: center;
-}
-.body__margin-top{
-	margin-top: 200px;
 }

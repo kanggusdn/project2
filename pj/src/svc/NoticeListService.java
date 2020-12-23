@@ -26,6 +26,7 @@ public class NoticeListService {
 		NoticeDAO noticeDAO = NoticeDAO.getInstance();
 		noticeDAO.setConnection(conn);
 		articleList = noticeDAO.selectArticleList(page, limit);
+		if(conn != null) close(conn);
 		return articleList;
 
 	}

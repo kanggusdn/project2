@@ -293,4 +293,20 @@ public class NoticeDAO {
 		return deleteCount;
 	}
 
+	public int addCountArticle(int selectArticle) {
+		int updateCount = 0;
+		PreparedStatement pstmt = null;
+		String sql = "update notice set notice_readcount=notice_readcount+1 where notice_num=?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, selectArticle);
+			updateCount = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println("addCountArticle 에러: " + e);
+		} finally {
+			if(pstmt != null) close(pstmt);
+		}
+		
+		return updateCount;
+	}
 }

@@ -20,7 +20,6 @@ ArrayList<Goods> todayImageList = (ArrayList<Goods>) request.getAttribute("today
 <%
 	NoticeBean article = (NoticeBean) request.getAttribute("article");
 %>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,13 +33,13 @@ ArrayList<Goods> todayImageList = (ArrayList<Goods>) request.getAttribute("today
 <link rel="stylesheet"
 	href="https://meyerweb.com/eric/tools/css/reset/reset.css">
 <!-- Bootstrap CSS -->
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 <!-- text -->
 <link
 	href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
 	rel="stylesheet">
 <!-- css origin -->
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 <link rel="stylesheet" href="css/style.css" />
 <title>컴퓨터 홈 쇼핑 사이트</title>
 </head>
@@ -48,80 +47,130 @@ ArrayList<Goods> todayImageList = (ArrayList<Goods>) request.getAttribute("today
 	onselectstart="return false">
 
 	<!-- 2020-12-02 haesu -->
-	<nav class="navbar navbar-expand-lg navbar__color bg-dark fixed-top"
+	<nav
+		class="navbar navbar-expand-lg bg-light fixed-top navbar-light justify-content-between"
 		id="header">
-		<button class="navbar-toggler navbar-toggler__nohide" type="button"
-			data-toggle="collapse" data-target="#navbarNavDropdown"
-			aria-controls="navbarNavDropdown" aria-expanded="true"
-			aria-label="Toggle navigation">
-			<span class="navbar-toggler-icon navbar-toggler__nohide"></span>
-		</button>
-		<div class="navbar__icon d-lg-block d-none">
-			<a href="index.do"><img class="navbar__icon-image" alt="-"
-				src="img/EzIcon.jpg"></a>
-		</div>
-		<div class="collapse navbar-collapse mr-4" id="navbarNavDropdown">
-			<ul class="navbar-nav">
-				<li class="nav-item dropdown"><a
-					class="nav-link dropdown-toggle" href="#"
-					id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
-					aria-haspopup="true" aria-expanded="false">컴퓨터부품</a>
-					<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+		<div>
+			<button class="navbar-toggler" type="button" data-toggle="collapse"
+				data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
+				aria-expanded="true" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
 
-						<a class="dropdown-item" href="goodsList.do?kind=cpu">CPU</a> <a
-							class="dropdown-item" href="goodsList.do?kind=cooler">쿨러/튜닝</a> <a
-							class="dropdown-item" href="goodsList.do?kind=mainboard">메인보드</a>
-						<a class="dropdown-item" href="goodsList.do?kind=memory">메모리</a> <a
-							class="dropdown-item" href="goodsList.do?kind=graphic">그래픽카드</a>
-						<a class="dropdown-item" href="goodsList.do?kind=SSD">SSd</a> <a
-							class="dropdown-item" href="goodsList.do?kind=harddisk">하드디스크</a>
-						<a class="dropdown-item" href="goodsList.do?kind=sidedisk">외장HDD/SSD</a>
-						<a class="dropdown-item" href="goodsList.do?kind=case">케이스</a> <a
-							class="dropdown-item" href="goodsList.do?kind=power">파워</a> <a
-							class="dropdown-item" href="goodsList.do?kind=keyboard">키보드</a> <a
-							class="dropdown-item" href="goodsList.do?kind=mouse">마우스</a> <a
-							class="dropdown-item" href="goodsList.do?kind=odd">ODD</a> <a
-							class="dropdown-item" href="goodsList.do?kind=moniter">모니터</a> <a
-							class="dropdown-item" href="goodsList.do?kind=software">소프트웨어</a>
-					</div></li>
-				<li class="nav-item dropdown"><a
-					class="nav-link dropdown-toggle" href="#"
-					id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
-					aria-haspopup="true" aria-expanded="false"> 조립PC </a>
-					<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-						<a class="dropdown-item" href="comuList.do?kind=user">유저 추천
-							조립PC</a> <a class="dropdown-item" href="comuList.do?kind=owner">사장
-							추천 조립PC</a> <a class="dropdown-item" href="comuList.do?kind=CEO">컴퓨터
-							부품 회사 추천 조립PC</a>
-					</div></li>
-				<li class="nav-item dropdown"><a
-					class="nav-link dropdown-toggle" href="#"
-					id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
-					aria-haspopup="true" aria-expanded="false"> 브랜드PC </a>
-					<div class="dropdown-menu "
-						aria-labelledby="navbarDropdownMenuLink">
-						<a class="dropdown-item" href="pcList.do?kind=SAMSUNG">삼성전자</a> <a
-							class="dropdown-item" href="pcList.do?kind=HP">HP</a> <a
-							class="dropdown-item" href="pcList.do?kind=LG">LG전자</a> <a
-							class="dropdown-item" href="pcList.do?kind=LENOVO">레노버</a> <a
-							class="dropdown-item" href="pcList.do?kind=DELL">DELL</a> <a
-							class="dropdown-item" href="pcList.do?kind=ASUS">ASUS</a>
-					</div></li>
-				<li class="nav-item dropdown"><a
-					class="nav-link dropdown-toggle" href="#"
-					id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
-					aria-haspopup="true" aria-expanded="false"> 커뮤니티 </a>
-					<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-						<a class="dropdown-item" href="boardList.do">컴퓨터 리뷰 커뮤니티</a> <a
-							class="dropdown-item" href="recommandList.do">컴퓨터 추천 커뮤니티</a>
-					</div></li>
-			</ul>
+			<div class="collapse navbar-collapse mr-4" id="navbarNavDropdown">
+				<div class="navbar__icon d-lg-block d-none">
+					<a href="index.do"><img class="navbar__icon-image" alt="-"
+						src="img/EzIcon.jpg"></a>
+				</div>
+				<ul class="navbar-nav">
+					<li class="nav-item dropdown"><a
+						class="nav-link dropdown-toggle" href="#"
+						id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
+						aria-haspopup="true" aria-expanded="false">컴퓨터부품</a>
+						<div class="dropdown-menu"
+							aria-labelledby="navbarDropdownMenuLink">
+
+							<a class="dropdown-item" href="goodsList.do?kind=cpu">CPU</a> <a
+								class="dropdown-item" href="goodsList.do?kind=cooler">쿨러/튜닝</a>
+							<a class="dropdown-item" href="goodsList.do?kind=mainboard">메인보드</a>
+							<a class="dropdown-item" href="goodsList.do?kind=memory">메모리</a>
+							<a class="dropdown-item" href="goodsList.do?kind=graphic">그래픽카드</a>
+							<a class="dropdown-item" href="goodsList.do?kind=SSD">SSd</a> <a
+								class="dropdown-item" href="goodsList.do?kind=harddisk">하드디스크</a>
+							<a class="dropdown-item" href="goodsList.do?kind=sidedisk">외장HDD/SSD</a>
+							<a class="dropdown-item" href="goodsList.do?kind=case">케이스</a> <a
+								class="dropdown-item" href="goodsList.do?kind=power">파워</a> <a
+								class="dropdown-item" href="goodsList.do?kind=keyboard">키보드</a>
+							<a class="dropdown-item" href="goodsList.do?kind=mouse">마우스</a> <a
+								class="dropdown-item" href="goodsList.do?kind=odd">ODD</a> <a
+								class="dropdown-item" href="goodsList.do?kind=moniter">모니터</a> <a
+								class="dropdown-item" href="goodsList.do?kind=software">소프트웨어</a>
+						</div></li>
+					<li class="nav-item dropdown"><a
+						class="nav-link dropdown-toggle" href="#"
+						id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
+						aria-haspopup="true" aria-expanded="false"> 조립PC </a>
+						<div class="dropdown-menu"
+							aria-labelledby="navbarDropdownMenuLink">
+							<a class="dropdown-item" href="comuList.do?kind=user">유저 추천
+								조립PC</a> <a class="dropdown-item" href="comuList.do?kind=owner">사장
+								추천 조립PC</a> <a class="dropdown-item" href="comuList.do?kind=CEO">컴퓨터
+								부품 회사 추천 조립PC</a>
+						</div></li>
+					<li class="nav-item dropdown"><a
+						class="nav-link dropdown-toggle" href="#"
+						id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
+						aria-haspopup="true" aria-expanded="false"> 브랜드PC </a>
+						<div class="dropdown-menu "
+							aria-labelledby="navbarDropdownMenuLink">
+							<a class="dropdown-item" href="pcList.do?kind=SAMSUNG">삼성전자</a> <a
+								class="dropdown-item" href="pcList.do?kind=HP">HP</a> <a
+								class="dropdown-item" href="pcList.do?kind=LG">LG전자</a> <a
+								class="dropdown-item" href="pcList.do?kind=LENOVO">레노버</a> <a
+								class="dropdown-item" href="pcList.do?kind=DELL">DELL</a> <a
+								class="dropdown-item" href="pcList.do?kind=ASUS">ASUS</a>
+						</div></li>
+					<li class="nav-item dropdown"><a
+						class="nav-link dropdown-toggle" href="#"
+						id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
+						aria-haspopup="true" aria-expanded="false"> 커뮤니티 </a>
+						<div class="dropdown-menu"
+							aria-labelledby="navbarDropdownMenuLink">
+							<a class="dropdown-item" href="boardList.do">컴퓨터 리뷰 커뮤니티</a> <a
+								class="dropdown-item" href="recommandList.do">컴퓨터 추천 커뮤니티</a>
+						</div></li>
+				</ul>
+			</div>
 		</div>
-		<form class="form-inline d-lg-block d-none">
-			<input class="form-control mr-sm-2" type="search"
-				placeholder="Search" aria-label="Search">
-			<button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
-		</form>
+		<div>
+			<button class="navbar-toggler" type="button" data-toggle="collapse"
+				data-target="#infoDropdown" aria-controls="navbarNavDropdown"
+				aria-expanded="true" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse dropdown-menu-end"
+				id="infoDropdown">
+				<ul class="navbar-nav">
+					<li class="nav-item"><a class="nav-link"
+						href="goodsCartList.do"><i class="fas fa-cart-arrow-down"></i></a></li>
+
+					<li class="nav-item dropdown"><a class="nav-link" href="#"
+						id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
+						aria-haspopup="true" aria-expanded="false"><i
+							class="fas fa-business-time"></i></a></li>
+
+					<li class="nav-item dropdown"><a class="nav-link" href="#"
+						id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
+						aria-haspopup="true" aria-expanded="false"><i
+							class="fas fa-user-alt"></i></a>
+						<div class="dropdown-menu dropdown-menu-end"
+							aria-labelledby="navbarDropdownMenuLink">
+							<%
+								if (loginMember == null) {
+							%>
+							<button type="button"
+								class="dropdown-item btn btn-primary btn-sm btn-block"
+								data-toggle="modal" data-target="#loginModal">로그인</button>
+							<button type="button"
+								class="dropdown-item btn btn-primary btn-sm btn-block"
+								data-toggle="modal" data-target="#joinModal">회원가입</button>
+							<%
+								} else {
+							%>
+							<button type="button"
+								class="dropdown-item btn btn-primary btn-sm btn-block"
+								onclick="location.href='logout.do'">로그아웃</button>
+							<button type="button"
+								class="dropdown-item btn btn-primary btn-sm btn-block"
+								data-toggle="modal" data-target="#profileModal">프로필 수정</button>
+							<%
+								}
+							%>
+
+						</div></li>
+				</ul>
+			</div>
+		</div>
 	</nav>
 	<!-- end -->
 
@@ -295,8 +344,8 @@ ArrayList<Goods> todayImageList = (ArrayList<Goods>) request.getAttribute("today
 								</div>
 								<form action="noticeList.do">
 									<div class="modal-body">
-										<p id="noticeName"></p>
-										<h6 id="noticeSubject"></h6>
+										<p id="noticeSubject"></p>
+										<h6 id="noticeName"></h6>
 										<p id="noticeContent"></p>
 									</div>
 								</form>
@@ -373,48 +422,7 @@ ArrayList<Goods> todayImageList = (ArrayList<Goods>) request.getAttribute("today
 		</div>
 		<!-- end -->
 		<!-- 2020-12-02 haesu -->
-		<div class="controller">
-			<%
-				if (loginMember == null) {
-			%>
-			<div class="controller__menu">
-				<button type="button" class="btn btn-primary btn-sm btn-block"
-					data-toggle="modal" data-target="#loginModal">로그인</button>
-			</div>
-			<!-- 회원가입 modal만들기 -->
-			<div class="controller__menu">
-				<button type="button" class="btn btn-primary btn-sm btn-block"
-					data-toggle="modal" data-target="#joinModal">회원가입</button>
-			</div>
-
-			<%
-				} else {
-			%>
-			<div class="controller__menu">
-				<h6>
-					<%=loginMember.getId()%>님 환영합니다.
-				</h6>
-			</div>
-			<div class="controller__menu">
-				<button type="button" class="btn btn-primary btn-sm btn-block"
-					onclick="location.href='logout.do'">로그아웃</button>
-			</div>
-			<div class="controller__menu">
-				<button type="button" class="btn btn-primary btn-sm btn-block"
-					data-toggle="modal" data-target="#profileModal">프로필 수정</button>
-			</div>
-			<%
-				}
-			%>
-
-			<div class="controller__menu">
-				<a class="btn btn-primary btn-sm btn-block " href="goodsListCart.do">장바구니</a>
-			</div>
-			<div class="controller__menu ">
-				<button type="button" class="btn btn-primary btn-sm btn-block"
-					data-toggle="modal" data-target="#todayImageListModal">최근본상품</button>
-			</div>
-		</div>
+		
 		<footer class="text-center text-white footer__color">
 			<div class="footer-above">
 				<div class="container pt-4">
@@ -513,7 +521,7 @@ ArrayList<Goods> todayImageList = (ArrayList<Goods>) request.getAttribute("today
 						</div>
 						<div class="form-group">
 							<input type="password" class="form-control" name="passwd"
-								placeholder="비밀번호" maxlength="20" required="required"
+								id="pass" placeholder="비밀번호" maxlength="20" required="required"
 								autocomplete="off" />
 						</div>
 						<div class="form-group">
@@ -594,9 +602,10 @@ ArrayList<Goods> todayImageList = (ArrayList<Goods>) request.getAttribute("today
 						<div class="form-col">
 							<div class="form-group">
 								<label for="notice_name">글쓴이</label> <input type="text"
-									class="form-control" id="notice_name" name="notice_name"
-									required="required" />
+									class="form-control" id="notice_name" required="required"
+									value="admin" disabled="disabled" />
 							</div>
+							<input type="hidden" name="notice_name" value="admin" />
 							<div class="form-group">
 								<label for="notice_pass">비밀번호</label> <input type="password"
 									class="form-control" id="notice_pass" name="notice_pass"
@@ -652,7 +661,7 @@ ArrayList<Goods> todayImageList = (ArrayList<Goods>) request.getAttribute("today
 								<input type="hidden" name="notice_num" id="notice_num" /> <label
 									for="notice_subject2">제 목</label> <input type="text"
 									class="form-control" id="notice_subject2"
-									name="notice_subject2" required="required" />
+									name="notice_subject2" required="required" value="admin" />
 							</div>
 							<div class="form-group">
 								<label for="notice_content2">내 용</label>
@@ -708,7 +717,8 @@ ArrayList<Goods> todayImageList = (ArrayList<Goods>) request.getAttribute("today
 
 	<!-- 2020/12/04 강현우 프로필 수정 -->
 	<div class="modal fade" id="profileModal" data-keyboard="false"
-		tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+		data-backdrop="static" tabindex="-1"
+		aria-labelledby="staticBackdropLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -784,31 +794,8 @@ ArrayList<Goods> todayImageList = (ArrayList<Goods>) request.getAttribute("today
 					</button>
 				</div>
 				<div class="modal-body">
-					<div class="text-center">
-						<h2>최근 본 상품 목록</h2>
-					</div>
-					<div class="form-col">
-						<div class="form-group">
-							<c:if test="${todayImageList != null }">
-								<div id="todayImageList">
-									<table>
-										<tr>
-											<c:forEach var="todayImage" items="${todayImageList }"
-												varStatus="status">
-												<td><img src="img/${todayImage }" id="todayImage" /></td>
-												<c:if test="${((status.index+1) mod 4) == 0 }">
-										</tr>
-										<tr>
-											</c:if>
-											</c:forEach>
-										</tr>
-									</table>
-								</div>
-							</c:if>
-						</div>
-						<button type="button" class="btn btn-secondary"
-							data-dismiss="modal">닫기</button>
-					</div>
+					<span>최근본상품</span>
+					<div></div>
 				</div>
 			</div>
 		</div>
@@ -957,6 +944,8 @@ ArrayList<Goods> todayImageList = (ArrayList<Goods>) request.getAttribute("today
 	<!-- end -->
 	<!-- Optional JavaScript -->
 	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+	<script src="js/header.js"></script>
+	<script src="js/main.js"></script>
 	<script
 		src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 	<!-- notice modal용 부트스트랩 -->
@@ -968,6 +957,7 @@ ArrayList<Goods> todayImageList = (ArrayList<Goods>) request.getAttribute("today
 	<script src="js/main.js"></script>
 	<script
 		src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	<script src="https://kit.fontawesome.com/6478f529f2.js"></script>
 	<script src="js/addr.js"></script>
 </body>
 </html>

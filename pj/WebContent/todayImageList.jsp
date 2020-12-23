@@ -1,32 +1,26 @@
-
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="vo.Member, vo.Goods"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ page import="java.util.HashMap,java.util.ArrayList"%>
-<%@page import="vo.PageInfo"%>
-<%@ page import="java.util.*"%>
-<%@ page import="java.text.SimpleDateFormat"%>
-<%@page import="vo.BoardBean"%>
-<%@page import="vo.RecommandBean"%>
-<%@page language="java" contentType="text/html; charset=UTF-8"%>
+<%@ page import="vo.Member, vo.Goods,vo.Cart"%>
+<%@ page
+	import="vo.Cart,java.util.List, java.text.SimpleDateFormat, java.lang.*"%>
 <%
 	Member loginMember = (Member) session.getAttribute("loginMember");
-ArrayList<Goods> todayImageList = (ArrayList<Goods>) request.getAttribute("todayImageList");
-%>
-<%
-	RecommandBean article = (RecommandBean) request.getAttribute("article");
-String nowPage = (String) request.getAttribute("page");
+ArrayList<Goods> goodsList = (ArrayList<Goods>) request.getAttribute("goodsList");
+ArrayList<Cart> cartList = (ArrayList<Cart>) request.getAttribute("cartList");
+int totalMoney = 0;
+if (request.getAttribute("totalMoney") != null)
+	totalMoney = (Integer) request.getAttribute("totalMoney");
 %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>MVC 게시판</title>
 <!-- Required meta tags -->
 <meta charset="utf-8" />
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <!-- title image -->
-
+<link href="img/EzIcon.jpg" rel="icon" type="image/x-icon">
 <!-- reset -->
 <link rel="stylesheet"
 	href="https://meyerweb.com/eric/tools/css/reset/reset.css">
@@ -41,9 +35,9 @@ String nowPage = (String) request.getAttribute("page");
 <link rel="stylesheet" href="css/style.css" />
 <title>컴퓨터 홈 쇼핑 사이트</title>
 </head>
-
-<body>
-	<!-- 2020-12-02 haesu -->
+<body oncontextmenu="return false" ondragstart="return false"
+	onselectstart="return false">
+	<!-- 2020-12-07 haesu -->
 	<nav
 		class="navbar navbar-expand-lg bg-light fixed-top navbar-light justify-content-between"
 		id="header">
@@ -53,12 +47,12 @@ String nowPage = (String) request.getAttribute("page");
 				aria-expanded="true" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
-			
+
 			<div class="collapse navbar-collapse mr-4" id="navbarNavDropdown">
-			<div class="navbar__icon d-lg-block d-none">
-				<a href="index.do"><img class="navbar__icon-image" alt="-"
-					src="img/EzIcon.jpg"></a>
-			</div>
+				<div class="navbar__icon d-lg-block d-none">
+					<a href="index.do"><img class="navbar__icon-image" alt="-"
+						src="img/EzIcon.jpg"></a>
+				</div>
 				<ul class="navbar-nav">
 					<li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle" href="#"
@@ -125,16 +119,17 @@ String nowPage = (String) request.getAttribute("page");
 				aria-expanded="true" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
-			<div class="collapse navbar-collapse dropdown-menu-end" id="infoDropdown">
+			<div class="collapse navbar-collapse dropdown-menu-end"
+				id="infoDropdown">
 				<ul class="navbar-nav">
 					<li class="nav-item"><a class="nav-link"
 						href="goodsCartList.do"><i class="fas fa-cart-arrow-down"></i></a></li>
-						
+
 					<li class="nav-item dropdown"><a class="nav-link" href="#"
 						id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
 						aria-haspopup="true" aria-expanded="false"><i
 							class="fas fa-business-time"></i></a></li>
-							
+
 					<li class="nav-item dropdown"><a class="nav-link" href="#"
 						id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
 						aria-haspopup="true" aria-expanded="false"><i
@@ -168,56 +163,82 @@ String nowPage = (String) request.getAttribute("page");
 			</div>
 		</div>
 	</nav>
-	<!-- end -->
-	<!-- 2020/12/8 게시판 상세보기 -->
-	<div class="container pt-4 bbs__margin-top">
-		<div class="text-center m-3 ">
-			<section id="articleForm">
-				<h2>글 내용 상세보기</h2>
-				<section id="basicInfoArea">
-					제 목 :
-					<%=article.getRecommand_subject()%>
-					<br />
-					<%
-						if (!(article.getRecommand_file() == null)) {
-					%>
-					<img src="/boardUpload/<%=article.getRecommand_file()%>" alt="-">
-					<%
-						}
-					%>
-				</section>
-				<section id="articleContentArea">
-					<%=article.getRecommand_content()%>
-				</section>
-			</section>
+	<div class="container">
 
-			<section id="commandList">
-				<a class="btn btn-primary"
-					href="recommandReplyForm.do?recommand_num=<%=article.getRecommand_num()%>&page=<%=nowPage%>"
-					role="button">답변</a>&nbsp;&nbsp; <a class="btn btn-primary"
-					href="recommandModifyForm.do?recommand_num=<%=article.getRecommand_num()%>&page=<%=nowPage%>"
-					role="button">수정</a>&nbsp;&nbsp; <a class="btn btn-primary"
-					href="recommandDeleteForm.do?recommand_num=<%=article.getRecommand_num()%>&page=<%=nowPage%>"
-					role="button">삭제</a>&nbsp;&nbsp; <a class="btn btn-primary"
-					href="recommandList.do?page=<%=nowPage%>" role="button">목록</a>&nbsp;&nbsp;
-			</section>
+		<div class="startLine-view text-center">
+			<p class="startLine__text">최근 본 상품</p>
 		</div>
-	</div>
-	<!-- 상세보기 끝 -->
-	<!-- 2020-12-02 haesu -->
-	
+		<%
+			if (todayList != null && todayList.size() > 0) {
+			for (int i = 0; i < todayList.size(); i++) {
+				if (i % 3 == 0) {
+		%>
+		<div class="card-deck">
+			<%
+				}
+			%>
 
-	<footer class="text-center text-white footer__color">
+			<div class="card goods__card-size">
+				<img src="./img/<%=todayList.get(i).getImage()%>"
+					class="card-img-top card-img__size" alt="...">
+				<div class="card-body">
+					<p class="card-text">
+						상품명:
+						<%=todayList.get(i).getKind()%><br /> 가격:
+						<%=todayList.get(i).getPrice()%><br />
+					</p>
+				</div>
+
+			</div>
+			<%
+				if (i % 3 == 2) {
+			%>
+		</div>
+		<%
+			}
+		%>
+		<%
+			if (i % todayList.size() == todayList.size() - 1) {
+		%>
+
+		<%
+			break;
+		}
+		}
+		}
+		%>
+
+		<%
+			if (todayList == null) {
+		%>
+		<div>
+			<button onclick="history.back()" class="btn btn-primary">쇼핑
+				계속하기</button>
+		</div>
+		<%
+			}
+		%>
+	</div>
+	<div class="totalMoney bg-dark text-white text-center">
+		<span>스토어 합계 주문 :&nbsp;&nbsp;</span> <span
+			class="totalMoney__font-small">상품 금액</span> <span
+			class="font-weight-bold" style="color: tomato;"> <%=totalMoney%>원
+		</span>
+		<button class="btn btn-primary">구매하기</button>
+	</div>
+
+
+	<footer class="text-center footer__color text-white footer__size">
 		<div class="footer-above">
 			<div class="container pt-4">
 				<div class="row">
-					<div class="footer-col col-md-4">
+					<div class="footer-col col-4">
 						<h3 style="color: white;">위치</h3>
 						<p>
 							영남기술교육원<br />대구광역시 달서구
 						</p>
 					</div>
-					<div class="footer-col col-md-4">
+					<div class="footer-col col-4">
 						<h3 style="color: white;">소셜 미디어</h3>
 						<a href="#" class="btn btn-light m-2"><img
 							src="img/facebook.svg"></a> <a href="#"
@@ -227,7 +248,7 @@ String nowPage = (String) request.getAttribute("page");
 							src="img/twitch.svg"></a> <a href="#" class="btn btn-light m-2"><img
 							src="img/instagram.svg"></a>
 					</div>
-					<div class="footer-col col-md-4">
+					<div class="footer-col col-4">
 						<h3 style="color: white;">개발자 한마디</h3>
 						<p>언제든지 연락주세요!!</p>
 					</div>
@@ -240,9 +261,7 @@ String nowPage = (String) request.getAttribute("page");
 			</div>
 		</div>
 	</footer>
-	<!-- end -->
 
-	<!-- Login Modal  2020-12-03 haesu-->
 
 	<div class="modal fade" id="loginModal" tabindex="-1"
 		aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -277,8 +296,8 @@ String nowPage = (String) request.getAttribute("page");
 			</div>
 		</div>
 	</div>
-	<!-- Join Modal -->
 
+	<!-- Join Modal -->
 	<div class="modal fade" id="joinModal" tabindex="-1"
 		aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
@@ -339,84 +358,25 @@ String nowPage = (String) request.getAttribute("page");
 								placeholder="이메일" maxlength="20" required="required"
 								autocomplete="no" />
 						</div>
+
+
+						<!-- input타입 button은 value 값을 줘야함 -->
 						<button type="submit" class="btn btn-primary form-control">가입</button>
 					</form>
 				</div>
-			</div>
-		</div>
-	</div>
-
-
-
-
-
-
-	<!-- 2020/12/04 강현우 프로필 수정 -->
-	<div class="modal fade" id="profileModal" data-backdrop="static"
-		data-keyboard="false" tabindex="-1"
-		aria-labelledby="staticBackdropLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="staticBackdropLabel">프로필 수정 페이지</h5>
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body">
-					<form action="joinPro.do" method="post">
-						<div class="form-group">
-							<input type="password" class="form-control" name="passwd"
-								placeholder="비밀번호" maxlength="20" required="required"
-								autocomplete="off" />
-						</div>
-						<div class="form-group">
-							<input type="text" class="form-control" name="name"
-								placeholder="이름" maxlength="20" required="required"
-								autocomplete="off" />
-						</div>
-						<div class="form-group">
-							<input type="text" id="sample4_postcode" placeholder="우편번호"
-								class="form-control" name="addr1" required="required"
-								autocomplete="off"> <input type="button"
-								onclick="sample4_execDaumPostcode()" value="우편번호 찾기"
-								class="form-control"><input type="text"
-								id="sample4_roadAddress" placeholder="도로명주소"
-								class="form-control" name="addr2" required="required"
-								autocomplete="off"> <input class="form-control"
-								type="text" id="sample4_detailAddress" placeholder="상세주소"
-								name="addr3" required="required" autocomplete="off">
-						</div>
-						<div class="form-group">
-							<input type="number" class="form-control" name="age"
-								placeholder="나이" maxlength="20" required="required"
-								autocomplete="off" />
-						</div>
-						<div class="form-group">
-							<div class="btn-group" data-toggle="buttons">
-								<label class="btn btn-primary active"> <input
-									type="radio" class="d-none" name="gender" autocomplete="off"
-									value='M' checked="checked" />남자
-								</label> <label class="btn btn-primary"> <input type="radio"
-									class="d-none" name="gender" autocomplete="off" value='F' />여자
-								</label>
-							</div>
-						</div>
-						<div class="form-group">
-							<input type="email" class="form-control" name="email"
-								placeholder="이메일" maxlength="20" required="required"
-								autocomplete="no" />
-						</div>
-						<button type="submit" class="btn btn-primary form-control">변경</button>
-					</form>
-				</div>
 
 			</div>
 		</div>
 	</div>
+	<!-- end -->
 
-	<!-- 프로필 수정 end -->
+
+
+
+
+
+
+
 	<!-- Optional JavaScript -->
 	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 	<script
@@ -428,6 +388,8 @@ String nowPage = (String) request.getAttribute("page");
 	<script
 		src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script src="js/addr.js"></script>
-	<script src="https://kit.fontawesome.com/6478f529f2.js"></script>
+	<script src="https://kit.fontawesome.com/6478f529f2.js"
+		crossorigin="anonymous"></script>
+	<script src="js/Cart.js"></script>
 </body>
 </html>

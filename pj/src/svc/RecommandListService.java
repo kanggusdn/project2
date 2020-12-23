@@ -23,6 +23,7 @@ public class RecommandListService {
 		RecommandDAO recommandDAO = RecommandDAO.getInstance();
 		recommandDAO.setConnection(conn);
 		articleList = recommandDAO.selectArticleList(page, limit);
+		if(conn != null) close(conn);
 		return articleList;
 		
 	}
