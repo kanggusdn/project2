@@ -796,6 +796,7 @@ ArrayList<Goods> todayImageList = (ArrayList<Goods>) request.getAttribute("today
 				<div class="modal-body">
 					<span>최근본상품</span>
 					<div></div>
+					<div></div>
 				</div>
 			</div>
 		</div>
