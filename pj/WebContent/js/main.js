@@ -72,7 +72,7 @@ $(function() {
 				$("#notice_subject2").val(view[1]);
 				$("#notice_content2").val(view[2]);
 			});
-				var del = $.parseJSON(data);
+				var del = $.parseJSON(data); /* 공지사항 글삭제 */
 				console.log(del);
 				$("#notice_pass2").val(del[0]);
 			});
