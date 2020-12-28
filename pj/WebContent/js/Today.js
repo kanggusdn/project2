@@ -1,5 +1,5 @@
 $(function() {
-	$(".card-img-top card-img__size").each(function() {
+	$(".").each(function() {
 		$(this).click(function() {
 			console.log($(this).find("img").attr("src"));
 			$("#todayImage1").val();
