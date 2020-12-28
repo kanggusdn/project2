@@ -44,6 +44,12 @@ import action.RecommandModifyProAction;
 import action.RecommandReplyFormAction;
 import action.RecommandReplyProAction;
 import action.RecommandWriteProAction;
+import action.TodayImageAddAction;
+import action.TodayImageListAction;
+import action.TodayImageQtyDownAction;
+import action.TodayImageQtyUpAction;
+import action.TodayImageRemoveAction;
+import action.TodayImageSearchAction;
 import vo.ActionForward;
 
 @WebServlet("*.do")
@@ -282,6 +288,53 @@ public class FrontController extends HttpServlet {
 			}
 		} else if (command.equals("/goodsCartList.do")) {
 			action = new GoodsCartListAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if (command.equals("/todayImageAdd.do")) {
+			action = new TodayImageAddAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		
+		} else if (command.equals("/todayImageListAction.do")) {
+			action = new TodayImageListAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		
+		} else if (command.equals("/todayImageQtyDownAction.do")) {
+			action = new TodayImageQtyDownAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		
+		} else if (command.equals("/todayImageQtyUpAction.do")) {
+			action = new TodayImageQtyUpAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		
+		} else if (command.equals("/todayImageRemoveAction.do")) {
+			action = new TodayImageRemoveAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		
+		} else if (command.equals("/todayImageSearchAction.do")) {
+			action = new TodayImageSearchAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {

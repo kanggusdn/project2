@@ -4,9 +4,23 @@
 <%@ page import="vo.Member, vo.Goods"%>
 <%
 	Member loginMember = (Member) session.getAttribute("loginMember");
-	ArrayList<Goods> comuList = (ArrayList<Goods>) request.getAttribute("comuList");
+ArrayList<Goods> comuList = (ArrayList<Goods>) request.getAttribute("comuList");
+ArrayList<Goods> todayImageList = (ArrayList<Goods>) request.getAttribute("todayImageList");
+int cnt = 0;
+%>
+<%
+	String image=null;
+	String cookie =request.getHeader("Cookie");
 
-	int cnt = 0;
+	if(cookie != null) {
+		Cookie cookies[] = request.getCookies();
+		
+		for(int i=0; i<cookies.length; i++) {
+			if(cookies[i].getName().equals("image")) {
+				image=cookies[i].getValue();
+			}
+		}
+	}
 %>
 <!DOCTYPE html>
 <html>
@@ -16,7 +30,7 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <!-- title image -->
-<link href = "img/EzIcon.jpg" rel="icon" type = "image/x-icon">
+<link href="img/EzIcon.jpg" rel="icon" type="image/x-icon">
 <!-- reset -->
 <link rel="stylesheet"
 	href="https://meyerweb.com/eric/tools/css/reset/reset.css">
@@ -43,12 +57,12 @@
 				aria-expanded="true" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
-			
+
 			<div class="collapse navbar-collapse mr-4" id="navbarNavDropdown">
-			<div class="navbar__icon d-lg-block d-none">
-				<a href="index.do"><img class="navbar__icon-image" alt="-"
-					src="img/EzIcon.jpg"></a>
-			</div>
+				<div class="navbar__icon d-lg-block d-none">
+					<a href="index.do"><img class="navbar__icon-image" alt="-"
+						src="img/EzIcon.jpg"></a>
+				</div>
 				<ul class="navbar-nav">
 					<li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle" href="#"
@@ -115,16 +129,62 @@
 				aria-expanded="true" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
-			<div class="collapse navbar-collapse dropdown-menu-end" id="infoDropdown">
+			<div class="collapse navbar-collapse dropdown-menu-end"
+				id="infoDropdown">
 				<ul class="navbar-nav">
 					<li class="nav-item"><a class="nav-link"
 						href="goodsCartList.do"><i class="fas fa-cart-arrow-down"></i></a></li>
-						
+
 					<li class="nav-item dropdown"><a class="nav-link" href="#"
 						id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
 						aria-haspopup="true" aria-expanded="false"><i
-							class="fas fa-business-time"></i></a></li>
-							
+							class="fas fa-business-time"></i></a>
+						<div class="dropdown-menu dropdown-menu-end"
+							aria-labelledby="navbarDropdownMenuLink">
+							<h6>최근 본 상품</h6>
+							<div class="container">
+								<%
+									if (todayImageList != null && todayImageList.size() > 0) {
+									for (int i = 0; i < todayImageList.size(); i++) {
+										if (i % 3 == 0) {
+								%>
+								<div class="card-deck">
+									<%
+										}
+									%>
+
+									<div class="card goods__card-size">
+										<img src="./img/<%=todayImageList.get(i).getImage()%>"
+											class="card-img-top card-img__size" alt="...">
+										<div class="card-body">
+											<p class="card-text">
+												상품명:
+												<%=todayImageList.get(i).getKind()%><br /> 가격:
+												<%=todayImageList.get(i).getPrice()%><br />
+											</p>
+										</div>
+
+									</div>
+									<%
+										if (i % 3 == 2) {
+									%>
+								</div>
+								<%
+									}
+								%>
+								<%
+									if (i % todayImageList.size() == todayImageList.size() - 1) {
+								%>
+
+								<%
+									break;
+								}
+								}
+								}
+								%>
+							</div>
+						</div></li>
+
 					<li class="nav-item dropdown"><a class="nav-link" href="#"
 						id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
 						aria-haspopup="true" aria-expanded="false"><i
@@ -158,7 +218,7 @@
 			</div>
 		</div>
 	</nav>
-	
+
 	<div class="container">
 		<section class="container__size" id="home">
 			<div class=" w-100 ">
@@ -191,7 +251,7 @@
 				</div>
 			</div>
 		</section>
-		
+
 		<div class="startLine text-center">
 			<p class="startLine__text"><%=comuList.get(1).getKind()%></p>
 		</div>
@@ -209,7 +269,7 @@
 				<a data-toggle="modal"
 					data-target="#<%=comuList.get(i).getModalip()%>"> <img
 					src="./img/<%=comuList.get(i).getImage()%>"
-					class="card-img-top card-img__size" alt="...">
+					class="card-img-top card-img__size" alt="..." id="todayImage1">
 					<div class="card-body">
 						<p class="card-text">
 							상품명:
@@ -396,14 +456,15 @@
 					<div>
 						<img class="modal-image__size" alt="-"
 							src="<%=comuList.get(i).getModalimage()%>">
-					</div>  
+					</div>
 				</div>
 			</div>
 		</div>
 		<div>
-			<a class="btn btn-primary button__lo" href = "goodsCartAdd.do?id=<%= comuList.get(i).getId()%>">장바구니에 담기</a>
+			<a class="btn btn-primary button__lo"
+				href="goodsCartAdd.do?id=<%=comuList.get(i).getId()%>">장바구니에 담기</a>
 		</div>
-	</div> 
+	</div>
 	<%
 		}
 	%>
@@ -425,6 +486,7 @@
 	<script
 		src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script src="js/addr.js"></script>
+	<script src="js/Today.js"></script>
 	<script src="https://kit.fontawesome.com/6478f529f2.js"
 		crossorigin="anonymous"></script>
 </body>

@@ -1,16 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.HashMap,java.util.ArrayList"%>
-<%@ page import="vo.Member, vo.Goods,vo.Cart"%>
-<%@ page
-	import="vo.Cart,java.util.List, java.text.SimpleDateFormat, java.lang.*"%>
+<%@ page import="vo.Member, vo.Goods,vo.Today"%>
+<%@ page import="vo.Cart,java.util.List, java.text.SimpleDateFormat, java.lang.*"%>
 <%
 	Member loginMember = (Member) session.getAttribute("loginMember");
 ArrayList<Goods> goodsList = (ArrayList<Goods>) request.getAttribute("goodsList");
-ArrayList<Cart> cartList = (ArrayList<Cart>) request.getAttribute("cartList");
+ArrayList<Today> todayImageList = (ArrayList<Today>) request.getAttribute("todayImageList");
 int totalMoney = 0;
-if (request.getAttribute("totalMoney") != null)
-	totalMoney = (Integer) request.getAttribute("totalMoney");
+if(request.getAttribute("totalMoney") != null)
+totalMoney = (Integer)request.getAttribute("totalMoney");
 %>
 <!DOCTYPE html>
 <html>
@@ -20,7 +19,7 @@ if (request.getAttribute("totalMoney") != null)
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <!-- title image -->
-<link href="img/EzIcon.jpg" rel="icon" type="image/x-icon">
+<link href = "img/EzIcon.jpg" rel="icon" type = "image/x-icon">
 <!-- reset -->
 <link rel="stylesheet"
 	href="https://meyerweb.com/eric/tools/css/reset/reset.css">
@@ -47,12 +46,12 @@ if (request.getAttribute("totalMoney") != null)
 				aria-expanded="true" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
-
+			
 			<div class="collapse navbar-collapse mr-4" id="navbarNavDropdown">
-				<div class="navbar__icon d-lg-block d-none">
-					<a href="index.do"><img class="navbar__icon-image" alt="-"
-						src="img/EzIcon.jpg"></a>
-				</div>
+			<div class="navbar__icon d-lg-block d-none">
+				<a href="index.do"><img class="navbar__icon-image" alt="-"
+					src="img/EzIcon.jpg"></a>
+			</div>
 				<ul class="navbar-nav">
 					<li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle" href="#"
@@ -119,17 +118,16 @@ if (request.getAttribute("totalMoney") != null)
 				aria-expanded="true" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
-			<div class="collapse navbar-collapse dropdown-menu-end"
-				id="infoDropdown">
+			<div class="collapse navbar-collapse dropdown-menu-end" id="infoDropdown">
 				<ul class="navbar-nav">
 					<li class="nav-item"><a class="nav-link"
 						href="goodsCartList.do"><i class="fas fa-cart-arrow-down"></i></a></li>
-
+						
 					<li class="nav-item dropdown"><a class="nav-link" href="#"
 						id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
 						aria-haspopup="true" aria-expanded="false"><i
 							class="fas fa-business-time"></i></a></li>
-
+							
 					<li class="nav-item dropdown"><a class="nav-link" href="#"
 						id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
 						aria-haspopup="true" aria-expanded="false"><i
@@ -169,9 +167,9 @@ if (request.getAttribute("totalMoney") != null)
 			<p class="startLine__text">최근 본 상품</p>
 		</div>
 		<%
-			if (todayList != null && todayList.size() > 0) {
-			for (int i = 0; i < todayList.size(); i++) {
-				if (i % 3 == 0) {
+			if( todayImageList != null && todayImageList.size() > 0) {
+			for (int i = 0; i < todayImageList.size(); i++) {
+			if (i % 3 == 0) {
 		%>
 		<div class="card-deck">
 			<%
@@ -179,13 +177,13 @@ if (request.getAttribute("totalMoney") != null)
 			%>
 
 			<div class="card goods__card-size">
-				<img src="./img/<%=todayList.get(i).getImage()%>"
+				<img src="./img/<%=todayImageList.get(i).getImage()%>"
 					class="card-img-top card-img__size" alt="...">
 				<div class="card-body">
 					<p class="card-text">
 						상품명:
-						<%=todayList.get(i).getKind()%><br /> 가격:
-						<%=todayList.get(i).getPrice()%><br />
+						<%=todayImageList.get(i).getKind()%><br /> 가격:
+						<%=todayImageList.get(i).getPrice()%><br />
 					</p>
 				</div>
 
@@ -198,35 +196,30 @@ if (request.getAttribute("totalMoney") != null)
 			}
 		%>
 		<%
-			if (i % todayList.size() == todayList.size() - 1) {
+			if (i % todayImageList.size() == todayImageList.size() - 1) {
 		%>
 
 		<%
 			break;
-		}
-		}
-		}
-		%>
-
-		<%
-			if (todayList == null) {
-		%>
-		<div>
-			<button onclick="history.back()" class="btn btn-primary">쇼핑
-				계속하기</button>
-		</div>
-		<%
+					}
+				}
 			}
 		%>
+		
+		<%
+			if(todayImageList == null){
+		%>
+			<div>
+			<button onclick="history.back()" class="btn btn-primary">쇼핑 계속하기</button>
+			</div>			
+		<%
+		} 
+		%>
 	</div>
-	<div class="totalMoney bg-dark text-white text-center">
-		<span>스토어 합계 주문 :&nbsp;&nbsp;</span> <span
-			class="totalMoney__font-small">상품 금액</span> <span
-			class="font-weight-bold" style="color: tomato;"> <%=totalMoney%>원
-		</span>
-		<button class="btn btn-primary">구매하기</button>
-	</div>
-
+		<div class = "totalMoney bg-dark text-white text-center">
+			<span>스토어 합계 주문 :&nbsp;&nbsp;</span> <span class = "totalMoney__font-small">상품 금액</span> <span class = "font-weight-bold"style="color: tomato;"> <%=totalMoney%>원</span>
+			<button class="btn btn-primary">구매하기</button>
+		</div>
 
 	<footer class="text-center footer__color text-white footer__size">
 		<div class="footer-above">

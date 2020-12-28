@@ -1,14 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.HashMap,java.util.ArrayList"%>
-<%@ page import="vo.Member, vo.Goods, vo.Cart"%>
-
-
+<%@ page import="vo.Member, vo.Goods, vo.Cart, vo.Today"%>
 <%
 	Member loginMember = (Member) session.getAttribute("loginMember");
 ArrayList<Goods> goodsList = (ArrayList<Goods>) request.getAttribute("goodsList");
-
+ArrayList<Goods> todayImageList = (ArrayList<Goods>) request.getAttribute("todayImageList");
 int cnt = 0;
+%>
+<%
+	String image=null;
+	String cookie =request.getHeader("Cookie");
+
+	if(cookie != null) {
+		Cookie cookies[] = request.getCookies();
+		
+		for(int i=0; i<cookies.length; i++) {
+			if(cookies[i].getName().equals("image")) {
+				image=cookies[i].getValue();
+			}
+		}
+	}
 %>
 <!DOCTYPE html>
 <html>
@@ -126,7 +138,53 @@ int cnt = 0;
 					<li class="nav-item dropdown"><a class="nav-link" href="#"
 						id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
 						aria-haspopup="true" aria-expanded="false"><i
-							class="fas fa-business-time"></i></a></li>
+							class="fas fa-business-time"></i></a>
+							<div class="dropdown-menu dropdown-menu-end"
+							aria-labelledby="navbarDropdownMenuLink">
+							<h6>최근 본 상품</h6>
+							<div class="container">
+								<%
+									if (todayImageList != null && todayImageList.size() > 0) {
+									for (int i = 0; i < todayImageList.size(); i++) {
+										if (i % 3 == 0) {
+								%>
+								<div class="card-deck">
+									<%
+										}
+									%>
+
+									<div class="card goods__card-size">
+										<img src="./img/<%=todayImageList.get(i).getImage()%>"
+											class="card-img-top card-img__size" alt="...">
+										<div class="card-body">
+											<p class="card-text">
+												상품명:
+												<%=todayImageList.get(i).getKind()%><br /> 가격:
+												<%=todayImageList.get(i).getPrice()%><br />
+											</p>
+										</div>
+
+									</div>
+									<%
+										if (i % 3 == 2) {
+									%>
+								</div>
+								<%
+									}
+								%>
+								<%
+									if (i % todayImageList.size() == todayImageList.size() - 1) {
+								%>
+
+								<%
+									break;
+								}
+								}
+								}
+								%>
+							</div>
+						</div>
+							</li>
 
 					<li class="nav-item dropdown"><a class="nav-link" href="#"
 						id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
@@ -211,7 +269,7 @@ int cnt = 0;
 				<a data-toggle="modal"
 					data-target="#<%=goodsList.get(i).getModalip()%>"> <img
 					src="./img/<%=goodsList.get(i).getImage()%>"
-					class="card-img-top card-img__size" alt="...">
+					class="card-img-top card-img__size" alt="..." id="todayImage2">
 					<div class="card-body">
 						<p class="card-text">
 							상품명:
@@ -429,6 +487,7 @@ int cnt = 0;
 	<script
 		src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script src="js/addr.js"></script>
+	<script src="js/Today.js"></script>
 	<script src="https://kit.fontawesome.com/6478f529f2.js"
 		crossorigin="anonymous"></script>
 </body>
