@@ -8,20 +8,6 @@ ArrayList<Goods> pcList = (ArrayList<Goods>) request.getAttribute("pcList");
 ArrayList<Goods> todayImageList = (ArrayList<Goods>) request.getAttribute("todayImageList");
 int cnt = 0;
 %>
-<%
-	String image=null;
-	String cookie =request.getHeader("Cookie");
-
-	if(cookie != null) {
-		Cookie cookies[] = request.getCookies();
-		
-		for(int i=0; i<cookies.length; i++) {
-			if(cookies[i].getName().equals("image")) {
-				image=cookies[i].getValue();
-			}
-		}
-	}
-%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,7 +16,7 @@ int cnt = 0;
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <!-- title image -->
-<link href = "img/EzIcon.jpg" rel="icon" type = "image/x-icon">
+<link href="img/EzIcon.jpg" rel="icon" type="image/x-icon">
 <!-- reset -->
 <link rel="stylesheet"
 	href="https://meyerweb.com/eric/tools/css/reset/reset.css">
@@ -57,12 +43,12 @@ int cnt = 0;
 				aria-expanded="true" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
-			
+
 			<div class="collapse navbar-collapse mr-4" id="navbarNavDropdown">
-			<div class="navbar__icon d-lg-block d-none">
-				<a href="index.do"><img class="navbar__icon-image" alt="-"
-					src="img/EzIcon.jpg"></a>
-			</div>
+				<div class="navbar__icon d-lg-block d-none">
+					<a href="index.do"><img class="navbar__icon-image" alt="-"
+						src="img/EzIcon.jpg"></a>
+				</div>
 				<ul class="navbar-nav">
 					<li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle" href="#"
@@ -129,16 +115,17 @@ int cnt = 0;
 				aria-expanded="true" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
-			<div class="collapse navbar-collapse dropdown-menu-end" id="infoDropdown">
+			<div class="collapse navbar-collapse dropdown-menu-end"
+				id="infoDropdown">
 				<ul class="navbar-nav">
 					<li class="nav-item"><a class="nav-link"
 						href="goodsCartList.do"><i class="fas fa-cart-arrow-down"></i></a></li>
-						
+
 					<li class="nav-item dropdown"><a class="nav-link" href="#"
 						id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
 						aria-haspopup="true" aria-expanded="false"><i
 							class="fas fa-business-time"></i></a>
-							<div class="dropdown-menu dropdown-menu-end"
+						<div class="dropdown-menu dropdown-menu-end"
 							aria-labelledby="navbarDropdownMenuLink">
 							<h6>최근 본 상품</h6>
 							<div class="container">
@@ -182,9 +169,8 @@ int cnt = 0;
 								}
 								%>
 							</div>
-						</div>
-							</li>
-							
+						</div></li>
+
 					<li class="nav-item dropdown"><a class="nav-link" href="#"
 						id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
 						aria-haspopup="true" aria-expanded="false"><i
@@ -460,7 +446,8 @@ int cnt = 0;
 			</div>
 		</div>
 		<div>
-			<a class="btn btn-primary button__lo" href = "goodsCartAdd.do?id=<%= pcList.get(i).getId()%>">장바구니에 담기</a>
+			<a class="btn btn-primary button__lo"
+				href="goodsCartAdd.do?id=<%=pcList.get(i).getId()%>">장바구니에 담기</a>
 		</div>
 	</div>
 	<%

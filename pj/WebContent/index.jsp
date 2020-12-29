@@ -20,20 +20,6 @@ ArrayList<Goods> todayImageList = (ArrayList<Goods>) request.getAttribute("today
 <%
 	NoticeBean article = (NoticeBean) request.getAttribute("article");
 %>
-<%
-	String image=null;
-	String cookie =request.getHeader("Cookie");
-
-	if(cookie != null) {
-		Cookie cookies[] = request.getCookies();
-		
-		for(int i=0; i<cookies.length; i++) {
-			if(cookies[i].getName().equals("image")) {
-				image=cookies[i].getValue();
-			}
-		}
-	}
-%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -166,7 +152,7 @@ ArrayList<Goods> todayImageList = (ArrayList<Goods>) request.getAttribute("today
 										}
 									%>
 
-									<div class="card goods__card-size">
+									<div class="card goods__card-size__list">
 										<img src="./img/<%=todayImageList.get(i).getImage()%>"
 											class="card-img-top card-img__size" alt="...">
 										<div class="card-body">

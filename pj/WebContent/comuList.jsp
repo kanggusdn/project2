@@ -8,20 +8,6 @@ ArrayList<Goods> comuList = (ArrayList<Goods>) request.getAttribute("comuList");
 ArrayList<Goods> todayImageList = (ArrayList<Goods>) request.getAttribute("todayImageList");
 int cnt = 0;
 %>
-<%
-	String image=null;
-	String cookie =request.getHeader("Cookie");
-
-	if(cookie != null) {
-		Cookie cookies[] = request.getCookies();
-		
-		for(int i=0; i<cookies.length; i++) {
-			if(cookies[i].getName().equals("image")) {
-				image=cookies[i].getValue();
-			}
-		}
-	}
-%>
 <!DOCTYPE html>
 <html>
 <head>
