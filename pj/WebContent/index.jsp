@@ -135,7 +135,7 @@ ArrayList<Goods> todayImageList = (ArrayList<Goods>) request.getAttribute("today
 						href="goodsCartList.do"><i class="fas fa-cart-arrow-down"></i></a></li>
 
 					<li class="nav-item dropdown"><a class="nav-link"
-						href="todayImageList.do" id="navbarDropdownMenuLink" role="button"
+						href="#" id="navbarDropdownMenuLink" role="button"
 						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i
 							class="fas fa-business-time"></i></a>
 						<div class="dropdown-menu dropdown-menu-end"
@@ -147,7 +147,7 @@ ArrayList<Goods> todayImageList = (ArrayList<Goods>) request.getAttribute("today
 									for (int i = 0; i < todayImageList.size(); i++) {
 										if (i % 3 == 0) {
 								%>
-								<div class="card-deck">
+								<div class="card-deck" id="com">
 									<%
 										}
 									%>
@@ -182,6 +182,8 @@ ArrayList<Goods> todayImageList = (ArrayList<Goods>) request.getAttribute("today
 								}
 								%>
 							</div>
+							<input type="button" class="delete" value="삭제">
+							<input type="button" class="alldelete" value="모두 삭제">
 						</div></li>
 
 					<li class="nav-item dropdown"><a class="nav-link" href="#"

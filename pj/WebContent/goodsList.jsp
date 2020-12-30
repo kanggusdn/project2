@@ -121,7 +121,7 @@ int cnt = 0;
 					<li class="nav-item"><a class="nav-link"
 						href="goodsCartList.do"><i class="fas fa-cart-arrow-down"></i></a></li>
 
-					<li class="nav-item dropdown"><a class="nav-link" href="#"
+					<li class="nav-item dropdown" id="imageList"><a class="nav-link" href="#"
 						id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
 						aria-haspopup="true" aria-expanded="false"><i
 							class="fas fa-business-time"></i></a>
@@ -139,7 +139,7 @@ int cnt = 0;
 										}
 									%>
 
-									<div class="card goods__card-size">
+									<div class="card goods__card-size" onclick="save()">
 										<img src="./img/<%=todayImageList.get(i).getImage()%>"
 											class="card-img-top card-img__size" alt="...">
 										<div class="card-body">
@@ -251,11 +251,11 @@ int cnt = 0;
 				}
 			%>
 
-			<div class="card goods__card-size">
+			<div class="card goods__card-size" id="todayImage1">
 				<a data-toggle="modal"
 					data-target="#<%=goodsList.get(i).getModalip()%>"> <img
 					src="./img/<%=goodsList.get(i).getImage()%>"
-					class="card-img-top card-img__size" alt="..." id="todayImage2">
+					class="card-img-top card-img__size" alt="...">
 					<div class="card-body">
 						<p class="card-text">
 							상품명:

@@ -139,7 +139,7 @@ int cnt = 0;
 										}
 									%>
 
-									<div class="card goods__card-size">
+									<div class="card goods__card-size" onclick="save()">
 										<img src="./img/<%=todayImageList.get(i).getImage()%>"
 											class="card-img-top card-img__size" alt="...">
 										<div class="card-body">
@@ -250,11 +250,11 @@ int cnt = 0;
 				}
 			%>
 
-			<div class="card goods__card-size">
+			<div class="card goods__card-size" id="todayImage2">
 				<a data-toggle="modal"
 					data-target="#<%=pcList.get(i).getModalip()%>"> <img
 					src="./img/<%=pcList.get(i).getImage()%>"
-					class="card-img-top card-img__size" alt="..." id="todayImage3">
+					class="card-img-top card-img__size" alt="...">
 					<div class="card-body">
 						<p class="card-text">
 							상품명:

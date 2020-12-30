@@ -163,17 +163,10 @@ totalMoney = (Integer)request.getAttribute("totalMoney");
 	</nav>
 	<div class="container">
 
-		<div class="startLine-view text-center">
+		<div class="startLine-view text-center" id="cookie_list">
 			<p class="startLine__text">최근 본 상품</p>
 		</div>
 		<%
-        Cookie[] cookies = request.getCookies();
-
-        for(Cookie c: cookies){
-            out.print("name: "+ c.getName() + "<br>");
-            out.print("value: " + c.getValue()+"<br>");
-            out.print("----------------------------------<br>");
-        }
 			if( todayImageList != null && todayImageList.size() > 0) {
 			for (int i = 0; i < todayImageList.size(); i++) {
 			if (i % 3 == 0) {
@@ -218,6 +211,7 @@ totalMoney = (Integer)request.getAttribute("totalMoney");
 		%>
 			<div>
 			<button onclick="history.back()" class="btn btn-primary">쇼핑 계속하기</button>
+			<button onclick="del()">목록 삭제하기</button>
 			</div>			
 		<%
 		} 
