@@ -2,14 +2,15 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.HashMap,java.util.ArrayList"%>
 <%@ page import="vo.Member, vo.Goods,vo.Cart"%>
-<%@ page import="vo.Cart,java.util.List, java.text.SimpleDateFormat, java.lang.*"%>
+<%@ page
+	import="vo.Cart,java.util.List, java.text.SimpleDateFormat, java.lang.*"%>
 <%
 	Member loginMember = (Member) session.getAttribute("loginMember");
 ArrayList<Goods> goodsList = (ArrayList<Goods>) request.getAttribute("goodsList");
 ArrayList<Cart> cartList = (ArrayList<Cart>) request.getAttribute("cartList");
 int totalMoney = 0;
-if(request.getAttribute("totalMoney") != null)
-totalMoney = (Integer)request.getAttribute("totalMoney");
+if (request.getAttribute("totalMoney") != null)
+	totalMoney = (Integer) request.getAttribute("totalMoney");
 %>
 <!DOCTYPE html>
 <html>
@@ -19,7 +20,7 @@ totalMoney = (Integer)request.getAttribute("totalMoney");
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <!-- title image -->
-<link href = "img/EzIcon.jpg" rel="icon" type = "image/x-icon">
+<link href="img/EzIcon.jpg" rel="icon" type="image/x-icon">
 <!-- reset -->
 <link rel="stylesheet"
 	href="https://meyerweb.com/eric/tools/css/reset/reset.css">
@@ -46,12 +47,12 @@ totalMoney = (Integer)request.getAttribute("totalMoney");
 				aria-expanded="true" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
-			
+
 			<div class="collapse navbar-collapse mr-4" id="navbarNavDropdown">
-			<div class="navbar__icon d-lg-block d-none">
-				<a href="index.do"><img class="navbar__icon-image" alt="-"
-					src="img/EzIcon.jpg"></a>
-			</div>
+				<div class="navbar__icon d-lg-block d-none">
+					<a href="index.do"><img class="navbar__icon-image" alt="-"
+						src="img/EzIcon.jpg"></a>
+				</div>
 				<ul class="navbar-nav">
 					<li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle" href="#"
@@ -112,27 +113,28 @@ totalMoney = (Integer)request.getAttribute("totalMoney");
 				</ul>
 			</div>
 		</div>
+		<!-- 2020 12 23 haesu -->
 		<div>
 			<button class="navbar-toggler" type="button" data-toggle="collapse"
 				data-target="#infoDropdown" aria-controls="navbarNavDropdown"
 				aria-expanded="true" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
-			<div class="collapse navbar-collapse dropdown-menu-end" id="infoDropdown">
+			<div class="collapse navbar-collapse" id="infoDropdown">
 				<ul class="navbar-nav">
 					<li class="nav-item"><a class="nav-link"
 						href="goodsCartList.do"><i class="fas fa-cart-arrow-down"></i></a></li>
-						
+
 					<li class="nav-item dropdown"><a class="nav-link" href="#"
 						id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
 						aria-haspopup="true" aria-expanded="false"><i
 							class="fas fa-business-time"></i></a></li>
-							
+
 					<li class="nav-item dropdown"><a class="nav-link" href="#"
 						id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
 						aria-haspopup="true" aria-expanded="false"><i
 							class="fas fa-user-alt"></i></a>
-						<div class="dropdown-menu"
+						<div class="dropdown-menu  dropdown-menu-right"
 							aria-labelledby="navbarDropdownMenuLink">
 							<%
 								if (loginMember == null) {
@@ -146,12 +148,23 @@ totalMoney = (Integer)request.getAttribute("totalMoney");
 							<%
 								} else {
 							%>
+
 							<button type="button"
 								class="dropdown-item btn btn-primary btn-sm btn-block"
 								onclick="location.href='logout.do'">로그아웃</button>
 							<button type="button"
 								class="dropdown-item btn btn-primary btn-sm btn-block"
 								data-toggle="modal" data-target="#profileModal">프로필 수정</button>
+							<%
+								if (loginMember.getId().equals("admin")) {
+							%>
+							<button type="button"
+								class="dropdown-item btn btn-primary btn-sm btn-block"
+								onclick="location.href='admin.do'">관리자 전용 페이지</button>
+
+							<%
+								}
+							%>
 							<%
 								}
 							%>
@@ -160,16 +173,16 @@ totalMoney = (Integer)request.getAttribute("totalMoney");
 				</ul>
 			</div>
 		</div>
+		<!-- end -->
 	</nav>
 	<div class="container">
-
 		<div class="startLine-view text-center">
 			<p class="startLine__text">장바구니</p>
 		</div>
 		<%
-			if( cartList != null && cartList.size() > 0) {
-			for (int i = 0; i < cartList.size(); i++) {
-			if (i % 3 == 0) {
+			if (cartList != null && cartList.size() > 0) {
+				for (int i = 0; i < cartList.size(); i++) {
+					if (i % 3 == 0) {
 		%>
 		<div class="card-deck">
 			<%
@@ -201,30 +214,34 @@ totalMoney = (Integer)request.getAttribute("totalMoney");
 
 		<%
 			break;
-					}
 				}
 			}
+		}
 		%>
-		
+
 		<%
-			if(cartList == null){
+			if (cartList == null) {
 		%>
-			<div>
-			<button onclick="history.back()" class="btn btn-primary">쇼핑 계속하기</button>
-			</div>			
+		<div>
+			<button onclick="history.back()" class="btn btn-primary">쇼핑
+				계속하기</button>
+		</div>
 		<%
-		} 
+			}
 		%>
 	</div>
-		<div class = "totalMoney bg-dark text-white text-center">
-			<span>스토어 합계 주문 :&nbsp;&nbsp;</span> <span class = "totalMoney__font-small">상품 금액</span> <span class = "font-weight-bold"style="color: tomato;"> <%=totalMoney%>원</span>
-			<button class="btn btn-primary">구매하기</button>
-		</div>
+	<div class="totalMoney bg-dark text-white text-center">
+		<span>스토어 합계 주문 :&nbsp;&nbsp;</span> <span
+			class="totalMoney__font-small">상품 금액</span> <span
+			class="font-weight-bold" style="color: tomato;"> <%=totalMoney%>원
+		</span>
+		<button class="btn btn-primary">구매하기</button>
+	</div>
 
 
-	<footer class="text-center footer__color text-white footer__size">
+	<footer class="text-center footer__color text-white">
 		<div class="footer-above">
-			<div class="container pt-4">
+			<div class="pt-4">
 				<div class="row">
 					<div class="footer-col col-4">
 						<h3 style="color: white;">위치</h3>
@@ -364,7 +381,69 @@ totalMoney = (Integer)request.getAttribute("totalMoney");
 	</div>
 	<!-- end -->
 
+	<div class="modal fade" id="profileModal" data-backdrop="static"
+		data-keyboard="false" tabindex="-1"
+		aria-labelledby="staticBackdropLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="staticBackdropLabel">프로필 수정 페이지</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form action="joinPro.do" method="post">
+						<div class="form-group">
+							<input type="password" class="form-control" name="passwd"
+								placeholder="비밀번호" maxlength="20" required="required"
+								autocomplete="off" />
+						</div>
+						<div class="form-group">
+							<input type="text" class="form-control" name="name"
+								placeholder="이름" maxlength="20" required="required"
+								autocomplete="off" />
+						</div>
+						<div class="form-group">
+							<input type="text" id="sample4_postcode2" placeholder="우편번호"
+								class="form-control" name="addr1" required="required"
+								autocomplete="off"> <input type="button"
+								onclick="sample4_execDaumPostcode()" value="우편번호 찾기"
+								class="form-control"><input type="text"
+								id="sample4_roadAddress2" placeholder="도로명주소"
+								class="form-control" name="addr2" required="required"
+								autocomplete="off"> <input class="form-control"
+								type="text" id="sample4_jibunAddress2" placeholder="상세주소"
+								name="addr3" required="required" autocomplete="off">
+						</div>
+						<div class="form-group">
+							<input type="number" class="form-control" name="age"
+								placeholder="나이" maxlength="20" required="required"
+								autocomplete="off" />
+						</div>
+						<div class="form-group">
+							<div class="btn-group" data-toggle="buttons">
+								<label class="btn btn-primary active"> <input
+									type="radio" class="d-none" name="gender" autocomplete="off"
+									value='M' checked="checked" />남자
+								</label> <label class="btn btn-primary"> <input type="radio"
+									class="d-none" name="gender" autocomplete="off" value='F' />여자
+								</label>
+							</div>
+						</div>
+						<div class="form-group">
+							<input type="email" class="form-control" name="email"
+								placeholder="이메일" maxlength="20" required="required"
+								autocomplete="no" />
+						</div>
+						<button type="submit" class="btn btn-primary form-control">변경</button>
+					</form>
+				</div>
 
+			</div>
+		</div>
+	</div>
 
 
 

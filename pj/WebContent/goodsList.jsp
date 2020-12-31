@@ -121,7 +121,7 @@ int cnt = 0;
 					<li class="nav-item"><a class="nav-link"
 						href="goodsCartList.do"><i class="fas fa-cart-arrow-down"></i></a></li>
 
-					<li class="nav-item dropdown" id="imageList"><a class="nav-link" href="#"
+					<li class="nav-item dropdown"><a class="nav-link" href="#"
 						id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
 						aria-haspopup="true" aria-expanded="false"><i
 							class="fas fa-business-time"></i></a>
@@ -129,6 +129,7 @@ int cnt = 0;
 							aria-labelledby="navbarDropdownMenuLink">
 							<h6>최근 본 상품</h6>
 							<div class="container">
+							<% System.out.println(todayImageList); %>
 								<%
 									if (todayImageList != null && todayImageList.size() > 0) {
 									for (int i = 0; i < todayImageList.size(); i++) {
@@ -138,18 +139,9 @@ int cnt = 0;
 									<%
 										}
 									%>
-
-									<div class="card goods__card-size" onclick="save()">
+									<div class="card goods__card-size" id="todayimageList">
 										<img src="./img/<%=todayImageList.get(i).getImage()%>"
 											class="card-img-top card-img__size" alt="...">
-										<div class="card-body">
-											<p class="card-text">
-												상품명:
-												<%=todayImageList.get(i).getKind()%><br /> 가격:
-												<%=todayImageList.get(i).getPrice()%><br />
-											</p>
-										</div>
-
 									</div>
 									<%
 										if (i % 3 == 2) {
@@ -169,6 +161,7 @@ int cnt = 0;
 								}
 								%>
 							</div>
+							<input type="button" class="alldelete" value="모두 삭제">
 						</div>
 							</li>
 
@@ -250,8 +243,22 @@ int cnt = 0;
 			<%
 				}
 			%>
-
-			<div class="card goods__card-size" id="todayImage1">
+		<script>
+			$(function() {
+				$("#goodsList").eq(<%=i%>).click(function(){
+					localStorage['todayImage<%=i %>'] = "<%=goodsList.get(i).getImage()%>";
+					var todayImage[<%=i%>] = localStorage['todayImage<%=i%>'];
+						$("#todayimageList").append("<img src='" + todayImage[<%=i%>] + "'/>");
+				});
+				$(".delete").eq(<%=i%>).click(function() {
+					delete localStorage['todayImage<%=i %>'];
+				});
+				$(".alldelete").click(function() {
+					localStorage.clear();
+				});
+			});
+		</script>
+			<div class="card goods__card-size" id="goodsList">
 				<a data-toggle="modal"
 					data-target="#<%=goodsList.get(i).getModalip()%>"> <img
 					src="./img/<%=goodsList.get(i).getImage()%>"
@@ -473,12 +480,8 @@ int cnt = 0;
 	<script
 		src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script src="js/addr.js"></script>
-	<script src="js/Today.js"></script>
 	<script src="https://kit.fontawesome.com/6478f529f2.js"
 		crossorigin="anonymous"></script>
+	
 </body>
 </html>
-
-
-
-

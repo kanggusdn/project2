@@ -1,18 +1,24 @@
 $(function() {
-	$("card goods__card-size").click(function() {
-		localStorage.setItem("#todayImage1", "goodsList");
-		localStorage.setItem("#todayImage2", "pcList");
-		localStorage.setItem("#todayImage3", "comuList");
+	$(".goods__card-size").each(function() {
+		$(this).click(function() {
+			localStorage["Goods"] = "goodsList 이것 2,3,4,5";
+			localStorage[Goods] = "pcList 이것 2,3,4,5";
+			localStorage[Goods] = "comuList 이것 2,3,4,5";
+		})
 	})
-	$("#imageList").click(function() {
-		var goodsList = localStorage.getItem("#todayImage1");
-		var pcList = localStorage.getItem("#todayImage2");
-		var comuList = localStorage.getItem("#todayImage3");
+	$("#imageList").each(function() {
+		$(this).click(function() {
+			var goodsList = localStorage[?];
+			var pcList = localStorage[?];
+			var comuList = localStorage[?];
+		})
 	})
-	$(".delete").click(function() {
-		localStorage.removeItem("#todayImage1");
-		localStorage.removeItem("#todayImage2");
-		localStorage.removeItem("#todayImage3");
+	$(".delete").each(function() {
+		$(this).click(function() {
+			delete localStorage[?];
+			delete localStorage[?];
+			delete localStorage[?];
+		})
 	})
 	$(".alldelete").click(function() {
 		localStorage.clear();

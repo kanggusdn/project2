@@ -21,6 +21,11 @@ font-family: 'Noto Sans KR', sans-serif;
 /* bbs.css */
 @import "bbs/boardList.css";
 
+/* admin.css */
+
+@import "admin/admin.css";
+
+
 h1, h2, h3, h4, .navbar-brand {
 	font-family: 'Do Hyeon', sans-serif;
 	color: #4A148C;

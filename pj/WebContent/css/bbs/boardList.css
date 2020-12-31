@@ -1,0 +1,11 @@
+@charset "UTF-8";
+.bbs__margin-top{
+	margin-top: 130px;
+}
+
+#pageList {
+	margin: auto;
+	margin-top:30px;
+	width: 500px;
+	text-align: center;
+}

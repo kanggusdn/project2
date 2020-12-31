@@ -10,6 +10,7 @@
 	margin: 0;
 }
 .goods__card-size{
+	width: 300px;
 	margin: 20px;
 	
 }
@@ -34,4 +35,10 @@
 }
 .modal-image__size{
 	width: 100%;
+}
+.card__deck-size{
+	width: 33%;
+}
+.card-line{
+	display: block;
 }

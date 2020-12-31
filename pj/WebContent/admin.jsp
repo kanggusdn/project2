@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="vo.Member, vo.Goods, vo.PageInfo"%>
+<%@ page import="vo.NoticeBean"%>
 <%@ page import="java.util.HashMap,java.util.ArrayList"%>
-<%@ page import="vo.Member, vo.Goods"%>
+
 <%
 	Member loginMember = (Member) session.getAttribute("loginMember");
-	ArrayList<Goods> comuList = (ArrayList<Goods>) request.getAttribute("comuList");
-
-	int cnt = 0;
+ArrayList<Member> adminList = (ArrayList<Member>) request.getAttribute("adminList");
 %>
 <!DOCTYPE html>
 <html>
@@ -16,24 +16,23 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <!-- title image -->
-<link href = "img/EzIcon.jpg" rel="icon" type = "image/x-icon">
+<link href="img/EzIcon.jpg" rel="icon" type="image/x-icon">
 <!-- reset -->
 <link rel="stylesheet"
 	href="https://meyerweb.com/eric/tools/css/reset/reset.css">
 <!-- Bootstrap CSS -->
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 <!-- text -->
 <link
 	href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
 	rel="stylesheet">
 <!-- css origin -->
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 <link rel="stylesheet" href="css/style.css" />
 <title>컴퓨터 홈 쇼핑 사이트</title>
 </head>
 <body oncontextmenu="return false" ondragstart="return false"
 	onselectstart="return false">
-	<!-- 2020-12-07 haesu -->
 	<nav
 		class="navbar navbar-expand-lg bg-light fixed-top navbar-light justify-content-between"
 		id="header">
@@ -171,103 +170,75 @@
 		</div>
 		<!-- end -->
 	</nav>
-	
-	<div class="container">
-		<section class="container__size" id="home">
-			<div class=" w-100 ">
-				<div id="carouselExampleControls"
-					class="carousel slide w-100 container__center "
-					data-ride="carousel">
-					<div class="carousel-inner w-100 ">
-						<div class="carousel-item active w-100">
-							<a target="_blank"
-								href="https://www.nvidia.com/ko-kr/geforce/graphics-cards/30-series/rtx-3060-ti">
-								<img src="img/mainIMG/main3060.jpg" class="d-block w-100"
-								alt="..." style="height: 400px; z-index: 2;">
-							</a>
-						</div>
-						<div class="carousel-item w-100">
-							<a href="animation.jsp"> <img src="img/mainIMG/YB.jpg"
-								class="d-block w-100" alt="..."
-								style="height: 400px; z-index: 2;"></a>
-						</div>
-						<div class="carousel-item w-100">
-							<a target="_blank"
-								href="https://www.intel.co.kr/content/www/kr/ko/products/processors/core.html">
-								<img src="img/mainIMG/mainIntel.jpg" class="d-block w-100"
-								alt="..." style="height: 400px;">
-							</a>
-						</div>
-					</div>
-					<a class="carousel-control-prev carousel__z-index"
-						href="#carouselExampleControls" role="button" data-slide="prev">
-						<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-						<span class="sr-only">Previous</span>
-					</a> <a class="carousel-control-next carousel__z-index"
-						href="#carouselExampleControls" role="button" data-slide="next">
-						<span class="carousel-control-next-icon" aria-hidden="true"></span>
-						<span class="sr-only">Next</span>
-					</a>
-				</div>
-			</div>
-		</section>
-		
-		<div class="startLine text-center">
-			<p class="startLine__text"><%=comuList.get(1).getKind()%></p>
-		</div>
-		<br>
-		<%
-			for (int i = 0; i < comuList.size(); i++) {
-			if (i % 3 == 0) {
-		%>
-		<div class="card-deck">
+
+	<!-- haesu 2020-12-29 -->
+
+	<table class="table table-hover table__location container">
+		<thead>
+			<tr>
+				<th scope="col">번호</th>
+				<th scope="col">ID</th>
+				<th scope="col">PassWord</th>
+				<th scope="col">이름</th>
+				<th scope="col">나이</th>
+				<th scope="col">성별</th>
+				<th scope="col">E-mail</th>
+				<th scope="col">주소1</th>
+				<th scope="col">주소2</th>
+				<th scope="col">주소3</th>
+				<th scope="col">탈퇴</th>
+			</tr>
+		</thead>
+		<tbody>
 			<%
-				}
+				int cnt = 1;
+			%>
+			<%
+				for (int i = 0; i < adminList.size(); i++) {
 			%>
 
-			<div class="card goods__card-size">
-				<a data-toggle="modal"
-					data-target="#<%=comuList.get(i).getModalip()%>"> <img
-					src="./img/<%=comuList.get(i).getImage()%>"
-					class="card-img-top card-img__size" alt="...">
-					<div class="card-body">
-						<p class="card-text">
-							상품명:
-							<%=comuList.get(i).getName()%><br /> 가격:
-							<%=comuList.get(i).getPrice()%><br />
-						</p>
-					</div>
-				</a>
-			</div>
+			<tr>
+				<th scope="row"><%=cnt%></th>
+				<td><%=adminList.get(i).getId()%></td>
+				<td><input disabled="disabled"
+					class="password__size form-control" type="password"
+					value="<%=adminList.get(i).getPasswd()%>"></td>
+				<td><%=adminList.get(i).getName()%></td>
+				<td><%=adminList.get(i).getAge()%></td>
+				<td><%=adminList.get(i).getGender()%></td>
+				<td><%=adminList.get(i).getEmail()%></td>
+				<td><%=adminList.get(i).getAddr1()%></td>
+				<td><%=adminList.get(i).getAddr2()%></td>
+				<td><%=adminList.get(i).getAddr3()%></td>
+				<%if(adminList.get(i).getId().equals("admin")) {%>
+				<td><a class="btn btn-primary disabled" 
+					href="adminDelete.do?id=<%=adminList.get(i).getId()%>"
+					onclick="return confirm('삭제를 진행하시겠습니까?')">탈퇴</a></td>
+				<%} else {%>
+				<td><a class="btn btn-primary"
+					href="adminDelete.do?id=<%=adminList.get(i).getId()%>"
+					onclick="return confirm('삭제를 진행하시겠습니까?')">탈퇴</a></td>
+				<%} %>
+			</tr>
 			<%
-				if (i % 3 == 2) {
-			%>
-		</div>
-		<%
+				cnt++;
 			}
-		%>
-		<%
-			if (i % 9 == 8) {
-		%>
+			%>
+		</tbody>
+	</table>
 
-		<%
-			break;
-		}
-		}
-		%>
-
-	</div>
-	<footer class="text-center footer__color text-white">
+	<!-- end -->
+	<footer class="text-center text-white footer__color">
 		<div class="footer-above">
 			<div class="container pt-4">
 				<div class="row">
-					<div class="footer-col col-md-4">
+					<div class="footer-col col">
 						<h3 style="color: white;">위치</h3>
 						<p>
 							영남기술교육원<br />대구광역시 달서구
 						</p>
 					</div>
-					<div class="footer-col col-md-4">
+					<div class="footer-col col">
 						<h3 style="color: white;">소셜 미디어</h3>
 						<a href="#" class="btn btn-light m-2"><img
 							src="img/facebook.svg"></a> <a href="#"
@@ -277,7 +248,7 @@
 							src="img/twitch.svg"></a> <a href="#" class="btn btn-light m-2"><img
 							src="img/instagram.svg"></a>
 					</div>
-					<div class="footer-col col-md-4">
+					<div class="footer-col col">
 						<h3 style="color: white;">개발자 한마디</h3>
 						<p>언제든지 연락주세요!!</p>
 					</div>
@@ -291,13 +262,16 @@
 		</div>
 	</footer>
 
+	<!-- end -->
+
+	<!-- Login Modal  2020-12-03 haesu-->
 
 	<div class="modal fade" id="loginModal" tabindex="-1"
 		aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">회원가입</h5>
+					<h5 class="modal-title" id="exampleModalLabel">로그인</h5>
 					<button type="button" class="close" data-dismiss="modal"
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
@@ -325,8 +299,8 @@
 			</div>
 		</div>
 	</div>
-
 	<!-- Join Modal -->
+
 	<div class="modal fade" id="joinModal" tabindex="-1"
 		aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
@@ -341,14 +315,29 @@
 				<div class="modal-body">
 					<form action="joinPro.do" method="post">
 						<div class="form-group">
-							<input type="text" class="form-control" name="id"
+							<input type="text" class="form-control" name="id" id="joinId"
 								placeholder="아이디" maxlength="20" required="required"
+								autocomplete="off" />
+						</div>
+						<div class="form-group" id="LoginCheck">
+							<span class="form-control">중복 확인을 해주세요</span>
+						</div>
+						<div class="form-group">
+							<input type="password" class="form-control" name="passwd"
+								id="pass" placeholder="비밀번호" maxlength="20" required="required"
 								autocomplete="off" />
 						</div>
 						<div class="form-group">
 							<input type="password" class="form-control" name="passwd"
-								placeholder="비밀번호" maxlength="20" required="required"
-								autocomplete="off" />
+								id="password" placeholder="비밀번호 확인" maxlength="20"
+								required="required" autocomplete="off" />
+						</div>
+						<div class="form-group">
+							<div class="form-control" id="alert-success"
+								style="color: white; background: #738ED1;">비밀번호가 일치합니다.</div>
+							<div class="form-control" id="alert-danger"
+								style="color: white; background: #FC707D;">비밀번호가 일치하지
+								않습니다.</div>
 						</div>
 						<div class="form-group">
 							<input type="text" class="form-control" name="name"
@@ -387,46 +376,20 @@
 								placeholder="이메일" maxlength="20" required="required"
 								autocomplete="no" />
 						</div>
-
-
-						<!-- input타입 button은 value 값을 줘야함 -->
-						<button type="submit" class="btn btn-primary form-control">가입</button>
+						<button type="submit" class="btn btn-primary form-control"
+							id="joinbutton">가입</button>
 					</form>
 				</div>
-
 			</div>
 		</div>
 	</div>
-	<!-- end -->
-	<%
-		for (int i = 0; i < comuList.size(); i++) {
-	%>
-	<div class="modal fade" id="<%=comuList.get(i).getModalip()%>"
-		tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog modal-dialog__size">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">제품 소개</h5>
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body">
-					<div>
-						<img class="modal-image__size" alt="-"
-							src="<%=comuList.get(i).getModalimage()%>">
-					</div>  
-				</div>
-			</div>
-		</div>
-		<div>
-			<a class="btn btn-primary button__lo" href = "goodsCartAdd.do?id=<%= comuList.get(i).getId()%>">장바구니에 담기</a>
-		</div>
-	</div> 
-	<%
-		}
-	%>
+
+
+
+
+
+
+	<!-- 2020/12/04 강현우 프로필 수정 -->
 	<div class="modal fade" id="profileModal" data-backdrop="static"
 		data-keyboard="false" tabindex="-1"
 		aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -493,25 +456,17 @@
 
 
 
-
-
-
 	<!-- Optional JavaScript -->
 	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js"></script>
 	<script src="js/header.js"></script>
 	<script src="js/main.js"></script>
 	<script
 		src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script src="js/addr.js"></script>
-	<script src="https://kit.fontawesome.com/6478f529f2.js"
-		crossorigin="anonymous"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js"></script>
+	<script src="https://kit.fontawesome.com/6478f529f2.js"></script>
 </body>
 </html>
-
-
-
-
