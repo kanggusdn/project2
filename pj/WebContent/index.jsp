@@ -822,7 +822,7 @@ ArrayList<Goods> todayImageList = (ArrayList<Goods>) request.getAttribute("today
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
-				</div>
+				</div> 
 				<div class="modal-body">
 					<form action="noticeWritePro.do" method="post"
 						enctype="multipart/form-data" name="noticeform">
