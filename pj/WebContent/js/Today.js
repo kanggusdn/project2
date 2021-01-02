@@ -1,9 +1,9 @@
 $(function() {
 	$(".goods__card-size").each(function() {
 		$(this).click(function() {
-			localStorage["Goods"] = "goodsList 이것 2,3,4,5";
-			localStorage[Goods] = "pcList 이것 2,3,4,5";
-			localStorage[Goods] = "comuList 이것 2,3,4,5";
+			localStorage["Goods"] = "goodsList";
+			localStorage[Goods] = "pcList";
+			localStorage[Goods] = "comuList";
 		})
 	})
 	$("#imageList").each(function() {
