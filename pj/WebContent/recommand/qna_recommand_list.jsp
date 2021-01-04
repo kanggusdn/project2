@@ -47,21 +47,21 @@ ArrayList<Goods> todayImageList = (ArrayList<Goods>) request.getAttribute("today
 </head>
 <body>
 	<!-- 2020-12-02 haesu -->
-	<nav
+<nav
 		class="navbar navbar-expand-lg bg-light fixed-top navbar-light justify-content-between"
 		id="header">
-		<div>
-			<button class="navbar-toggler" type="button" data-toggle="collapse"
+		<div class= "text-left">
+			<button class="navbar-toggler" id = "navMainBtn" type="button" data-toggle="collapse"
 				data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
 				aria-expanded="true" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
-			
+
 			<div class="collapse navbar-collapse mr-4" id="navbarNavDropdown">
-			<div class="navbar__icon d-lg-block d-none">
-				<a href="index.do"><img class="navbar__icon-image" alt="-"
-					src="img/EzIcon.jpg"></a>
-			</div>
+				<div class="navbar__icon d-lg-block d-none">
+					<a href="index.do"><img class="navbar__icon-image" alt="-"
+						src="img/EzIcon.jpg"></a>
+				</div>
 				<ul class="navbar-nav">
 					<li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle" href="#"
@@ -122,27 +122,28 @@ ArrayList<Goods> todayImageList = (ArrayList<Goods>) request.getAttribute("today
 				</ul>
 			</div>
 		</div>
+		<!-- 2020 12 23 haesu -->
 		<div>
-			<button class="navbar-toggler" type="button" data-toggle="collapse"
+			<button class="navbar-toggler" id = "navSideBtn"type="button" data-toggle="collapse"
 				data-target="#infoDropdown" aria-controls="navbarNavDropdown"
 				aria-expanded="true" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
-			<div class="collapse navbar-collapse dropdown-menu-end" id="infoDropdown">
+			<div class="collapse navbar-collapse" id="infoDropdown">
 				<ul class="navbar-nav">
 					<li class="nav-item"><a class="nav-link"
 						href="goodsCartList.do"><i class="fas fa-cart-arrow-down"></i></a></li>
-						
+
 					<li class="nav-item dropdown"><a class="nav-link" href="#"
 						id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
 						aria-haspopup="true" aria-expanded="false"><i
 							class="fas fa-business-time"></i></a></li>
-							
+
 					<li class="nav-item dropdown"><a class="nav-link" href="#"
 						id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
 						aria-haspopup="true" aria-expanded="false"><i
 							class="fas fa-user-alt"></i></a>
-						<div class="dropdown-menu"
+						<div class="dropdown-menu  dropdown-menu-right"
 							aria-labelledby="navbarDropdownMenuLink">
 							<%
 								if (loginMember == null) {
@@ -156,12 +157,23 @@ ArrayList<Goods> todayImageList = (ArrayList<Goods>) request.getAttribute("today
 							<%
 								} else {
 							%>
+
 							<button type="button"
 								class="dropdown-item btn btn-primary btn-sm btn-block"
 								onclick="location.href='logout.do'">로그아웃</button>
 							<button type="button"
 								class="dropdown-item btn btn-primary btn-sm btn-block"
 								data-toggle="modal" data-target="#profileModal">프로필 수정</button>
+							<%
+								if (loginMember.getId().equals("admin")) {
+							%>
+							<button type="button"
+								class="dropdown-item btn btn-primary btn-sm btn-block"
+								onclick="location.href='admin.do'">관리자 전용 페이지</button>
+
+							<%
+								}
+							%>
 							<%
 								}
 							%>
@@ -171,7 +183,6 @@ ArrayList<Goods> todayImageList = (ArrayList<Goods>) request.getAttribute("today
 			</div>
 		</div>
 	</nav>
-	<!-- end -->
 
 	<div id="main" class="bbs__margin-top">
 		<div class="container pt-4">
@@ -419,7 +430,6 @@ ArrayList<Goods> todayImageList = (ArrayList<Goods>) request.getAttribute("today
 
 
 
-	<!-- 2020/12/04 강현우 프로필 수정 -->
 	<div class="modal fade" id="profileModal" data-backdrop="static"
 		data-keyboard="false" tabindex="-1"
 		aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -445,15 +455,15 @@ ArrayList<Goods> todayImageList = (ArrayList<Goods>) request.getAttribute("today
 								autocomplete="off" />
 						</div>
 						<div class="form-group">
-							<input type="text" id="sample4_postcode" placeholder="우편번호"
+							<input type="text" id="sample4_postcode2" placeholder="우편번호"
 								class="form-control" name="addr1" required="required"
 								autocomplete="off"> <input type="button"
 								onclick="sample4_execDaumPostcode()" value="우편번호 찾기"
 								class="form-control"><input type="text"
-								id="sample4_roadAddress" placeholder="도로명주소"
+								id="sample4_roadAddress2" placeholder="도로명주소"
 								class="form-control" name="addr2" required="required"
 								autocomplete="off"> <input class="form-control"
-								type="text" id="sample4_detailAddress" placeholder="상세주소"
+								type="text" id="sample4_jibunAddress2" placeholder="상세주소"
 								name="addr3" required="required" autocomplete="off">
 						</div>
 						<div class="form-group">
@@ -483,8 +493,6 @@ ArrayList<Goods> todayImageList = (ArrayList<Goods>) request.getAttribute("today
 			</div>
 		</div>
 	</div>
-
-	<!-- 프로필 수정 end -->
 
 
 	<!-- Optional JavaScript -->

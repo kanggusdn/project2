@@ -2,14 +2,27 @@ $(function() {
 	/*
 		search 안보이게 하는 기능
 	 */
-	$(".nav-tabs > li").click(function(e) {
+	var CheckSideBtn = false;
+	var CheckMainBtn = false;
+	$("#navMainBtn").click(function(e) {
 		e.preventDefault();
-		$(".nav-tabs > li >a").removeClass("active");
-		$(this).find("a").addClass("active");
-		$(".tab-info").addClass("d-none");
-		let num = $(this).index();
-		$(".tab-info").eq(num).removeClass("d-none");
-
+		if (CheckSideBtn == false) {
+			$("#navSideBtn").hide();
+			CheckSideBtn = true;
+		} else {
+			$("#navSideBtn").show();
+			CheckSideBtn = false;
+		}
+	});
+	$("#navSideBtn").click(function(e) {
+		e.preventDefault();
+		if (CheckMainBtn == false) {
+			$("#navMainBtn").hide();
+			CheckMainBtn = true;
+		} else {
+			$("#navMainBtn").show();
+			CheckMainBtn = false;
+		}
 	});
 
 	/* login시 joinBtn click 후 loginmodal close */
@@ -55,7 +68,7 @@ $(function() {
 	});
 
 	/*
-		2020/12/15 공지사항 모달 시작
+		2020/12/15 공지사항 글쓰기, 수정 모달 시작
 	 */
 	$(".noticeViewLink").each(function() {
 		$(this).click(function() {
@@ -72,10 +85,10 @@ $(function() {
 				$("#notice_subject2").val(view[1]);
 				$("#notice_content2").val(view[2]);
 			});
-				var del = $.parseJSON(data); /* 공지사항 글삭제 */
-				console.log(del);
-				$("#notice_pass2").val(del[0]);
-			});
+			var del = $.parseJSON(data);
+			console.log(del);
+			$("#notice_pass2").val(del[0]);
 		});
 	});
-/* 모달 끝 */
+});
+	/* 모달 끝 */

@@ -40,6 +40,7 @@ ArrayList<Goods> todayImageList = (ArrayList<Goods>) request.getAttribute("today
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 <link rel="stylesheet" href="css/style.css" />
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
 <title>컴퓨터 홈 쇼핑 사이트</title>
 </head>
@@ -50,10 +51,11 @@ ArrayList<Goods> todayImageList = (ArrayList<Goods>) request.getAttribute("today
 	<nav
 		class="navbar navbar-expand-lg bg-light fixed-top navbar-light justify-content-between"
 		id="header">
-		<div>
-			<button class="navbar-toggler" type="button" data-toggle="collapse"
-				data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
-				aria-expanded="true" aria-label="Toggle navigation">
+		<div class="text-left">
+			<button class="navbar-toggler" id="navMainBtn" type="button"
+				data-toggle="collapse" data-target="#navbarNavDropdown"
+				aria-controls="navbarNavDropdown" aria-expanded="true"
+				aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
 
@@ -124,9 +126,10 @@ ArrayList<Goods> todayImageList = (ArrayList<Goods>) request.getAttribute("today
 		</div>
 		<!-- 2020 12 23 haesu -->
 		<div>
-			<button class="navbar-toggler" type="button" data-toggle="collapse"
-				data-target="#infoDropdown" aria-controls="navbarNavDropdown"
-				aria-expanded="true" aria-label="Toggle navigation">
+			<button class="navbar-toggler" id="navSideBtn" type="button"
+				data-toggle="collapse" data-target="#infoDropdown"
+				aria-controls="navbarNavDropdown" aria-expanded="true"
+				aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
 			<div class="collapse navbar-collapse" id="infoDropdown">
@@ -137,7 +140,52 @@ ArrayList<Goods> todayImageList = (ArrayList<Goods>) request.getAttribute("today
 					<li class="nav-item dropdown"><a class="nav-link" href="#"
 						id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
 						aria-haspopup="true" aria-expanded="false"><i
-							class="fas fa-business-time"></i></a></li>
+							class="fas fa-business-time"></i></a>
+						<div class="dropdown-menu dropdown-menu-right"
+							aria-labelledby="navbarDropdownMenuLink">
+							<h6>최근 본 상품</h6>
+							<div class="container">
+								<ul>
+									<li>
+										<div class="goodsthumb">
+											<img src="img/gift.svg" alt="..."> <a
+												href="javascript:;" class="btn_close type_black">삭제</a>
+										</div>
+									</li>
+									<li>
+										<div class="goodsthumb">
+											<img src="img/gift.svg" alt="..."> <a
+												href="javascript:;" class="btn_close type_black">삭제</a>
+										</div>
+									</li>
+									<li>
+										<div class="goodsthumb">
+											<img src="img/gift.svg" alt="..."> <a
+												href="javascript:;" class="btn_close type_black">삭제</a>
+										</div>
+									</li>
+									<li>
+										<div class="goodsthumb">
+											<img src="img/gift.svg" alt="..."> <a
+												href="javascript:;" class="btn_close type_black">삭제</a>
+										</div>
+									</li>
+									<li>
+										<div class="goodsthumb">
+											<img src="img/gift.svg" alt="..."> <a
+												href="javascript:;" class="btn_close type_black">삭제</a>
+										</div>
+									</li>
+									<li>
+										<div class="goodsthumb">
+											<img src="img/gift.svg" alt="..."> <a
+												href="javascript:;" class="btn_close type_black">삭제</a>
+										</div>
+									</li>
+								</ul>
+							</div>
+							<input type="button" class="alldelete" value="모두 삭제">
+						</div></li>
 
 					<li class="nav-item dropdown"><a class="nav-link" href="#"
 						id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
@@ -822,7 +870,7 @@ ArrayList<Goods> todayImageList = (ArrayList<Goods>) request.getAttribute("today
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
-				</div> 
+				</div>
 				<div class="modal-body">
 					<form action="noticeWritePro.do" method="post"
 						enctype="multipart/form-data" name="noticeform">
@@ -945,7 +993,6 @@ ArrayList<Goods> todayImageList = (ArrayList<Goods>) request.getAttribute("today
 		</div>
 	</div>
 	<!-- Optional JavaScript -->
-	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
 
 	<script src="js/header.js"></script>
@@ -960,6 +1007,6 @@ ArrayList<Goods> todayImageList = (ArrayList<Goods>) request.getAttribute("today
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js"></script>
-		<script src="https://kit.fontawesome.com/6478f529f2.js"></script>
+	<script src="https://kit.fontawesome.com/6478f529f2.js"></script>
 </body>
 </html>

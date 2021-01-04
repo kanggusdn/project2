@@ -36,8 +36,8 @@ ArrayList<Member> adminList = (ArrayList<Member>) request.getAttribute("adminLis
 	<nav
 		class="navbar navbar-expand-lg bg-light fixed-top navbar-light justify-content-between"
 		id="header">
-		<div>
-			<button class="navbar-toggler" type="button" data-toggle="collapse"
+		<div class= "text-left">
+			<button class="navbar-toggler" id = "navMainBtn" type="button" data-toggle="collapse"
 				data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
 				aria-expanded="true" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
@@ -110,7 +110,7 @@ ArrayList<Member> adminList = (ArrayList<Member>) request.getAttribute("adminLis
 		</div>
 		<!-- 2020 12 23 haesu -->
 		<div>
-			<button class="navbar-toggler" type="button" data-toggle="collapse"
+			<button class="navbar-toggler" id = "navSideBtn"type="button" data-toggle="collapse"
 				data-target="#infoDropdown" aria-controls="navbarNavDropdown"
 				aria-expanded="true" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
@@ -168,7 +168,6 @@ ArrayList<Member> adminList = (ArrayList<Member>) request.getAttribute("adminLis
 				</ul>
 			</div>
 		</div>
-		<!-- end -->
 	</nav>
 
 	<!-- haesu 2020-12-29 -->

@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.HashMap,java.util.ArrayList"%>
-<%@ page import="vo.Member, vo.Goods"%>
+<%@ page import="vo.Member, vo.Goods, vo.Cart"%>
 <%
 	Member loginMember = (Member) session.getAttribute("loginMember");
-	ArrayList<Goods> comuList = (ArrayList<Goods>) request.getAttribute("comuList");
-
-	int cnt = 0;
+ArrayList<Goods> comuList = (ArrayList<Goods>) request.getAttribute("comuList");
+ArrayList<Goods> todayImageList = (ArrayList<Goods>) request.getAttribute("todayImageList");
+int cnt = 0;
 %>
 <!DOCTYPE html>
 <html>
@@ -16,7 +16,7 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <!-- title image -->
-<link href = "img/EzIcon.jpg" rel="icon" type = "image/x-icon">
+<link href="img/EzIcon.jpg" rel="icon" type="image/x-icon">
 <!-- reset -->
 <link rel="stylesheet"
 	href="https://meyerweb.com/eric/tools/css/reset/reset.css">
@@ -29,6 +29,7 @@
 	rel="stylesheet">
 <!-- css origin -->
 <link rel="stylesheet" href="css/style.css" />
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <title>컴퓨터 홈 쇼핑 사이트</title>
 </head>
 <body oncontextmenu="return false" ondragstart="return false"
@@ -116,7 +117,8 @@
 				aria-expanded="true" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
-			<div class="collapse navbar-collapse" id="infoDropdown">
+			<div class="collapse navbar-collapse dropdown-menu-end"
+				id="infoDropdown">
 				<ul class="navbar-nav">
 					<li class="nav-item"><a class="nav-link"
 						href="goodsCartList.do"><i class="fas fa-cart-arrow-down"></i></a></li>
@@ -124,7 +126,52 @@
 					<li class="nav-item dropdown"><a class="nav-link" href="#"
 						id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
 						aria-haspopup="true" aria-expanded="false"><i
-							class="fas fa-business-time"></i></a></li>
+							class="fas fa-business-time"></i></a>
+						<div class="dropdown-menu dropdown-menu-right"
+							aria-labelledby="navbarDropdownMenuLink">
+							<h6>최근 본 상품</h6>
+							<div class="container">
+								<ul>
+									<li>
+										<div class="goodsthumb">
+											<img src="img/gift.svg" alt="..."> 
+											<a href="javascript:;" class="btn_close type_black">삭제</a>
+										</div>
+									</li>
+									<li>
+										<div class="goodsthumb">
+											<img src="img/gift.svg" alt="...">
+											<a href="javascript:;" class="btn_close type_black">삭제</a>
+										</div>
+									</li>
+									<li>
+										<div class="goodsthumb">
+											<img src="img/gift.svg" alt="...">
+											<a href="javascript:;" class="btn_close type_black">삭제</a>
+										</div>
+									</li>
+									<li>
+										<div class="goodsthumb">
+											<img src="img/gift.svg" alt="..."> 
+											<a href="javascript:;" class="btn_close type_black">삭제</a>
+										</div>
+									</li>
+									<li>
+										<div class="goodsthumb">
+											<img src="img/gift.svg" alt="..."> 
+											<a href="javascript:;" class="btn_close type_black">삭제</a>
+										</div>
+									</li>
+									<li>
+										<div class="goodsthumb">
+											<img src="img/gift.svg" alt="...">
+											<a href="javascript:;" class="btn_close type_black">삭제</a>
+										</div>
+									</li>
+								</ul>
+							</div>
+							<input type="button" class="alldelete" value="모두 삭제">
+						</div></li>
 
 					<li class="nav-item dropdown"><a class="nav-link" href="#"
 						id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
@@ -171,7 +218,7 @@
 		</div>
 		<!-- end -->
 	</nav>
-	
+
 	<div class="container">
 		<section class="container__size" id="home">
 			<div class=" w-100 ">
@@ -211,7 +258,7 @@
 				</div>
 			</div>
 		</section>
-		
+
 		<div class="startLine text-center">
 			<p class="startLine__text"><%=comuList.get(1).getKind()%></p>
 		</div>
@@ -224,8 +271,23 @@
 			<%
 				}
 			%>
-
-			<div class="card goods__card-size">
+			<script>
+			$(function() {
+				var todayImage = [];
+				$(".comuList").eq(<%=i%>).click(function(){
+					localStorage['todayImage<%=i %>'] = "<%=comuList.get(i).getImage()%>";
+					todayImage[<%=i%>] = "<%=comuList.get(i).getImage()%>";
+					$(".goodsthumb").empty().append("<img src='./img/" + todayImage[<%=i%>] + "'/>");
+				});
+				$(".delete").eq(<%=i%>).click(function() {
+					delete localStorage['todayImage<%=i%>'];
+					});
+					$(".alldelete").click(function() {
+						localStorage.clear();
+					});
+				});
+			</script>
+			<div class="card goods__card-size comuList">
 				<a data-toggle="modal"
 					data-target="#<%=comuList.get(i).getModalip()%>"> <img
 					src="./img/<%=comuList.get(i).getImage()%>"
@@ -416,14 +478,15 @@
 					<div>
 						<img class="modal-image__size" alt="-"
 							src="<%=comuList.get(i).getModalimage()%>">
-					</div>  
+					</div>
 				</div>
 			</div>
 		</div>
 		<div>
-			<a class="btn btn-primary button__lo" href = "goodsCartAdd.do?id=<%= comuList.get(i).getId()%>">장바구니에 담기</a>
+			<a class="btn btn-primary button__lo"
+				href="goodsCartAdd.do?id=<%=comuList.get(i).getId()%>">장바구니에 담기</a>
 		</div>
-	</div> 
+	</div>
 	<%
 		}
 	%>
@@ -497,7 +560,6 @@
 
 
 	<!-- Optional JavaScript -->
-	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 	<script
 		src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 	<script

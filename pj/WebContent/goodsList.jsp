@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.HashMap,java.util.ArrayList"%>
-<%@ page import="vo.Member, vo.Goods, vo.Cart, vo.Today"%>
+<%@ page import="vo.Member, vo.Goods, vo.Cart"%>
 <%
 	Member loginMember = (Member) session.getAttribute("loginMember");
 ArrayList<Goods> goodsList = (ArrayList<Goods>) request.getAttribute("goodsList");
@@ -29,6 +29,8 @@ int cnt = 0;
 	rel="stylesheet">
 <!-- css origin -->
 <link rel="stylesheet" href="css/style.css" />
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
 <title>컴퓨터 홈 쇼핑 사이트</title>
 </head>
 <body oncontextmenu="return false" ondragstart="return false"
@@ -125,51 +127,57 @@ int cnt = 0;
 						id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
 						aria-haspopup="true" aria-expanded="false"><i
 							class="fas fa-business-time"></i></a>
-							<div class="dropdown-menu dropdown-menu-end"
+						<div class="dropdown-menu dropdown-menu-right"
 							aria-labelledby="navbarDropdownMenuLink">
 							<h6>최근 본 상품</h6>
 							<div class="container">
-							<% System.out.println(todayImageList); %>
-								<%
-									if (todayImageList != null && todayImageList.size() > 0) {
-									for (int i = 0; i < todayImageList.size(); i++) {
-										if (i % 3 == 0) {
-								%>
-								<div class="card-deck">
-									<%
-										}
-									%>
-									<div class="card goods__card-size" id="todayimageList">
-										<img src="./img/<%=todayImageList.get(i).getImage()%>"
-											class="card-img-top card-img__size" alt="...">
-									</div>
-									<%
-										if (i % 3 == 2) {
-									%>
-								</div>
-								<%
-									}
-								%>
-								<%
-									if (i % todayImageList.size() == todayImageList.size() - 1) {
-								%>
-
-								<%
-									break;
-								}
-								}
-								}
-								%>
+								<ul>
+									<li>
+										<div class="goodsthumb">
+											<img src="img/gift.svg" alt="...">
+											<a href="javascript:;" class="btn_close type_black">삭제</a>
+										</div>
+									</li>
+									<li>
+										<div class="goodsthumb">
+											<img src="img/gift.svg" alt="...">
+											<a href="javascript:;" class="btn_close type_black">삭제</a>
+										</div>
+									</li>
+									<li>
+										<div class="goodsthumb">
+											<img src="img/gift.svg" alt="...">
+											<a href="javascript:;" class="btn_close type_black">삭제</a>
+										</div>
+									</li>
+									<li>
+										<div class="goodsthumb">
+											<img src="img/gift.svg" alt="...">
+											<a href="javascript:;" class="btn_close type_black">삭제</a>
+										</div>
+									</li>
+									<li>
+										<div class="goodsthumb">
+											<img src="img/gift.svg" alt="...">
+											<a href="javascript:;" class="btn_close type_black">삭제</a>
+										</div>
+									</li>
+									<li>
+										<div class="goodsthumb">
+											<img src="img/gift.svg" alt="...">
+											<a href="javascript:;" class="btn_close type_black">삭제</a>
+										</div>
+									</li>
+								</ul>
 							</div>
 							<input type="button" class="alldelete" value="모두 삭제">
-						</div>
-							</li>
+						</div></li>
 
 					<li class="nav-item dropdown"><a class="nav-link" href="#"
 						id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
 						aria-haspopup="true" aria-expanded="false"><i
 							class="fas fa-user-alt"></i></a>
-						<div class="dropdown-menu"
+						<div class="dropdown-menu dropdown-menu-right"
 							aria-labelledby="navbarDropdownMenuLink">
 							<%
 								if (loginMember == null) {
@@ -243,22 +251,23 @@ int cnt = 0;
 			<%
 				}
 			%>
-		<script>
+			<script>
 			$(function() {
-				$("#goodsList").eq(<%=i%>).click(function(){
+				var todayImage = [];
+				$(".goodsList").eq(<%=i%>).click(function(){
 					localStorage['todayImage<%=i %>'] = "<%=goodsList.get(i).getImage()%>";
-					var todayImage[<%=i%>] = localStorage['todayImage<%=i%>'];
-						$("#todayimageList").append("<img src='" + todayImage[<%=i%>] + "'/>");
+					todayImage[<%=i%>] = "<%=goodsList.get(i).getImage()%>";
+					$(".goodsthumb").empty().append("<img src='./img/" + todayImage[<%=i%>] + "'/>");
 				});
 				$(".delete").eq(<%=i%>).click(function() {
-					delete localStorage['todayImage<%=i %>'];
+					delete localStorage['todayImage<%=i%>'];
+					});
+					$(".alldelete").click(function() {
+						localStorage.clear();
+					});
 				});
-				$(".alldelete").click(function() {
-					localStorage.clear();
-				});
-			});
-		</script>
-			<div class="card goods__card-size" id="goodsList">
+			</script>
+			<div class="card goods__card-size goodsList">
 				<a data-toggle="modal"
 					data-target="#<%=goodsList.get(i).getModalip()%>"> <img
 					src="./img/<%=goodsList.get(i).getImage()%>"
@@ -455,8 +464,7 @@ int cnt = 0;
 		</div>
 		<div>
 			<a class="btn btn-primary button__lo"
-				href="goodsCartAdd.do?id=<%=goodsList.get(i).getId()%>">장바구니에
-				담기</a>
+				href="goodsCartAdd.do?id=<%=goodsList.get(i).getId()%>">장바구니에 담기</a>
 		</div>
 	</div>
 	<%
@@ -470,7 +478,6 @@ int cnt = 0;
 
 
 	<!-- Optional JavaScript -->
-	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 	<script
 		src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 	<script
@@ -482,6 +489,6 @@ int cnt = 0;
 	<script src="js/addr.js"></script>
 	<script src="https://kit.fontawesome.com/6478f529f2.js"
 		crossorigin="anonymous"></script>
-	
+
 </body>
 </html>
