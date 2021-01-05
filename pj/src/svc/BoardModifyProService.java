@@ -11,31 +11,43 @@ public class BoardModifyProService {
 
 	public boolean isArticleWriter(int board_num, String pass) throws Exception {
 		boolean isArticleWriter = false;
-		Connection con = getConnection();
-		BoardDAO boardDAO = BoardDAO.getInstance();
-		boardDAO.setConnection(con);
-		isArticleWriter = boardDAO.isArticleBoardWriter(board_num, pass);
-		if (con != null)
-			close(con);
+		Connection conn = null;
+		try {
+			conn = getConnection();
+			BoardDAO boardDAO = BoardDAO.getInstance();
+			boardDAO.setConnection(conn);
+			isArticleWriter = boardDAO.isArticleBoardWriter(board_num, pass);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (conn != null)
+				close(conn);
+		}
 		return isArticleWriter;
 	}
 
 	public boolean modifyArticle(BoardBean article) throws Exception {
 		boolean isModifySuccess = false;
-		Connection con = getConnection();
-		BoardDAO boardDAO = BoardDAO.getInstance();
-		boardDAO.setConnection(con);
-		int updateCount = boardDAO.updateArticle(article);
+		Connection conn = null;
+		try {
+			conn = getConnection();
+			BoardDAO boardDAO = BoardDAO.getInstance();
+			boardDAO.setConnection(conn);
+			int updateCount = boardDAO.updateArticle(article);
 
-		if (updateCount > 0) {
-			commit(con);
-			isModifySuccess = true;
+			if (updateCount > 0) {
+				commit(conn);
+				isModifySuccess = true;
 
-		} else {
-			rollback(con);
+			} else {
+				rollback(conn);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (conn != null)
+				close(conn);
 		}
-		if (con != null)
-			close(con);
 		return isModifySuccess;
 	}
 

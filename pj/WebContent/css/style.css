@@ -25,6 +25,8 @@ font-family: 'Noto Sans KR', sans-serif;
 
 @import "admin/admin.css";
 
+/* today.css */
+@import "today/today.css";
 
 h1, h2, h3, h4, .navbar-brand {
 	font-family: 'Do Hyeon', sans-serif;

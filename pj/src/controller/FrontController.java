@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import action.Action;
+import action.AdminAction;
+import action.AdminDeleteAction;
 import action.BoardDeleteProAction;
 import action.BoardDetailAction;
 import action.BoardListAction;
@@ -22,11 +24,11 @@ import action.BoardWriteProAction;
 import action.ComuListAction;
 import action.GoodsCartAddAction;
 import action.GoodsCartListAction;
-import action.GoodsListAction;
 import action.GoodsCartQtyDownAction;
 import action.GoodsCartQtyUpAction;
 import action.GoodsCartRemoveAction;
 import action.GoodsCartSearchAction;
+import action.GoodsListAction;
 import action.IndexAction;
 import action.JoinAction;
 import action.LoginAction;
@@ -44,12 +46,6 @@ import action.RecommandModifyProAction;
 import action.RecommandReplyFormAction;
 import action.RecommandReplyProAction;
 import action.RecommandWriteProAction;
-import action.TodayImageAddAction;
-import action.TodayImageListAction;
-import action.TodayImageQtyDownAction;
-import action.TodayImageQtyUpAction;
-import action.TodayImageRemoveAction;
-import action.TodayImageSearchAction;
 import vo.ActionForward;
 
 @WebServlet("*.do")
@@ -74,7 +70,7 @@ public class FrontController extends HttpServlet {
 		String command = requestURI.substring(contextPath.length());
 		ActionForward forward = null;
 		Action action = null;
-
+		/*main*/
 		if (command.equals("/index.do")) {
 			action = new IndexAction();
 			try {
@@ -82,6 +78,7 @@ public class FrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+			/*login*/
 		} else if (command.equals("/loginPro.do")) {
 			action = new LoginAction();
 			try {
@@ -89,6 +86,7 @@ public class FrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+			/*join*/
 		} else if (command.equals("/joinPro.do")) {
 			action = new JoinAction();
 			try {
@@ -96,6 +94,7 @@ public class FrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+			/*goodsList*/
 		} else if (command.equals("/goodsList.do")) {
 			action = new GoodsListAction();
 			try {
@@ -103,7 +102,7 @@ public class FrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-
+			/*pcList*/
 		} else if (command.equals("/pcList.do")) {
 			action = new PcListAction();
 			try {
@@ -111,6 +110,7 @@ public class FrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+			/*review board*/
 		} else if (command.equals("/boardWritePro.do")) {
 			action = new BoardWriteProAction();
 			try {
@@ -177,6 +177,8 @@ public class FrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+			
+			/*recommand board*/
 		} else if (command.equals("/recommandWritePro.do")) {
 			action = new RecommandWriteProAction();
 			try {
@@ -243,6 +245,7 @@ public class FrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+			/*comunity List*/
 		} else if (command.equals("/comuList.do")) {
 			action = new ComuListAction();
 			try {
@@ -250,42 +253,7 @@ public class FrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		} else if (command.equals("/goodsCartAdd.do")) {
-			action = new GoodsCartAddAction();
-			try {
-				forward = action.execute(request, response);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		
-		} else if (command.equals("/goodsCartQtyDown.do")) {
-			action = new GoodsCartQtyDownAction();
-			try {
-				forward = action.execute(request, response);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		} else if (command.equals("/goodsCartQtyUp.do")) {
-			action = new GoodsCartQtyUpAction();
-			try {
-				forward = action.execute(request, response);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		} else if (command.equals("/goodsCartRemove.do")) {
-			action = new GoodsCartRemoveAction();
-			try {
-				forward = action.execute(request, response);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		} else if (command.equals("/goodsCartSearch.do")) {
-			action = new GoodsCartSearchAction();
-			try {
-				forward = action.execute(request, response);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+			/*CartList*/
 		} else if (command.equals("/goodsCartList.do")) {
 			action = new GoodsCartListAction();
 			try {
@@ -293,53 +261,44 @@ public class FrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		} else if (command.equals("/todayImageAdd.do")) {
-			action = new TodayImageAddAction();
+			
+		}else if (command.equals("/goodsCartAdd.do")) {
+			action = new GoodsCartAddAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		
-		} else if (command.equals("/todayImageListAction.do")) {
-			action = new TodayImageListAction();
+		}else if (command.equals("/goodsCartSearch.do")) {
+			action = new GoodsCartSearchAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		
-		} else if (command.equals("/todayImageQtyDownAction.do")) {
-			action = new TodayImageQtyDownAction();
+		}else if (command.equals("/goodsCartRemove.do")) {
+			action = new GoodsCartRemoveAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		
-		} else if (command.equals("/todayImageQtyUpAction.do")) {
-			action = new TodayImageQtyUpAction();
+		}else if (command.equals("/goodsCartQtyUp.do")) {
+			action = new GoodsCartQtyUpAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		
-		} else if (command.equals("/todayImageRemoveAction.do")) {
-			action = new TodayImageRemoveAction();
+		}else if (command.equals("/goodsCartQtyDown.do")) {
+			action = new GoodsCartQtyDownAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		
-		} else if (command.equals("/todayImageSearchAction.do")) {
-			action = new TodayImageSearchAction();
-			try {
-				forward = action.execute(request, response);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+			/*notice board*/
 		} else if (command.equals("/noticeWritePro.do")) {
 			action = new NoticeWriteProAction();
 			try {
@@ -385,7 +344,22 @@ public class FrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-
+			/*admin*/
+		}  else if (command.equals("/admin.do")) {
+			action = new AdminAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}  else if (command.equals("/adminDelete.do")) {
+			action = new AdminDeleteAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			/*logout*/
 		} else if (command.equals("/logout.do")) {
 			HttpSession session = request.getSession();
 			session.invalidate();

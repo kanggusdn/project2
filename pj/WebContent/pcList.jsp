@@ -29,6 +29,7 @@ int cnt = 0;
 	rel="stylesheet">
 <!-- css origin -->
 <link rel="stylesheet" href="css/style.css" />
+<!-- Optional JavaScript -->
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <title>컴퓨터 홈 쇼핑 사이트</title>
 </head>
@@ -133,39 +134,33 @@ int cnt = 0;
 							<div class="container">
 								<ul>
 									<li>
-										<div class="pcthumb">
-											<img src="img/gift.svg" alt="...">
-											<a href="javascript:;" class="btn_close type_black">삭제</a>
+										<div class="todayImagethumb">
+											<img src="img/gift.svg" alt="..." class="todayImageSize">
 										</div>
 									</li>
 									<li>
-										<div class="pcthumb">
-											<img src="img/gift.svg" alt="...">
-											<a href="javascript:;" class="btn_close type_black">삭제</a>
+										<div class="todayImagethumb">
+											<img src="img/gift.svg" alt="..." class="todayImageSize">
 										</div>
 									</li>
 									<li>
-										<div class="pcthumb">
-											<img src="img/gift.svg" alt="...">
-											<a href="javascript:;" class="btn_close type_black">삭제</a>
+										<div class="todayImagethumb">
+											<img src="img/gift.svg" alt="..." class="todayImageSize">
 										</div>
 									</li>
 									<li>
-										<div class="pcthumb">
-											<img src="img/gift.svg" alt="...">
-											<a href="javascript:;" class="btn_close type_black">삭제</a>
+										<div class="todayImagethumb">
+											<img src="img/gift.svg" alt="..." class="todayImageSize">
 										</div>
 									</li>
 									<li>
-										<div class="pcthumb">
-											<img src="img/gift.svg" alt="...">
-											<a href="javascript:;" class="btn_close type_black">삭제</a>
+										<div class="todayImagethumb">
+											<img src="img/gift.svg" alt="..." class="todayImageSize">
 										</div>
 									</li>
 									<li>
-										<div class="pcthumb">
-											<img src="img/gift.svg" alt="...">
-											<a href="javascript:;" class="btn_close type_black">삭제</a>
+										<div class="todayImagethumb">
+											<img src="img/gift.svg" alt="..." class="todayImageSize">
 										</div>
 									</li>
 								</ul>
@@ -271,12 +266,14 @@ int cnt = 0;
 				}
 			%>
 			<script>
+			var cnt = 0;
 			$(function() {
 				var todayImage = [];
 				$(".pcList").eq(<%=i%>).click(function(){
 					localStorage['todayImage<%=i %>'] = "<%=pcList.get(i).getImage()%>";
 					todayImage[<%=i%>] = "<%=pcList.get(i).getImage()%>";
-					$(".pcthumb").empty().append("<img src='./img/" + todayImage[<%=i%>] + "'/>");
+					$(".todayImagethumb").eq(cnt).empty();
+					$(".todayImagethumb").eq(cnt++).append("<img class='todayImageSize' src='./img/" + todayImage[<%=i%>] + "'/>");
 				});
 				$(".delete").eq(<%=i%>).click(function() {
 					delete localStorage['todayImage<%=i%>'];

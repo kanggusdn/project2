@@ -10,22 +10,30 @@ import java.util.ArrayList;
 
 import dao.GoodsDAO;
 import vo.Goods;
+
 public class GoodsViewService {
 
 	public ArrayList<Goods> getGoodsView(String kind) {
 		GoodsDAO goodsDAO = GoodsDAO.getInstance();
-		Connection conn = getConnection();
-		goodsDAO.setConnection(conn);
-		ArrayList<Goods> select = GoodsDAO.selectGoodsList(kind);
-		
-		if(select != null) {
-			commit(conn);
-		} else {
-			rollback(conn);
+		Connection conn = null;
+		ArrayList<Goods> goods = null;
+		try {
+			conn = getConnection();
+			goodsDAO.setConnection(conn);
+			ArrayList<Goods> select = GoodsDAO.selectGoodsList(kind);
+
+			if (select != null) {
+				commit(conn);
+			} else {
+				rollback(conn);
+			}
+			goods = goodsDAO.selectGoodsList(kind);
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		ArrayList<Goods> goods = goodsDAO.selectGoodsList(kind);
+
 		close(conn);
-		
+
 		return goods;
 	}
 

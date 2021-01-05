@@ -194,7 +194,7 @@ if (request.getAttribute("totalMoney") != null)
 				<div class="card-body">
 					<p class="card-text">
 						상품명:
-						<%=cartList.get(i).getKind()%><br /> 가격:
+						<%=cartList.get(i).getName()%><br /> 가격:
 						<%=cartList.get(i).getPrice()%><br />
 					</p>
 				</div>

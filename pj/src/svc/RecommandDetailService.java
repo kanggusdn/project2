@@ -9,24 +9,26 @@ import vo.RecommandBean;
 
 public class RecommandDetailService {
 
-	public RecommandBean getArticle(int recommand_num) throws Exception{ 
+	public RecommandBean getArticle(int recommand_num) throws Exception {
 		RecommandBean article = null;
-			Connection con = getConnection();
+		Connection conn = null;
+		try {
+			conn = getConnection();
 			RecommandDAO recommandDAO = RecommandDAO.getInstance();
-			recommandDAO.setConnection(con);
+			recommandDAO.setConnection(conn);
 			int updateCount = recommandDAO.updateReadCount(recommand_num);
-			
-			if(updateCount > 0) {
-				commit(con);
-			} else {
-				rollback(con);
-			}
-			
 			article = recommandDAO.selectArticle(recommand_num);
-			close(con);
-			return article; 
-			
-	
+			if (updateCount > 0) {
+				commit(conn);
+			} else {
+				rollback(conn);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(conn);
+		}
+		return article;
 	}
 
 }

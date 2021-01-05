@@ -1,4 +1,5 @@
 package svc;
+
 import static db.JdbcUtil.close;
 import static db.JdbcUtil.commit;
 import static db.JdbcUtil.getConnection;
@@ -13,18 +14,24 @@ import vo.Goods;
 public class GoodsListService {
 
 	public static ArrayList<Goods> getGoodsList(String kind) {
-			
-			GoodsDAO goodsDAO = GoodsDAO.getInstance();
-			Connection conn = getConnection();
+
+		GoodsDAO goodsDAO = GoodsDAO.getInstance();
+		Connection conn = null;
+		ArrayList<Goods> goodsList = null;
+		try {
+			conn = getConnection();
 			goodsDAO.setConnection(conn);
-			ArrayList<Goods> goodsList = goodsDAO.selectGoodsList(kind);
-			if(goodsList != null) {
+			goodsList = goodsDAO.selectGoodsList(kind);
+			if (goodsList != null) {
 				commit(conn);
 			} else {
 				rollback(conn);
 			}
 			ArrayList<Goods> goods = GoodsDAO.selectGoodsList(kind);
-			close(conn);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		close(conn);
 		return goodsList;
 	}
 
