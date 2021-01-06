@@ -1,37 +1,471 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="vo.Member, vo.Goods, vo.PageInfo"%>
+<%@ page import="vo.NoticeBean"%>
+<%@ page import="java.util.HashMap,java.util.ArrayList"%>
+
+<%
+	Member loginMember = (Member) session.getAttribute("loginMember");
+ArrayList<Member> adminList = (ArrayList<Member>) request.getAttribute("adminList");
+%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+<!-- Required meta tags -->
+<meta charset="utf-8" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<!-- title image -->
+<link href="img/EzIcon.jpg" rel="icon" type="image/x-icon">
+<!-- reset -->
+<link rel="stylesheet"
+	href="https://meyerweb.com/eric/tools/css/reset/reset.css">
+<!-- Bootstrap CSS -->
+<!-- text -->
+<link
+	href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
+	rel="stylesheet">
+<!-- css origin -->
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="css/style.css" />
+<title>컴퓨터 홈 쇼핑 사이트</title>
 </head>
 <body oncontextmenu="return false" ondragstart="return false"
 	onselectstart="return false">
-	<!-- Button trigger modal -->
-	<button type="button" class="btn btn-primary" data-bs-toggle="modal"
-		data-bs-target="#staticBackdrop">Launch static backdrop modal
-	</button>
+	<nav
+		class="navbar navbar-expand-lg bg-light fixed-top navbar-light justify-content-between"
+		id="header">
+		<div class= "text-left">
+			<button class="navbar-toggler" id = "navMainBtn" type="button" data-toggle="collapse"
+				data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
+				aria-expanded="true" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
 
-	<!-- Modal -->
-	<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static"
-		data-bs-keyboard="false" tabindex="-1"
-		aria-labelledby="staticBackdropLabel" aria-hidden="true">
+			<div class="collapse navbar-collapse mr-4" id="navbarNavDropdown">
+				<div class="navbar__icon d-lg-block d-none">
+					<a href="index.do"><img class="navbar__icon-image" alt="-"
+						src="img/EzIcon.jpg"></a>
+				</div>
+				<ul class="navbar-nav">
+					<li class="nav-item dropdown"><a
+						class="nav-link dropdown-toggle" href="#"
+						id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
+						aria-haspopup="true" aria-expanded="false">컴퓨터부품</a>
+						<div class="dropdown-menu"
+							aria-labelledby="navbarDropdownMenuLink">
+
+							<a class="dropdown-item" href="goodsList.do?kind=cpu">CPU</a> <a
+								class="dropdown-item" href="goodsList.do?kind=cooler">쿨러/튜닝</a>
+							<a class="dropdown-item" href="goodsList.do?kind=mainboard">메인보드</a>
+							<a class="dropdown-item" href="goodsList.do?kind=memory">메모리</a>
+							<a class="dropdown-item" href="goodsList.do?kind=graphic">그래픽카드</a>
+							<a class="dropdown-item" href="goodsList.do?kind=SSD">SSd</a> <a
+								class="dropdown-item" href="goodsList.do?kind=harddisk">하드디스크</a>
+							<a class="dropdown-item" href="goodsList.do?kind=sidedisk">외장HDD/SSD</a>
+							<a class="dropdown-item" href="goodsList.do?kind=case">케이스</a> <a
+								class="dropdown-item" href="goodsList.do?kind=power">파워</a> <a
+								class="dropdown-item" href="goodsList.do?kind=keyboard">키보드</a>
+							<a class="dropdown-item" href="goodsList.do?kind=mouse">마우스</a> <a
+								class="dropdown-item" href="goodsList.do?kind=odd">ODD</a> <a
+								class="dropdown-item" href="goodsList.do?kind=moniter">모니터</a> <a
+								class="dropdown-item" href="goodsList.do?kind=software">소프트웨어</a>
+						</div></li>
+					<li class="nav-item dropdown"><a
+						class="nav-link dropdown-toggle" href="#"
+						id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
+						aria-haspopup="true" aria-expanded="false"> 조립PC </a>
+						<div class="dropdown-menu"
+							aria-labelledby="navbarDropdownMenuLink">
+							<a class="dropdown-item" href="comuList.do?kind=user">유저 추천
+								조립PC</a> <a class="dropdown-item" href="comuList.do?kind=owner">사장
+								추천 조립PC</a> <a class="dropdown-item" href="comuList.do?kind=CEO">컴퓨터
+								부품 회사 추천 조립PC</a>
+						</div></li>
+					<li class="nav-item dropdown"><a
+						class="nav-link dropdown-toggle" href="#"
+						id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
+						aria-haspopup="true" aria-expanded="false"> 브랜드PC </a>
+						<div class="dropdown-menu "
+							aria-labelledby="navbarDropdownMenuLink">
+							<a class="dropdown-item" href="pcList.do?kind=SAMSUNG">삼성전자</a> <a
+								class="dropdown-item" href="pcList.do?kind=HP">HP</a> <a
+								class="dropdown-item" href="pcList.do?kind=LG">LG전자</a> <a
+								class="dropdown-item" href="pcList.do?kind=LENOVO">레노버</a> <a
+								class="dropdown-item" href="pcList.do?kind=DELL">DELL</a> <a
+								class="dropdown-item" href="pcList.do?kind=ASUS">ASUS</a>
+						</div></li>
+					<li class="nav-item dropdown"><a
+						class="nav-link dropdown-toggle" href="#"
+						id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
+						aria-haspopup="true" aria-expanded="false"> 커뮤니티 </a>
+						<div class="dropdown-menu"
+							aria-labelledby="navbarDropdownMenuLink">
+							<a class="dropdown-item" href="boardList.do">컴퓨터 리뷰 커뮤니티</a> <a
+								class="dropdown-item" href="recommandList.do">컴퓨터 추천 커뮤니티</a>
+						</div></li>
+				</ul>
+			</div>
+		</div>
+		<!-- 2020 12 23 haesu -->
+		<div>
+			<button class="navbar-toggler" id = "navSideBtn"type="button" data-toggle="collapse"
+				data-target="#infoDropdown" aria-controls="navbarNavDropdown"
+				aria-expanded="true" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="infoDropdown">
+				<ul class="navbar-nav">
+					<li class="nav-item"><a class="nav-link"
+						href="goodsCartList.do"><i class="fas fa-cart-arrow-down"></i></a></li>
+
+					<li class="nav-item dropdown"><a class="nav-link" href="#"
+						id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
+						aria-haspopup="true" aria-expanded="false"><i
+							class="fas fa-business-time"></i></a></li>
+
+					<li class="nav-item dropdown"><a class="nav-link" href="#"
+						id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
+						aria-haspopup="true" aria-expanded="false"><i
+							class="fas fa-user-alt"></i></a>
+						<div class="dropdown-menu  dropdown-menu-right"
+							aria-labelledby="navbarDropdownMenuLink">
+							<%
+								if (loginMember == null) {
+							%>
+							<button type="button"
+								class="dropdown-item btn btn-primary btn-sm btn-block"
+								data-toggle="modal" data-target="#loginModal">로그인</button>
+							<button type="button"
+								class="dropdown-item btn btn-primary btn-sm btn-block"
+								data-toggle="modal" data-target="#joinModal">회원가입</button>
+							<%
+								} else {
+							%>
+
+							<button type="button"
+								class="dropdown-item btn btn-primary btn-sm btn-block"
+								onclick="location.href='logout.do'">로그아웃</button>
+							<button type="button"
+								class="dropdown-item btn btn-primary btn-sm btn-block"
+								data-toggle="modal" data-target="#profileModal">프로필 수정</button>
+							<%
+								if (loginMember.getId().equals("admin")) {
+							%>
+							<button type="button"
+								class="dropdown-item btn btn-primary btn-sm btn-block"
+								onclick="location.href='admin.do'">관리자 전용 페이지</button>
+
+							<%
+								}
+							%>
+							<%
+								}
+							%>
+
+						</div></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<!-- haesu 2020-12-29 -->
+
+	<table class="table table-hover table__location container">
+		<thead>
+			<tr>
+				<th scope="col">번호</th>
+				<th scope="col">ID</th>
+				<th scope="col">PassWord</th>
+				<th scope="col">이름</th>
+				<th scope="col">나이</th>
+				<th scope="col">성별</th>
+				<th scope="col">E-mail</th>
+				<th scope="col">주소1</th>
+				<th scope="col">주소2</th>
+				<th scope="col">주소3</th>
+				<th scope="col">탈퇴</th>
+			</tr>
+		</thead>
+		<tbody>
+			<%
+				int cnt = 1;
+			%>
+			<%
+				for (int i = 0; i < adminList.size(); i++) {
+			%>
+
+			<tr>
+				<th scope="row"><%=cnt%></th>
+				<td><%=adminList.get(i).getId()%></td>
+				<td><input disabled="disabled"
+					class="password__size form-control" type="password"
+					value="<%=adminList.get(i).getPasswd()%>"></td>
+				<td><%=adminList.get(i).getName()%></td>
+				<td><%=adminList.get(i).getAge()%></td>
+				<td><%=adminList.get(i).getGender()%></td>
+				<td><%=adminList.get(i).getEmail()%></td>
+				<td><%=adminList.get(i).getAddr1()%></td>
+				<td><%=adminList.get(i).getAddr2()%></td>
+				<td><%=adminList.get(i).getAddr3()%></td>
+				<%if(adminList.get(i).getId().equals("admin")) {%>
+				<td><a class="btn btn-primary disabled" 
+					href="adminDelete.do?id=<%=adminList.get(i).getId()%>"
+					onclick="return confirm('삭제를 진행하시겠습니까?')">탈퇴</a></td>
+				<%} else {%>
+				<td><a class="btn btn-primary"
+					href="adminDelete.do?id=<%=adminList.get(i).getId()%>"
+					onclick="return confirm('삭제를 진행하시겠습니까?')">탈퇴</a></td>
+				<%} %>
+			</tr>
+			<%
+				cnt++;
+			}
+			%>
+		</tbody>
+	</table>
+
+	<!-- end -->
+	<footer class="text-center text-white footer__color">
+		<div class="footer-above">
+			<div class="container pt-4">
+				<div class="row">
+					<div class="footer-col col">
+						<h3 style="color: white;">위치</h3>
+						<p>
+							영남기술교육원<br />대구광역시 달서구
+						</p>
+					</div>
+					<div class="footer-col col">
+						<h3 style="color: white;">소셜 미디어</h3>
+						<a href="#" class="btn btn-light m-2"><img
+							src="img/facebook.svg"></a> <a href="#"
+							class="btn btn-light m-2"><img src="img/youtube.svg"></a> <a
+							href="#" class="btn btn-light m-2"><img src="img/twitter.svg"></a>
+						<a href="#" class="btn btn-light m-2"><img
+							src="img/twitch.svg"></a> <a href="#" class="btn btn-light m-2"><img
+							src="img/instagram.svg"></a>
+					</div>
+					<div class="footer-col col">
+						<h3 style="color: white;">개발자 한마디</h3>
+						<p>언제든지 연락주세요!!</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="footer-below pb-4">
+			<div class="container text-center">
+				<div>Copyright &copy; JP 2020. All Right Reserved.</div>
+			</div>
+		</div>
+	</footer>
+
+	<!-- end -->
+
+	<!-- Login Modal  2020-12-03 haesu-->
+
+	<div class="modal fade" id="loginModal" tabindex="-1"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="staticBackdropLabel">2개의 모달창 시험</h5>
-					<button type="button" class="btn-close" data-bs-dismiss="modal"
-						aria-label="Close"></button>
+					<h5 class="modal-title" id="exampleModalLabel">로그인</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
 				</div>
-				<div class="modal-body">...</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-primary"
-						data-bs-dismiss="modal">확인</button>
-					<button type="button" class="btn btn-secondary">닫기</button>
+				<div class="modal-body">
+					<form action="loginPro.do" method="post">
+						<div class="form-group">
+							<label for="id">ID</label> <input type="text"
+								class="form-control" id="id" aria-describedby="emailHelp"
+								name="id">
+						</div>
+						<div class="form-group">
+							<label for="passwd">Password</label> <input type="password"
+								class="form-control" id="passwd" name="passwd">
+						</div>
+						<button type="submit" class="btn btn-primary">로그인</button>
+						<button type="button" class="btn btn-primary"
+							id="loginModalJoinBtn">회원가입</button>
+						<button type="button" class="btn btn-secondary"
+							data-dismiss="modal">취소</button>
+					</form>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	<!-- Join Modal -->
+
+	<div class="modal fade" id="joinModal" tabindex="-1"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">회원가입</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form action="joinPro.do" method="post">
+						<div class="form-group">
+							<input type="text" class="form-control" name="id" id="joinId"
+								placeholder="아이디" maxlength="20" required="required"
+								autocomplete="off" />
+						</div>
+						<div class="form-group" id="LoginCheck">
+							<span class="form-control">중복 확인을 해주세요</span>
+						</div>
+						<div class="form-group">
+							<input type="password" class="form-control" name="passwd"
+								id="pass" placeholder="비밀번호" maxlength="20" required="required"
+								autocomplete="off" />
+						</div>
+						<div class="form-group">
+							<input type="password" class="form-control" name="passwd"
+								id="password" placeholder="비밀번호 확인" maxlength="20"
+								required="required" autocomplete="off" />
+						</div>
+						<div class="form-group">
+							<div class="form-control" id="alert-success"
+								style="color: white; background: #738ED1;">비밀번호가 일치합니다.</div>
+							<div class="form-control" id="alert-danger"
+								style="color: white; background: #FC707D;">비밀번호가 일치하지
+								않습니다.</div>
+						</div>
+						<div class="form-group">
+							<input type="text" class="form-control" name="name"
+								placeholder="이름" maxlength="20" required="required"
+								autocomplete="off" />
+						</div>
+						<div class="form-group">
+							<input type="text" id="sample4_postcode" placeholder="우편번호"
+								class="form-control" name="addr1" required="required"
+								autocomplete="off"> <input type="button"
+								onclick="sample4_execDaumPostcode()" value="우편번호 찾기"
+								class="form-control"><input type="text"
+								id="sample4_roadAddress" placeholder="도로명주소"
+								class="form-control" name="addr2" required="required"
+								autocomplete="off"> <input class="form-control"
+								type="text" id="sample4_detailAddress" placeholder="상세주소"
+								name="addr3" required="required" autocomplete="off">
+						</div>
+						<div class="form-group">
+							<input type="number" class="form-control" name="age"
+								placeholder="나이" maxlength="20" required="required"
+								autocomplete="off" />
+						</div>
+						<div class="form-group">
+							<div class="btn-group" data-toggle="buttons">
+								<label class="btn btn-primary active"> <input
+									type="radio" class="d-none" name="gender" autocomplete="off"
+									value='M' checked="checked" />남자
+								</label> <label class="btn btn-primary"> <input type="radio"
+									class="d-none" name="gender" autocomplete="off" value='F' />여자
+								</label>
+							</div>
+						</div>
+						<div class="form-group">
+							<input type="email" class="form-control" name="email"
+								placeholder="이메일" maxlength="20" required="required"
+								autocomplete="no" />
+						</div>
+						<button type="submit" class="btn btn-primary form-control"
+							id="joinbutton">가입</button>
+					</form>
 				</div>
 			</div>
 		</div>
 	</div>
+
+
+
+
+
+
+	<!-- 2020/12/04 강현우 프로필 수정 -->
+	<div class="modal fade" id="profileModal" data-backdrop="static"
+		data-keyboard="false" tabindex="-1"
+		aria-labelledby="staticBackdropLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="staticBackdropLabel">프로필 수정 페이지</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form action="joinPro.do" method="post">
+						<div class="form-group">
+							<input type="password" class="form-control" name="passwd"
+								placeholder="비밀번호" maxlength="20" required="required"
+								autocomplete="off" />
+						</div>
+						<div class="form-group">
+							<input type="text" class="form-control" name="name"
+								placeholder="이름" maxlength="20" required="required"
+								autocomplete="off" />
+						</div>
+						<div class="form-group">
+							<input type="text" id="sample4_postcode2" placeholder="우편번호"
+								class="form-control" name="addr1" required="required"
+								autocomplete="off"> <input type="button"
+								onclick="sample4_execDaumPostcode()" value="우편번호 찾기"
+								class="form-control"><input type="text"
+								id="sample4_roadAddress2" placeholder="도로명주소"
+								class="form-control" name="addr2" required="required"
+								autocomplete="off"> <input class="form-control"
+								type="text" id="sample4_jibunAddress2" placeholder="상세주소"
+								name="addr3" required="required" autocomplete="off">
+						</div>
+						<div class="form-group">
+							<input type="number" class="form-control" name="age"
+								placeholder="나이" maxlength="20" required="required"
+								autocomplete="off" />
+						</div>
+						<div class="form-group">
+							<div class="btn-group" data-toggle="buttons">
+								<label class="btn btn-primary active"> <input
+									type="radio" class="d-none" name="gender" autocomplete="off"
+									value='M' checked="checked" />남자
+								</label> <label class="btn btn-primary"> <input type="radio"
+									class="d-none" name="gender" autocomplete="off" value='F' />여자
+								</label>
+							</div>
+						</div>
+						<div class="form-group">
+							<input type="email" class="form-control" name="email"
+								placeholder="이메일" maxlength="20" required="required"
+								autocomplete="no" />
+						</div>
+						<button type="submit" class="btn btn-primary form-control">변경</button>
+					</form>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+
+
+	<!-- Optional JavaScript -->
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+	<script src="js/header.js"></script>
+	<script src="js/main.js"></script>
+	<script
+		src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	<script src="js/addr.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js"></script>
+	<script src="https://kit.fontawesome.com/6478f529f2.js"></script>
 </body>
 </html>
