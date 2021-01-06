@@ -124,48 +124,44 @@ int cnt = 0;
 					<li class="nav-item"><a class="nav-link"
 						href="goodsCartList.do"><i class="fas fa-cart-arrow-down"></i></a></li>
 
-					<li class="nav-item dropdown"><a class="nav-link" href="#"
+					<li class="nav-item dropdown" id="today__Range-close"><a class="nav-link" href="#"
 						id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
 						aria-haspopup="true" aria-expanded="false"><i
 							class="fas fa-business-time"></i></a>
-						<div class="dropdown-menu dropdown-menu-right"
+						<div class="dropdown-menu dropdown-menu-right today__Range"
 							aria-labelledby="navbarDropdownMenuLink">
-							<h6>최근 본 상품</h6>
-							<div class="container">
-								<ul>
-									<li>
-										<div class="todayImagethumb">
-											<img src="img/gift.svg" alt="..." class="todayImageSize"> 
-										</div>
-									</li>
-									<li>
-										<div class="todayImagethumb">
-											<img src="img/gift.svg" alt="..." class="todayImageSize">
-										</div>
-									</li>
-									<li>
-										<div class="todayImagethumb">
-											<img src="img/gift.svg" alt="..." class="todayImageSize">
-										</div>
-									</li>
-									<li>
-										<div class="todayImagethumb">
-											<img src="img/gift.svg" alt="..." class="todayImageSize"> 
-										</div>
-									</li>
-									<li>
-										<div class="todayImagethumb">
-											<img src="img/gift.svg" alt="..." class="todayImageSize"> 
-										</div>
-									</li>
-									<li>
-										<div class="todayImagethumb">
-											<img src="img/gift.svg" alt="..." class="todayImageSize">
-										</div>
-									</li>
-								</ul>
+							<h2>최근 본 상품</h2>
+							<div class="today__Range-margin">
+								<div class="today__Range-width">
+									<div class="todayImagethumb">
+										<img src="img/gift.svg" alt="..." class="todayImageSize">
+									</div>
+									<div class="todayImagethumb">
+										<img src="img/gift.svg" alt="..." class="todayImageSize">
+									</div>
+
+									<div class="todayImagethumb">
+										<img src="img/gift.svg" alt="..." class="todayImageSize">
+									</div>
+
+									<div class="todayImagethumb">
+										<img src="img/gift.svg" alt="..." class="todayImageSize">
+									</div>
+									<div class="todayImagethumb">
+										<img src="img/gift.svg" alt="..." class="todayImageSize">
+									</div>
+
+									<div class="todayImagethumb">
+										<img src="img/gift.svg" alt="..." class="todayImageSize">
+									</div>
+									<div class="todayImagethumb">
+										<img src="img/gift.svg" alt="..." class="todayImageSize">
+									</div>
+									<div class="todayImagethumb">
+										<img src="img/gift.svg" alt="..." class="todayImageSize">
+									</div>
+								</div>
 							</div>
-							<input type="button" class="alldelete" value="모두 삭제">
 						</div></li>
 
 					<li class="nav-item dropdown"><a class="nav-link" href="#"
@@ -258,34 +254,15 @@ int cnt = 0;
 			<p class="startLine__text"><%=comuList.get(1).getKind()%></p>
 		</div>
 		<br>
+		<script>
+		var imgArr = new Array();
+		</script>
+		<div class="row row-cols-3">
 		<%
 			for (int i = 0; i < comuList.size(); i++) {
-			if (i % 3 == 0) {
 		%>
-		<div class="card-deck">
-			<%
-				}
-			%>
-			<script>
-			var cnt = 0;
-			$(function() {
-				var todayImage = [];
-				$(".comuList").eq(<%=i%>).click(function(){
-					console.log(cnt);
-					localStorage['todayImage<%=i %>'] = "<%=comuList.get(i).getImage()%>";
-					todayImage[<%=i%>] = "<%=comuList.get(i).getImage()%>";
-					$(".todayImagethumb").eq(cnt).empty();
-					$(".todayImagethumb").eq(cnt++).append("<img class='todayImageSize' src='./img/" + todayImage[<%=i%>] + "'/>");
-				});
-				$(".delete").eq(<%=i%>).click(function() {
-					delete localStorage['todayImage<%=i%>'];
-					});
-					$(".alldelete").click(function() {
-						localStorage.clear();
-					});
-				});
-			</script>
-			<div class="card goods__card-size comuList">
+		<div class="card goods__card-size comuList p-2 border-0">
+			<div class="border">
 				<a data-toggle="modal"
 					data-target="#<%=comuList.get(i).getModalip()%>"> <img
 					src="./img/<%=comuList.get(i).getImage()%>"
@@ -299,23 +276,11 @@ int cnt = 0;
 					</div>
 				</a>
 			</div>
-			<%
-				if (i % 3 == 2) {
-			%>
 		</div>
 		<%
 			}
 		%>
-		<%
-			if (i % 9 == 8) {
-		%>
-
-		<%
-			break;
-		}
-		}
-		%>
-
+		</div>
 	</div>
 	<footer class="text-center footer__color text-white">
 		<div class="footer-above">
@@ -569,9 +534,44 @@ int cnt = 0;
 	<script src="js/addr.js"></script>
 	<script src="https://kit.fontawesome.com/6478f529f2.js"
 		crossorigin="anonymous"></script>
+<%		for (int i = 0; i < comuList.size(); i++) {  %>
+		<script>
+			imgArr[<%=i %>] = "<%=comuList.get(i).getImage()%>";	
+		</script>
+<% 		} %>
+		
+	<script>
+			var cnt = 0;
+			var closeCnt = 0;
+			$(function() {
+				var todayImage = [];
+				$(".comuList").each(function(){
+					localStorage[closeCnt] = imgArr[closeCnt];
+					todayImage[closeCnt] = imgArr[closeCnt];
+					closeCnt++;
+					$(this).click(function(){
+						//설정
+						$(".todayImagethumb").eq(cnt).empty();
+						$(".todayImagethumb").eq(cnt).append("<img class='todayImageSize' src='./img/" + todayImage[$(this).index()] + "'/>");
+						$(".todayImagethumb").eq(cnt++).append("<button type='button' class='close today__close closeBtn'><span>&times;</span></button>");
+						$(".closeBtn").unbind();
+						$(".closeBtn").click(function(){
+							$(".today__Range-width").append("<div class='todayImagethumb'><img class='todayImageSize' src='./img/gift.svg'/></div>");
+							$(".today__Range-width").find("div").eq($(this).parent().index()).remove();
+							cnt--;
+						});
+					});
+				});
+// 				$('#today__Range-close').mouseleave(function(){
+//					$('#today__Range-close').dropdown('hide');
+//				});
+				$('#today__Range-close').on('hide.bs.dropdown', function (e) {
+				    if (e.clickEvent) {
+				      e.preventDefault();
+				    }
+				});
+				
+			});
+			</script>
 </body>
 </html>
-
-
-
-

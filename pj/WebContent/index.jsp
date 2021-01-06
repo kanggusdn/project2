@@ -137,54 +137,44 @@ ArrayList<Goods> todayImageList = (ArrayList<Goods>) request.getAttribute("today
 					<li class="nav-item"><a class="nav-link"
 						href="goodsCartList.do"><i class="fas fa-cart-arrow-down"></i></a></li>
 
-					<li class="nav-item dropdown"><a class="nav-link" href="#"
+					<li class="nav-item dropdown" id="today__Range-close"><a class="nav-link" href="#"
 						id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
 						aria-haspopup="true" aria-expanded="false"><i
 							class="fas fa-business-time"></i></a>
-						<div class="dropdown-menu dropdown-menu-right"
+						<div class="dropdown-menu dropdown-menu-right today__Range"
 							aria-labelledby="navbarDropdownMenuLink">
-							<h6>최근 본 상품</h6>
-							<div class="container">
-								<ul>
-									<li>
-										<div class="goodsthumb">
-											<img src="img/gift.svg" alt="..."> <a
-												href="javascript:;" class="btn_close type_black">삭제</a>
-										</div>
-									</li>
-									<li>
-										<div class="goodsthumb">
-											<img src="img/gift.svg" alt="..."> <a
-												href="javascript:;" class="btn_close type_black">삭제</a>
-										</div>
-									</li>
-									<li>
-										<div class="goodsthumb">
-											<img src="img/gift.svg" alt="..."> <a
-												href="javascript:;" class="btn_close type_black">삭제</a>
-										</div>
-									</li>
-									<li>
-										<div class="goodsthumb">
-											<img src="img/gift.svg" alt="..."> <a
-												href="javascript:;" class="btn_close type_black">삭제</a>
-										</div>
-									</li>
-									<li>
-										<div class="goodsthumb">
-											<img src="img/gift.svg" alt="..."> <a
-												href="javascript:;" class="btn_close type_black">삭제</a>
-										</div>
-									</li>
-									<li>
-										<div class="goodsthumb">
-											<img src="img/gift.svg" alt="..."> <a
-												href="javascript:;" class="btn_close type_black">삭제</a>
-										</div>
-									</li>
-								</ul>
+							<h2>최근 본 상품</h2>
+							<div class="today__Range-margin">
+								<div class="today__Range-width">
+									<div class="todayImagethumb">
+										<img src="img/gift.svg" alt="..." class="todayImageSize">
+									</div>
+									<div class="todayImagethumb">
+										<img src="img/gift.svg" alt="..." class="todayImageSize">
+									</div>
+
+									<div class="todayImagethumb">
+										<img src="img/gift.svg" alt="..." class="todayImageSize">
+									</div>
+
+									<div class="todayImagethumb">
+										<img src="img/gift.svg" alt="..." class="todayImageSize">
+									</div>
+									<div class="todayImagethumb">
+										<img src="img/gift.svg" alt="..." class="todayImageSize">
+									</div>
+
+									<div class="todayImagethumb">
+										<img src="img/gift.svg" alt="..." class="todayImageSize">
+									</div>
+									<div class="todayImagethumb">
+										<img src="img/gift.svg" alt="..." class="todayImageSize">
+									</div>
+									<div class="todayImagethumb">
+										<img src="img/gift.svg" alt="..." class="todayImageSize">
+									</div>
+								</div>
 							</div>
-							<input type="button" class="alldelete" value="모두 삭제">
 						</div></li>
 
 					<li class="nav-item dropdown"><a class="nav-link" href="#"

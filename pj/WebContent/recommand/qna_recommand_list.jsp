@@ -137,7 +137,43 @@ ArrayList<Goods> todayImageList = (ArrayList<Goods>) request.getAttribute("today
 					<li class="nav-item dropdown"><a class="nav-link" href="#"
 						id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
 						aria-haspopup="true" aria-expanded="false"><i
-							class="fas fa-business-time"></i></a></li>
+							class="fas fa-business-time"></i></a>
+						<div class="dropdown-menu dropdown-menu-right today__Range"
+							aria-labelledby="navbarDropdownMenuLink">
+							<h2>최근 본 상품</h2>
+							<div class="today__Range-margin">
+								<div class="today__Range-width">
+									<div class="todayImagethumb">
+										<img src="img/gift.svg" alt="..." class="todayImageSize">
+									</div>
+									<div class="todayImagethumb">
+										<img src="img/gift.svg" alt="..." class="todayImageSize">
+									</div>
+
+									<div class="todayImagethumb">
+										<img src="img/gift.svg" alt="..." class="todayImageSize">
+									</div>
+
+									<div class="todayImagethumb">
+										<img src="img/gift.svg" alt="..." class="todayImageSize">
+									</div>
+									<div class="todayImagethumb">
+										<img src="img/gift.svg" alt="..." class="todayImageSize">
+									</div>
+
+									<div class="todayImagethumb">
+										<img src="img/gift.svg" alt="..." class="todayImageSize">
+									</div>
+									<div class="todayImagethumb">
+										<img src="img/gift.svg" alt="..." class="todayImageSize">
+									</div>
+									<div class="todayImagethumb">
+										<img src="img/gift.svg" alt="..." class="todayImageSize">
+									</div>
+								</div>
+							</div>
+						</div>	
+					</li>
 
 					<li class="nav-item dropdown"><a class="nav-link" href="#"
 						id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"

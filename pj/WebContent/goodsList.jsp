@@ -129,7 +129,7 @@ int cnt = 0;
 							class="fas fa-business-time"></i></a>
 						<div class="dropdown-menu dropdown-menu-right today__Range"
 							aria-labelledby="navbarDropdownMenuLink">
-							<h6 class="today__title">최근 본 상품</h6>
+							<h2>최근 본 상품</h2>
 							<div class="today__Range-margin">
 								<div class="today__Range-width">
 									<div class="todayImagethumb">
@@ -161,7 +161,6 @@ int cnt = 0;
 									</div>
 								</div>
 							</div>
-							<input type="button" class="alldelete" value="모두 삭제">
 						</div></li>
 
 					<li class="nav-item dropdown"><a class="nav-link" href="#"
@@ -234,42 +233,15 @@ int cnt = 0;
 			<p class="startLine__text"><%=goodsList.get(1).getKind()%></p>
 		</div>
 		<br>
+		<script>
+		var imgArr = new Array();
+		</script>
+		<div class="row row-cols-3">
 		<%
 			for (int i = 0; i < goodsList.size(); i++) {
-			if (i % 3 == 0) {
 		%>
-		<div class="card-deck">
-			<%
-				}
-			%>
-			<script>
-				var cnt = 0;
-			$(function() {
-				var todayImage = [];
-				$(".goodsList").eq(<%=i%>).click(function(){
-					//설정
-					localStorage['todayImage<%=i %>'] = "<%=goodsList.get(i).getImage()%>";
-					todayImage[<%=i%>] = "<%=goodsList.get(i).getImage()%>";
-					$(".todayImagethumb").eq(cnt).empty();
-					$(".todayImagethumb").eq(cnt).append("<img class='todayImageSize' src='./img/" + todayImage[<%=i%>] + "'/>");
-					$(".todayImagethumb").eq(cnt++).append("<button type='button' onclick='delete(localStorage['todayImage<%=i%>'])' class='close today__close'><span>&times;</span></button>");
-				});
-				$(".today__close").eq(<%=i%>).click(function() {
-					delete localStorage['todayImage<%=i%>'];
-					$(".todayImagethumb").eq(<%=i%>).remove();
-					$(".today__Range-width").append("<img class='todayImageSize' src='./img/gift.svg'/>");
-					});
-				$(".alldelete").click(function() {
-						localStorage.clear();
-				});
-				$('#today__Range-close').on('hide.bs.dropdown', function (e) {
-				    if (e.clickEvent) {
-				      e.preventDefault();
-				    }
-				});
-			});
-			</script>
-			<div class="card goods__card-size goodsList">
+		<div class="card goods__card-size goodsList p-2 border-0">
+			<div class="border">
 				<a data-toggle="modal"
 					data-target="#<%=goodsList.get(i).getModalip()%>"> <img
 					src="./img/<%=goodsList.get(i).getImage()%>"
@@ -283,22 +255,11 @@ int cnt = 0;
 					</div>
 				</a>
 			</div>
-			<%
-				if (i % 3 == 2) {
-			%>
 		</div>
 		<%
 			}
 		%>
-		<%
-			if (i % 6 == 5) {
-		%>
-
-		<%
-			break;
-		}
-		}
-		%>
+		</div>
 	</div>
 	<footer class="text-center footer__color text-white">
 		<div class="footer-above">
@@ -491,5 +452,42 @@ int cnt = 0;
 	<script src="js/addr.js"></script>
 	<script src="https://kit.fontawesome.com/6478f529f2.js"
 		crossorigin="anonymous"></script>
+<%		for (int i = 0; i < goodsList.size(); i++) {  %>
+		<script>
+			imgArr[<%=i %>] = "<%=goodsList.get(i).getImage()%>";	
+		</script>
+<% 		} %>	
+	<script>
+			var cnt = 0;
+			var closeCnt = 0;
+			$(function() {
+				var todayImage = [];
+				$(".goodsList").each(function(){
+					localStorage[closeCnt] = imgArr[closeCnt];
+					todayImage[closeCnt] = imgArr[closeCnt];
+					closeCnt++;
+					$(this).click(function(){
+						//설정
+						$(".todayImagethumb").eq(cnt).empty();
+						$(".todayImagethumb").eq(cnt).append("<img class='todayImageSize' src='./img/" + todayImage[$(this).index()] + "'/>");
+						$(".todayImagethumb").eq(cnt++).append("<button type='button' class='close today__close closeBtn'><span>&times;</span></button>");
+						$(".closeBtn").unbind();
+						$(".closeBtn").click(function(){
+							$(".today__Range-width").append("<div class='todayImagethumb'><img class='todayImageSize' src='./img/gift.svg'/></div>");
+							$(".today__Range-width").find("div").eq($(this).parent().index()).remove();
+							cnt--;
+						});
+					});
+				});
+// 				$('#today__Range-close').mouseleave(function(){
+// 					$('#today__Range-close').dropdown('hide');
+// 				});
+				$('#today__Range-close').on('hide.bs.dropdown', function (e) {
+				    if (e.clickEvent) {
+				      e.preventDefault();
+				    }
+				});
+			});
+			</script>
 </body>
 </html>
