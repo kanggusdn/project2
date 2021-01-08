@@ -236,7 +236,7 @@ ArrayList<Member> adminList = (ArrayList<Member>) request.getAttribute("adminLis
 						<p>
 							영남기술교육원<br />대구광역시 달서구
 						</p>
-					</div>
+					</div> 
 					<div class="footer-col col">
 						<h3 style="color: white;">소셜 미디어</h3>
 						<a href="#" class="btn btn-light m-2"><img
