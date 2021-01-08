@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import javax.sql.DataSource;
 
 import vo.NoticeBean;
- 
+
 public class NoticeDAO {
 	DataSource ds;
 	Connection conn;
@@ -292,7 +292,7 @@ public class NoticeDAO {
 		
 		return deleteCount;
 	}
-
+	
 	public int addCountArticle(int selectArticle) {
 		int updateCount = 0;
 		PreparedStatement pstmt = null;
@@ -309,4 +309,5 @@ public class NoticeDAO {
 		
 		return updateCount;
 	}
+
 }

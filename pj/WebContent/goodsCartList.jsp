@@ -41,8 +41,8 @@ if (request.getAttribute("totalMoney") != null)
 	<nav
 		class="navbar navbar-expand-lg bg-light fixed-top navbar-light justify-content-between"
 		id="header">
-		<div class= "text-left">
-			<button class="navbar-toggler" id = "navMainBtn" type="button" data-toggle="collapse"
+		<div>
+			<button class="navbar-toggler" type="button" data-toggle="collapse"
 				data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
 				aria-expanded="true" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
@@ -115,57 +115,41 @@ if (request.getAttribute("totalMoney") != null)
 		</div>
 		<!-- 2020 12 23 haesu -->
 		<div>
-			<button class="navbar-toggler" id = "navSideBtn"type="button" data-toggle="collapse"
+			<button class="navbar-toggler" type="button" data-toggle="collapse"
 				data-target="#infoDropdown" aria-controls="navbarNavDropdown"
 				aria-expanded="true" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
-			<div class="collapse navbar-collapse" id="infoDropdown">
+			<div class="collapse navbar-collapse dropdown-menu-end" 
+				id="infoDropdown">
 				<ul class="navbar-nav">
 					<li class="nav-item"><a class="nav-link"
 						href="goodsCartList.do"><i class="fas fa-cart-arrow-down"></i></a></li>
 
-					<li class="nav-item dropdown"><a class="nav-link" href="#"
+					<li class="nav-item dropdown" id="today__Range-close"><a class="nav-link" href="#"
 						id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
 						aria-haspopup="true" aria-expanded="false"><i
 							class="fas fa-business-time"></i></a>
+							
+							<!-- 2021 01 06 gang -->
+							
 						<div class="dropdown-menu dropdown-menu-right today__Range"
 							aria-labelledby="navbarDropdownMenuLink">
 							<h2>최근 본 상품</h2>
 							<div class="today__Range-margin">
 								<div class="today__Range-width">
+								<div class= "today__Range-div">
+									<%for(int i = 0; i <8 ; i++) {%>
+									
 									<div class="todayImagethumb">
-										<img src="img/gift.svg" alt="..." class="todayImageSize">
+										<img src="img/todayIMG/gift.svg" alt="..." class="todayImageSize">
 									</div>
-									<div class="todayImagethumb">
-										<img src="img/gift.svg" alt="..." class="todayImageSize">
-									</div>
-
-									<div class="todayImagethumb">
-										<img src="img/gift.svg" alt="..." class="todayImageSize">
-									</div>
-
-									<div class="todayImagethumb">
-										<img src="img/gift.svg" alt="..." class="todayImageSize">
-									</div>
-									<div class="todayImagethumb">
-										<img src="img/gift.svg" alt="..." class="todayImageSize">
-									</div>
-
-									<div class="todayImagethumb">
-										<img src="img/gift.svg" alt="..." class="todayImageSize">
-									</div>
-									<div class="todayImagethumb">
-										<img src="img/gift.svg" alt="..." class="todayImageSize">
-									</div>
-									<div class="todayImagethumb">
-										<img src="img/gift.svg" alt="..." class="todayImageSize">
+									<%} %>
 									</div>
 								</div>
 							</div>
-						</div>	
-					</li>
-
+						</div></li>
+						<!-- end -->
 					<li class="nav-item dropdown"><a class="nav-link" href="#"
 						id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
 						aria-haspopup="true" aria-expanded="false"><i
@@ -214,46 +198,30 @@ if (request.getAttribute("totalMoney") != null)
 		<div class="startLine-view text-center">
 			<p class="startLine__text">장바구니</p>
 		</div>
-		<%
-			if (cartList != null && cartList.size() > 0) {
-				for (int i = 0; i < cartList.size(); i++) {
-					if (i % 3 == 0) {
-		%>
-		<div class="card-deck">
+		<div class="row row-cols-3">
 			<%
-				}
+				if (cartList != null && cartList.size() > 0) {
+				for (int i = 0; i < cartList.size(); i++) {
 			%>
-
-			<div class="card goods__card-size">
-				<img src="./img/<%=cartList.get(i).getImage()%>"
-					class="card-img-top card-img__size" alt="...">
-				<div class="card-body">
-					<p class="card-text">
-						상품명:
-						<%=cartList.get(i).getName()%><br /> 가격:
-						<%=cartList.get(i).getPrice()%><br />
-					</p>
+			<div class="card goods__card-size Cartlist p-2 border-0">
+				<div class="border">
+					<img src="./img/<%=cartList.get(i).getImage()%>"
+						class="card-img-top card-img__size" alt="...">
+					<div class="card-body">
+						<p class="card-text">
+							<span>상품명: <%=cartList.get(i).getName()%></span><br/>
+							<span class="goods__card-price">가격: <%=cartList.get(i).getPrice()%></span><br/>
+						</p>
+					</div>
+					<button type='button' class='close cart__close CartcloseBtn'><span>&times;</span></button>
 				</div>
-
 			</div>
 			<%
-				if (i % 3 == 2) {
-			%>
-		</div>
-		<%
-			}
-		%>
-		<%
-			if (i % cartList.size() == cartList.size() - 1) {
-		%>
-
-		<%
-			break;
 				}
 			}
-		}
-		%>
-
+			%>
+		</div>
+		
 		<%
 			if (cartList == null) {
 		%>
@@ -262,13 +230,18 @@ if (request.getAttribute("totalMoney") != null)
 				계속하기</button>
 		</div>
 		<%
-			}
+			} else{
 		%>
+		<div>
+			<button onclick="history.back()" class="btn btn-primary">쇼핑
+				계속하기</button>
+		</div>
+		<%} %>
 	</div>
 	<div class="totalMoney bg-dark text-white text-center">
 		<span>스토어 합계 주문 :&nbsp;&nbsp;</span> <span
 			class="totalMoney__font-small">상품 금액</span> <span
-			class="font-weight-bold" style="color: tomato;"> <%=totalMoney%>원
+			class="font-weight-bold" id = "totalMoney"style="color: tomato;"> <%=totalMoney%>원
 		</span>
 		<button class="btn btn-primary">구매하기</button>
 	</div>
@@ -499,5 +472,42 @@ if (request.getAttribute("totalMoney") != null)
 	<script src="https://kit.fontawesome.com/6478f529f2.js"
 		crossorigin="anonymous"></script>
 	<script src="js/Cart.js"></script>
+	<script type="text/javascript">
+	var localIMG = new Array();
+	var cnt = 0;
+	var closeCnt = 0;
+	var TotalMoney = <%=totalMoney%>;
+	console.log(TotalMoney);
+	$(function() {
+		for (var i = 0; i < localStorage.length; i++) {
+			localStorage.getItem(localStorage.key(i));
+			if(localStorage.getItem(localStorage.key(closeCnt)) != null){
+				$(".todayImagethumb").eq(closeCnt).empty();
+				$(".todayImagethumb").eq(closeCnt).append("<img src='./img/"+ localStorage.getItem(localStorage.key(closeCnt)) +"' alt= '...' class='todayImageSize'>");
+				$(".todayImagethumb").eq(closeCnt).append("<button type='button' class='close today__close closeBtn'><span>&times;</span></button>");
+				$(".closeBtn").unbind();
+				$(".CartcloseBtn").unbind();
+				closeCnt++;
+				
+		}
+				
+				$(".closeBtn").click(function(){
+					$(".today__Range-div").append("<div class='todayImagethumb'><img class='todayImageSize' src='./img/todayIMG/gift.svg'/></div>");
+					$(".today__Range-div").find("div").eq($(this).parent().index()).remove();
+				});
+				$(".CartcloseBtn").click(function(){
+					var cartPrice = Number($(".goods__card-price").eq($(this).parent().parent().index()).text().substring(4).trim());
+					TotalMoney = TotalMoney - cartPrice;
+					$(".row").find(".Cartlist").eq($(this).parent().parent().index()).remove();
+					$("#totalMoney").text(TotalMoney + "원");
+				});
+				$('#today__Range-close').on('hide.bs.dropdown', function (e) {
+				    if (e.clickEvent) {
+				      e.preventDefault();
+				    }
+				});
+			}
+	});
+	</script>
 </body>
 </html>

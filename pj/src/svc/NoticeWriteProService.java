@@ -9,27 +9,22 @@ import vo.NoticeBean;
 
 public class NoticeWriteProService {
 
-	public boolean registArticle(NoticeBean noticeBean) throws Exception {
+	public boolean registArticle(NoticeBean noticeBean) throws Exception{
 		boolean isWriteSuccess = false;
-		Connection conn = null;
-		try {
-			conn = getConnection();
-			NoticeDAO noticeDAO = NoticeDAO.getInstance();
-			noticeDAO.setConnection(conn);
-			int insertCount = noticeDAO.insertArticle(noticeBean);
-
-			if (insertCount > 0) {
-				commit(conn);
-				isWriteSuccess = true;
-			} else {
-				rollback(conn);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			close(conn);
+		Connection conn = getConnection();
+		NoticeDAO noticeDAO = NoticeDAO.getInstance();
+		noticeDAO.setConnection(conn);
+		int insertCount = noticeDAO.insertArticle(noticeBean);
+		
+		if(insertCount > 0) {
+			commit(conn);
+			isWriteSuccess = true;
+		} else {
+			rollback(conn);
+			
 		}
+		close(conn);
 		return isWriteSuccess;
 	}
-
+	
 }

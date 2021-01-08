@@ -111,13 +111,14 @@ int cnt = 0;
 				</ul>
 			</div>
 		</div>
+		<!-- 2020 12 23 haesu -->
 		<div>
 			<button class="navbar-toggler" type="button" data-toggle="collapse"
 				data-target="#infoDropdown" aria-controls="navbarNavDropdown"
 				aria-expanded="true" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
-			<div class="collapse navbar-collapse dropdown-menu-end"
+			<div class="collapse navbar-collapse dropdown-menu-end" 
 				id="infoDropdown">
 				<ul class="navbar-nav">
 					<li class="nav-item"><a class="nav-link"
@@ -127,47 +128,33 @@ int cnt = 0;
 						id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
 						aria-haspopup="true" aria-expanded="false"><i
 							class="fas fa-business-time"></i></a>
+							
+							<!-- 2021 01 06 gang -->
+							
 						<div class="dropdown-menu dropdown-menu-right today__Range"
 							aria-labelledby="navbarDropdownMenuLink">
 							<h2>최근 본 상품</h2>
 							<div class="today__Range-margin">
 								<div class="today__Range-width">
+								<div class = "today__Range-div">
+									<%for(int i = 0; i <8 ; i++) {%>
 									<div class="todayImagethumb">
-										<img src="img/gift.svg" alt="..." class="todayImageSize">
+										<img src="img/todayIMG/gift.svg" alt="..." class="todayImageSize">
 									</div>
-									<div class="todayImagethumb">
-										<img src="img/gift.svg" alt="..." class="todayImageSize">
+									<%} %>
 									</div>
-
-									<div class="todayImagethumb">
-										<img src="img/gift.svg" alt="..." class="todayImageSize">
-									</div>
-
-									<div class="todayImagethumb">
-										<img src="img/gift.svg" alt="..." class="todayImageSize">
-									</div>
-									<div class="todayImagethumb">
-										<img src="img/gift.svg" alt="..." class="todayImageSize">
-									</div>
-
-									<div class="todayImagethumb">
-										<img src="img/gift.svg" alt="..." class="todayImageSize">
-									</div>
-									<div class="todayImagethumb">
-										<img src="img/gift.svg" alt="..." class="todayImageSize">
-									</div>
-									<div class="todayImagethumb">
-										<img src="img/gift.svg" alt="..." class="todayImageSize">
-									</div>
+									<div class = "today__LSDelete">
+										<button class = "today__LSDelete-Btn" onclick="LSDelete()">전부 삭제</button>
+								</div>
 								</div>
 							</div>
 						</div></li>
-
+						<!-- end -->
 					<li class="nav-item dropdown"><a class="nav-link" href="#"
 						id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
 						aria-haspopup="true" aria-expanded="false"><i
 							class="fas fa-user-alt"></i></a>
-						<div class="dropdown-menu dropdown-menu-right"
+						<div class="dropdown-menu  dropdown-menu-right"
 							aria-labelledby="navbarDropdownMenuLink">
 							<%
 								if (loginMember == null) {
@@ -181,12 +168,23 @@ int cnt = 0;
 							<%
 								} else {
 							%>
+
 							<button type="button"
 								class="dropdown-item btn btn-primary btn-sm btn-block"
 								onclick="location.href='logout.do'">로그아웃</button>
 							<button type="button"
 								class="dropdown-item btn btn-primary btn-sm btn-block"
 								data-toggle="modal" data-target="#profileModal">프로필 수정</button>
+							<%
+								if (loginMember.getId().equals("admin")) {
+							%>
+							<button type="button"
+								class="dropdown-item btn btn-primary btn-sm btn-block"
+								onclick="location.href='admin.do'">관리자 전용 페이지</button>
+
+							<%
+								}
+							%>
 							<%
 								}
 							%>
@@ -204,26 +202,33 @@ int cnt = 0;
 					data-ride="carousel">
 					<div class="carousel-inner w-100 ">
 						<div class="carousel-item active w-100">
-							<img src="img/come.png" class="d-block w-100" alt="..."
-								style="height: 400px">
+							<a target="_blank"
+								href="https://www.nvidia.com/ko-kr/geforce/graphics-cards/30-series/rtx-3060-ti">
+								<img src="img/mainIMG/main3060.jpg" class="d-block w-100"
+								alt="..." style="height: 400px; z-index: 2;">
+							</a>
 						</div>
 						<div class="carousel-item w-100">
-							<img src="img/norefund.png" class="d-block w-100" alt="..."
-								style="height: 400px">
+							<a href="animation.jsp"> <img src="img/mainIMG/YB.jpg"
+								class="d-block w-100" alt="..."
+								style="height: 400px; z-index: 2;"></a>
 						</div>
 						<div class="carousel-item w-100">
-							<img src="img/attack.jpg" class="d-block w-100" alt="..."
-								style="height: 400px">
+							<a target="_blank"
+								href="https://www.intel.co.kr/content/www/kr/ko/products/processors/core.html">
+								<img src="img/mainIMG/mainIntel.jpg" class="d-block w-100"
+								alt="..." style="height: 400px;">
+							</a>
 						</div>
 					</div>
-					<a class="carousel-control-prev" href="#carouselExampleControls"
-						role="button" data-slide="prev"> <span
-						class="carousel-control-prev-icon" aria-hidden="true"></span> <span
-						class="sr-only">Previous</span>
-					</a> <a class="carousel-control-next" href="#carouselExampleControls"
-						role="button" data-slide="next"> <span
-						class="carousel-control-next-icon" aria-hidden="true"></span> <span
-						class="sr-only">Next</span>
+					<a class="carousel-control-prev carousel__z-index"
+						href="#carouselExampleControls" role="button" data-slide="prev">
+						<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+						<span class="sr-only">Previous</span>
+					</a> <a class="carousel-control-next carousel__z-index"
+						href="#carouselExampleControls" role="button" data-slide="next">
+						<span class="carousel-control-next-icon" aria-hidden="true"></span>
+						<span class="sr-only">Next</span>
 					</a>
 				</div>
 			</div>
@@ -240,7 +245,7 @@ int cnt = 0;
 		<%
 			for (int i = 0; i < goodsList.size(); i++) {
 		%>
-		<div class="card goods__card-size goodsList p-2 border-0">
+		<div class="card goods__card-size goodsList p-2 border-0 m-0">
 			<div class="border">
 				<a data-toggle="modal"
 					data-target="#<%=goodsList.get(i).getModalip()%>"> <img
@@ -454,40 +459,71 @@ int cnt = 0;
 		crossorigin="anonymous"></script>
 <%		for (int i = 0; i < goodsList.size(); i++) {  %>
 		<script>
-			imgArr[<%=i %>] = "<%=goodsList.get(i).getImage()%>";	
+			imgArr[<%=i %>] = "<%=goodsList.get(i).getImage()%>";
 		</script>
 <% 		} %>	
 	<script>
-			var cnt = 0;
 			var closeCnt = 0;
+			var cnt = 0;
+			//로컬 스토리지 불러오기 코드
+			$(function () {
+				for (var j = 0; j < localStorage.length; j++) {
+					localStorage.getItem(localStorage.key(j));
+					// 여기까지
+					console.log(localStorage.getItem(localStorage.key(j)));
+					if(localStorage.getItem(localStorage.key(closeCnt)) != null){
+						$(".todayImagethumb").eq(closeCnt).empty();
+						$(".todayImagethumb").eq(closeCnt).append("<img src='./img/"+ localStorage.getItem(localStorage.key(closeCnt)) +"' alt= '...' class='todayImageSize'>");
+						$(".todayImagethumb").eq(closeCnt).append("<button type='button' class='close today__close closeBtn'><span>&times;</span></button>");
+						$(".closeBtn").unbind();
+							closeCnt++;
+							cnt++;
+					}
+			}
+		});
+			
+		
+			
+			
+			//로컬스토리지 저장 코드	-- 다음주 작업해야 함!!!!
 			$(function() {
+				console.log(cnt);
 				var todayImage = [];
 				$(".goodsList").each(function(){
-					localStorage[closeCnt] = imgArr[closeCnt];
-					todayImage[closeCnt] = imgArr[closeCnt];
-					closeCnt++;
 					$(this).click(function(){
+						//로컬스토리지 저장
+					localStorage[$(this).index()] = imgArr[$(this).index()];
+					todayImage[$(this).index()] = imgArr[$(this).index()];
 						//설정
-						$(".todayImagethumb").eq(cnt).empty();
-						$(".todayImagethumb").eq(cnt).append("<img class='todayImageSize' src='./img/" + todayImage[$(this).index()] + "'/>");
-						$(".todayImagethumb").eq(cnt++).append("<button type='button' class='close today__close closeBtn'><span>&times;</span></button>");
+						if(closeCnt != cnt){
+							$(".todayImagethumb").eq(cnt).empty();
+							$(".todayImagethumb").eq(cnt).append("<img class='todayImageSize' src='./img/" + todayImage[$(this).index()] + "'/>");
+							$(".todayImagethumb").eq(cnt).append("<button type='button' class='close today__close closeBtn'><span>&times;</span></button>");
+							closeCnt = cnt +1;
+						} else{
+							closeCnt = cnt +1;
+						}
 						$(".closeBtn").unbind();
 						$(".closeBtn").click(function(){
-							$(".today__Range-width").append("<div class='todayImagethumb'><img class='todayImageSize' src='./img/gift.svg'/></div>");
-							$(".today__Range-width").find("div").eq($(this).parent().index()).remove();
+							$(".today__Range-div").append("<div class='todayImagethumb'><img class='todayImageSize' src='./img/todayIMG/gift.svg'/></div>");
+							$(".today__Range-div").find("div").eq($(this).parent().index()).remove();
 							cnt--;
 						});
 					});
 				});
 // 				$('#today__Range-close').mouseleave(function(){
-// 					$('#today__Range-close').dropdown('hide');
-// 				});
+//					$('#today__Range-close').dropdown('hide');
+//				});
 				$('#today__Range-close').on('hide.bs.dropdown', function (e) {
 				    if (e.clickEvent) {
 				      e.preventDefault();
 				    }
 				});
+				
 			});
+			function LSDelete() {
+				localStorage.clear();
+			}
 			</script>
 </body>
 </html>

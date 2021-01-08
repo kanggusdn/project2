@@ -118,7 +118,7 @@ int cnt = 0;
 				aria-expanded="true" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
-			<div class="collapse navbar-collapse dropdown-menu-end"
+			<div class="collapse navbar-collapse dropdown-menu-end" 
 				id="infoDropdown">
 				<ul class="navbar-nav">
 					<li class="nav-item"><a class="nav-link"
@@ -128,42 +128,28 @@ int cnt = 0;
 						id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
 						aria-haspopup="true" aria-expanded="false"><i
 							class="fas fa-business-time"></i></a>
+							
+							<!-- 2021 01 06 gang -->
+							
 						<div class="dropdown-menu dropdown-menu-right today__Range"
 							aria-labelledby="navbarDropdownMenuLink">
 							<h2>최근 본 상품</h2>
 							<div class="today__Range-margin">
 								<div class="today__Range-width">
+								<div class = "today__Range-div">
+									<%for(int i = 0; i <8 ; i++) {%>
 									<div class="todayImagethumb">
-										<img src="img/gift.svg" alt="..." class="todayImageSize">
+										<img src="img/todayIMG/gift.svg" alt="..." class="todayImageSize">
 									</div>
-									<div class="todayImagethumb">
-										<img src="img/gift.svg" alt="..." class="todayImageSize">
+									<%} %>
 									</div>
-
-									<div class="todayImagethumb">
-										<img src="img/gift.svg" alt="..." class="todayImageSize">
-									</div>
-
-									<div class="todayImagethumb">
-										<img src="img/gift.svg" alt="..." class="todayImageSize">
-									</div>
-									<div class="todayImagethumb">
-										<img src="img/gift.svg" alt="..." class="todayImageSize">
-									</div>
-
-									<div class="todayImagethumb">
-										<img src="img/gift.svg" alt="..." class="todayImageSize">
-									</div>
-									<div class="todayImagethumb">
-										<img src="img/gift.svg" alt="..." class="todayImageSize">
-									</div>
-									<div class="todayImagethumb">
-										<img src="img/gift.svg" alt="..." class="todayImageSize">
-									</div>
+									<div class = "today__LSDelete">
+										<button class = "today__LSDelete-Btn" onclick="LSDelete()">전부 삭제</button>
+								</div>
 								</div>
 							</div>
 						</div></li>
-
+						<!-- end -->
 					<li class="nav-item dropdown"><a class="nav-link" href="#"
 						id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
 						aria-haspopup="true" aria-expanded="false"><i
@@ -207,7 +193,6 @@ int cnt = 0;
 				</ul>
 			</div>
 		</div>
-		<!-- end -->
 	</nav>
 
 	<div class="container">
@@ -261,7 +246,7 @@ int cnt = 0;
 		<%
 			for (int i = 0; i < comuList.size(); i++) {
 		%>
-		<div class="card goods__card-size comuList p-2 border-0">
+		<div class="card goods__card-size comuList p-2 border-0 m-0">
 			<div class="border">
 				<a data-toggle="modal"
 					data-target="#<%=comuList.get(i).getModalip()%>"> <img
@@ -546,18 +531,17 @@ int cnt = 0;
 			$(function() {
 				var todayImage = [];
 				$(".comuList").each(function(){
-					localStorage[closeCnt] = imgArr[closeCnt];
-					todayImage[closeCnt] = imgArr[closeCnt];
-					closeCnt++;
 					$(this).click(function(){
+					localStorage[$(this).index()] = imgArr[$(this).index()];
+					todayImage[$(this).index()] = imgArr[$(this).index()];
 						//설정
 						$(".todayImagethumb").eq(cnt).empty();
 						$(".todayImagethumb").eq(cnt).append("<img class='todayImageSize' src='./img/" + todayImage[$(this).index()] + "'/>");
 						$(".todayImagethumb").eq(cnt++).append("<button type='button' class='close today__close closeBtn'><span>&times;</span></button>");
 						$(".closeBtn").unbind();
 						$(".closeBtn").click(function(){
-							$(".today__Range-width").append("<div class='todayImagethumb'><img class='todayImageSize' src='./img/gift.svg'/></div>");
-							$(".today__Range-width").find("div").eq($(this).parent().index()).remove();
+							$(".today__Range-div").append("<div class='todayImagethumb'><img class='todayImageSize' src='./img/todayIMG/gift.svg'/></div>");
+							$(".today__Range-div").find("div").eq($(this).parent().index()).remove();
 							cnt--;
 						});
 					});
@@ -572,6 +556,9 @@ int cnt = 0;
 				});
 				
 			});
+			function LSDelete() {
+				localStorage.clear();
+			}
 			</script>
 </body>
 </html>
