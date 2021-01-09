@@ -8,6 +8,9 @@
 	Member loginMember = (Member) session.getAttribute("loginMember");
 ArrayList<Member> adminList = (ArrayList<Member>) request.getAttribute("adminList");
 %>
+<%
+	Cookie cookie = new Cookie();
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -42,7 +45,7 @@ ArrayList<Member> adminList = (ArrayList<Member>) request.getAttribute("adminLis
 				aria-expanded="true" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
-
+ 
 			<div class="collapse navbar-collapse mr-4" id="navbarNavDropdown">
 				<div class="navbar__icon d-lg-block d-none">
 					<a href="index.do"><img class="navbar__icon-image" alt="-"
