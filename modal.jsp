@@ -10,6 +10,7 @@ ArrayList<Member> adminList = (ArrayList<Member>) request.getAttribute("adminLis
 %>
 <%
 	Cookie cookie = new Cookie();
+	cookie[] = {1,2,3,4,5};
 %>
 <!DOCTYPE html>
 <html>
