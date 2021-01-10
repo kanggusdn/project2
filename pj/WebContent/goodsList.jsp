@@ -485,7 +485,7 @@ int cnt = 0;
 		
 			
 			
-			//로컬스토리지 저장 코드	-- 다음주 작업해야 함!!!!
+			//로컬스토리지 저장
 			$(function() {
 				console.log(cnt);
 				var todayImage = [];
