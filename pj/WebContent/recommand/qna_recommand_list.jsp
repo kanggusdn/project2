@@ -138,8 +138,8 @@ ArrayList<Goods> todayImageList = (ArrayList<Goods>) request.getAttribute("today
 						id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
 						aria-haspopup="true" aria-expanded="false"><i
 							class="fas fa-business-time"></i></a>
-							
-							<!-- 2021 01 06 gang -->
+					
+						<!-- 2021 01 06 gang -->
 							
 						<div class="dropdown-menu dropdown-menu-right today__Range"
 							aria-labelledby="navbarDropdownMenuLink">
@@ -154,10 +154,14 @@ ArrayList<Goods> todayImageList = (ArrayList<Goods>) request.getAttribute("today
 									</div>
 									<%} %>
 									</div>
+									<div class = "today__LSDelete">
+										<button class = "today__LSDelete-Btn" onclick="LSDelete()">전부 삭제</button>
+								</div>
 								</div>
 							</div>
-						</div></li>
-
+						</div>	
+					</li>
+					
 					<li class="nav-item dropdown"><a class="nav-link" href="#"
 						id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
 						aria-haspopup="true" aria-expanded="false"><i
@@ -551,8 +555,13 @@ ArrayList<Goods> todayImageList = (ArrayList<Goods>) request.getAttribute("today
 				    }
 				});
 			}
-			
 	});
+	function LSDelete() {
+		localStorage.clear();
+		$(".today__Range-div").empty();
+		for(var i=0; i<8; i++)
+		$(".today__Range-div").append("<div class='todayImagethumb'><img class='todayImageSize' src='./img/todayIMG/gift.svg'/></div>");
+	}
 	</script>
 </body>
 </html>

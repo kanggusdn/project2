@@ -39,8 +39,8 @@ int cnt = 0;
 	<nav
 		class="navbar navbar-expand-lg bg-light fixed-top navbar-light justify-content-between"
 		id="header">
-		<div>
-			<button class="navbar-toggler" type="button" data-toggle="collapse"
+		<div class = "text-left">
+			<button class="navbar-toggler" type="button" data-toggle="collapse" id = "navMainBtn"
 				data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
 				aria-expanded="true" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
@@ -113,7 +113,7 @@ int cnt = 0;
 		</div>
 		<!-- 2020 12 23 haesu -->
 		<div>
-			<button class="navbar-toggler" type="button" data-toggle="collapse"
+			<button class="navbar-toggler" type="button" data-toggle="collapse" id = "navSideBtn"
 				data-target="#infoDropdown" aria-controls="navbarNavDropdown"
 				aria-expanded="true" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
@@ -246,7 +246,7 @@ int cnt = 0;
 		<%
 			for (int i = 0; i < pcList.size(); i++) {
 		%>
-		<div class="card goods__card-size pcList p-2 border-0 m-0">
+		<div class="card goods__card-size pcList p-2 border-0">
 			<div class="border">
 				<a data-toggle="modal"
 					data-target="#<%=pcList.get(i).getModalip()%>"> <img
@@ -520,44 +520,62 @@ int cnt = 0;
 	<script src="js/addr.js"></script>
 	<script src="https://kit.fontawesome.com/6478f529f2.js"
 		crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
 <%		for (int i = 0; i < pcList.size(); i++) {  %>
 		<script>
 			imgArr[<%=i %>] = "<%=pcList.get(i).getImage()%>";	
 		</script>
 <% 		} %>
+		
 	<script>
 			var cnt = 0;
 			var closeCnt = 0;
+			for (var cnt = 0; cnt < localStorage.length; cnt++) {
+				localStorage.getItem(localStorage.key(cnt));
+				$(".todayImagethumb").eq(cnt).empty();
+				$(".todayImagethumb").eq(cnt).append("<img src='./img/"+ localStorage.getItem(localStorage.key(cnt)) +"' alt= '...' class='todayImageSize'>");
+				$(".todayImagethumb").eq(cnt).append("<button type='button' class='close today__close closeBtn'><span>&times;</span></button>");
+				
+			}
 			$(function() {
+					$.cookie("cnt", 0);
 				var todayImage = [];
+				var temp = $.cookie("cnt");
 				$(".pcList").each(function(){
 					$(this).click(function(){
-					localStorage[$(this).index()] = imgArr[$(this).index()];
-					todayImage[$(this).index()] = imgArr[$(this).index()];
+						console.log($.cookie("cnt"));
+						localStorage[$(this).index()] = imgArr[$(this).index()];
+						todayImage[$(this).index()] = imgArr[$(this).index()];
 						//설정
 						$(".todayImagethumb").eq(cnt).empty();
 						$(".todayImagethumb").eq(cnt).append("<img class='todayImageSize' src='./img/" + todayImage[$(this).index()] + "'/>");
 						$(".todayImagethumb").eq(cnt++).append("<button type='button' class='close today__close closeBtn'><span>&times;</span></button>");
+							$.cookie("cnt", ++temp);
 						$(".closeBtn").unbind();
+						});
+					});
 						$(".closeBtn").click(function(){
 							$(".today__Range-div").append("<div class='todayImagethumb'><img class='todayImageSize' src='./img/todayIMG/gift.svg'/></div>");
 							$(".today__Range-div").find("div").eq($(this).parent().index()).remove();
 							cnt--;
-						});
-					});
+							$.cookie("cnt", --temp);
+				});
+				
+				$('#today__Range-close').on('hide.bs.dropdown', function (e) {
+				    if (e.clickEvent) {
+				      e.preventDefault();
+				    }
 				});
 // 				$('#today__Range-close').mouseleave(function(){
 //					$('#today__Range-close').dropdown('hide');
 //				});
- 				$('#today__Range-close').on('hide.bs.dropdown', function (e) {
-			   		if (e.clickEvent) {
-				      e.preventDefault();
-				    }
- 				});
 				
 			});
 			function LSDelete() {
 				localStorage.clear();
+				$(".today__Range-div").empty();
+				for(var i=0; i<8; i++)
+				$(".today__Range-div").append("<div class='todayImagethumb'><img class='todayImageSize' src='./img/todayIMG/gift.svg'/></div>");
 			}
 			</script>
 </body>

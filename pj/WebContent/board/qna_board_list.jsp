@@ -153,6 +153,9 @@ ArrayList<Goods> todayImageList = (ArrayList<Goods>) request.getAttribute("today
 									</div>
 									<%} %>
 									</div>
+									<div class = "today__LSDelete">
+										<button class = "today__LSDelete-Btn" onclick="LSDelete()">전부 삭제</button>
+								</div>
 								</div>
 							</div>
 						</div></li>
@@ -548,8 +551,13 @@ ArrayList<Goods> todayImageList = (ArrayList<Goods>) request.getAttribute("today
 				    }
 				});
 			}
-			
 	});
+	function LSDelete() {
+		localStorage.clear();
+		$(".today__Range-div").empty();
+		for(var i=0; i<8; i++)
+		$(".today__Range-div").append("<div class='todayImagethumb'><img class='todayImageSize' src='./img/todayIMG/gift.svg'/></div>");
+	}
 	</script>
 </body>
 </html>

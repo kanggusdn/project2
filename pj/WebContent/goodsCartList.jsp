@@ -41,8 +41,8 @@ if (request.getAttribute("totalMoney") != null)
 	<nav
 		class="navbar navbar-expand-lg bg-light fixed-top navbar-light justify-content-between"
 		id="header">
-		<div>
-			<button class="navbar-toggler" type="button" data-toggle="collapse"
+		<div class = "text-left">
+			<button class="navbar-toggler" type="button" data-toggle="collapse" id = "navMainBtn"
 				data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
 				aria-expanded="true" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
@@ -115,7 +115,7 @@ if (request.getAttribute("totalMoney") != null)
 		</div>
 		<!-- 2020 12 23 haesu -->
 		<div>
-			<button class="navbar-toggler" type="button" data-toggle="collapse"
+			<button class="navbar-toggler" type="button" data-toggle="collapse" id = "navSideBtn"
 				data-target="#infoDropdown" aria-controls="navbarNavDropdown"
 				aria-expanded="true" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
@@ -146,6 +146,9 @@ if (request.getAttribute("totalMoney") != null)
 									</div>
 									<%} %>
 									</div>
+									<div class = "today__LSDelete">
+										<button class = "today__LSDelete-Btn" onclick="LSDelete()">전부 삭제</button>
+								</div>
 								</div>
 							</div>
 						</div></li>
@@ -472,7 +475,7 @@ if (request.getAttribute("totalMoney") != null)
 	<script src="https://kit.fontawesome.com/6478f529f2.js"
 		crossorigin="anonymous"></script>
 	<script src="js/Cart.js"></script>
-	<script type="text/javascript">
+<script type="text/javascript">
 	var localIMG = new Array();
 	var cnt = 0;
 	var closeCnt = 0;
@@ -508,6 +511,12 @@ if (request.getAttribute("totalMoney") != null)
 				});
 			}
 	});
+	function LSDelete() {
+		localStorage.clear();
+		$(".today__Range-div").empty();
+		for(var i=0; i<8; i++)
+		$(".today__Range-div").append("<div class='todayImagethumb'><img class='todayImageSize' src='./img/todayIMG/gift.svg'/></div>");
+	}
 	</script>
 </body>
 </html>

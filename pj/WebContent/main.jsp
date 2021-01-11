@@ -50,8 +50,8 @@ ArrayList<Goods> todayImageList = (ArrayList<Goods>) request.getAttribute("today
 	<nav
 		class="navbar navbar-expand-lg bg-light fixed-top navbar-light justify-content-between"
 		id="header">
-		<div>
-			<button class="navbar-toggler" type="button" data-toggle="collapse"
+		<div class = "text-left">
+			<button class="navbar-toggler" type="button" data-toggle="collapse" id = "navMainBtn"
 				data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
 				aria-expanded="true" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
@@ -124,7 +124,7 @@ ArrayList<Goods> todayImageList = (ArrayList<Goods>) request.getAttribute("today
 		</div>
 		<!-- 2020 12 23 haesu -->
 		<div>
-			<button class="navbar-toggler" type="button" data-toggle="collapse"
+			<button class="navbar-toggler" type="button" data-toggle="collapse" id = "navSideBtn"
 				data-target="#infoDropdown" aria-controls="navbarNavDropdown"
 				aria-expanded="true" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
@@ -972,6 +972,8 @@ ArrayList<Goods> todayImageList = (ArrayList<Goods>) request.getAttribute("today
 	</div>
 	<!-- Optional JavaScript -->
 	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+
 	<script src="js/header.js"></script>
 	<script src="js/main.js"></script>
 	<script
@@ -985,36 +987,42 @@ ArrayList<Goods> todayImageList = (ArrayList<Goods>) request.getAttribute("today
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js"></script>
 	<script src="https://kit.fontawesome.com/6478f529f2.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
 	<script type="text/javascript">
 	var localIMG = new Array();
 	var cnt = 0;
+	cnt = $.cookie("cnt");
 	var closeCnt = 0;
+	var temp = $.cookie("cnt");
 	$(function() {
 		//로컬스토리지 불러오기
 		for (var i = 0; i < localStorage.length; i++) {
-			localStorage.getItem(localStorage.key(i));
+			localStorage.getItem(localStorage.key($.cookie("cnt")));
 			// 여기까지
 			console.log(localStorage.getItem(localStorage.key(i)));
 			
-			if(localStorage.getItem(localStorage.key(closeCnt)) != null){
-				$(".todayImagethumb").eq(closeCnt).empty();
-				$(".todayImagethumb").eq(closeCnt).append("<img src='./img/"+ localStorage.getItem(localStorage.key(closeCnt)) +"' alt= '...' class='todayImageSize'>");
-				$(".todayImagethumb").eq(closeCnt).append("<button type='button' class='close today__close closeBtn'><span>&times;</span></button>");
+				$(".todayImagethumb").eq(i).empty();
+				$(".todayImagethumb").eq(i).append("<img class='todayImageSize' src='./img/" + localStorage.getItem(localStorage.key(i)) + "'/>");
+				$(".todayImagethumb").eq(i).append("<button type='button' class='close today__close closeBtn'><span>&times;</span></button>");
 				$(".closeBtn").unbind();
-				closeCnt++;
-		}
 				$(".closeBtn").click(function(){
 					$(".today__Range-div").append("<div class='todayImagethumb'><img class='todayImageSize' src='./img/todayIMG/gift.svg'/></div>");
 					$(".today__Range-div").find("div").eq($(this).parent().index()).remove();
-				});
-				$('#today__Range-close').on('hide.bs.dropdown', function (e) {
-				    if (e.clickEvent) {
-				      e.preventDefault();
-				    }
+					$.cookie("cnt", $.cookie("cnt")-1);
 				});
 			}
-			
+		$('#today__Range-close').on('hide.bs.dropdown', function (e) {
+		    if (e.clickEvent) {
+		      e.preventDefault();
+		    }
+		});
 	});
+	function LSDelete() {
+		localStorage.clear();
+		$(".today__Range-div").empty();
+		for(var i=0; i<8; i++)
+		$(".today__Range-div").append("<div class='todayImagethumb'><img class='todayImageSize' src='./img/todayIMG/gift.svg'/></div>");
+	}
 	</script>
 </body>
 </html>

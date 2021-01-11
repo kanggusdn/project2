@@ -36,8 +36,8 @@ ArrayList<Member> adminList = (ArrayList<Member>) request.getAttribute("adminLis
 	<nav
 		class="navbar navbar-expand-lg bg-light fixed-top navbar-light justify-content-between"
 		id="header">
-		<div class= "text-left">
-			<button class="navbar-toggler" id = "navMainBtn" type="button" data-toggle="collapse"
+		<div class = "text-left">
+			<button class="navbar-toggler" type="button" data-toggle="collapse" id = "navMainBtn"
 				data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
 				aria-expanded="true" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
@@ -110,12 +110,13 @@ ArrayList<Member> adminList = (ArrayList<Member>) request.getAttribute("adminLis
 		</div>
 		<!-- 2020 12 23 haesu -->
 		<div>
-			<button class="navbar-toggler" id = "navSideBtn"type="button" data-toggle="collapse"
+			<button class="navbar-toggler" type="button" data-toggle="collapse" id = "navSideBtn"
 				data-target="#infoDropdown" aria-controls="navbarNavDropdown"
 				aria-expanded="true" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
-			<div class="collapse navbar-collapse" id="infoDropdown">
+			<div class="collapse navbar-collapse dropdown-menu-end" 
+				id="infoDropdown">
 				<ul class="navbar-nav">
 					<li class="nav-item"><a class="nav-link"
 						href="goodsCartList.do"><i class="fas fa-cart-arrow-down"></i></a></li>
@@ -140,10 +141,13 @@ ArrayList<Member> adminList = (ArrayList<Member>) request.getAttribute("adminLis
 									</div>
 									<%} %>
 									</div>
+									<div class = "today__LSDelete">
+										<button class = "today__LSDelete-Btn" onclick="LSDelete()">전부 삭제</button>
+								</div>
 								</div>
 							</div>
 						</div></li>
-
+						<!-- end -->
 					<li class="nav-item dropdown"><a class="nav-link" href="#"
 						id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
 						aria-haspopup="true" aria-expanded="false"><i
@@ -486,7 +490,7 @@ ArrayList<Member> adminList = (ArrayList<Member>) request.getAttribute("adminLis
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js"></script>
 	<script src="https://kit.fontawesome.com/6478f529f2.js"></script>
-		<script type="text/javascript">
+	<script type="text/javascript">
 	var localIMG = new Array();
 	var cnt = 0;
 	var closeCnt = 0;
@@ -511,8 +515,13 @@ ArrayList<Member> adminList = (ArrayList<Member>) request.getAttribute("adminLis
 				    }
 				});
 			}
-			
 	});
+	function LSDelete() {
+		localStorage.clear();
+		$(".today__Range-div").empty();
+		for(var i=0; i<8; i++)
+		$(".today__Range-div").append("<div class='todayImagethumb'><img class='todayImageSize' src='./img/todayIMG/gift.svg'/></div>");
+	}
 	</script>
 </body>
 </html>

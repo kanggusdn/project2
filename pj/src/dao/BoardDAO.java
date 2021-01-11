@@ -225,7 +225,9 @@ public class BoardDAO {
 		} catch (SQLException e) {
 			System.out.println("boardReply 에러: " + e);
 		} finally {
-			if(pstmt != null) close(pstmt);
+			if(pstmt != null) 
+				close(rs);
+				close(pstmt);
 		}
 		
 		return insertCount;
@@ -249,7 +251,9 @@ public class BoardDAO {
 		} catch (SQLException e) {
 			System.out.println("isBoardWriter 에러: " + e);
 		} finally {
-			if(pstmt != null) close(pstmt);
+			if(pstmt != null) 
+				close(rs);
+				close(pstmt);
 		}
 		
 		return isWriter;
@@ -287,7 +291,8 @@ public class BoardDAO {
 		} catch (SQLException e) {
 			System.out.println("boardDelete 에러: " + e);
 		} finally {
-			if(pstmt != null) close(pstmt);
+			if(pstmt != null) 
+				close(pstmt);
 		}
 		
 		return deleteCount;
