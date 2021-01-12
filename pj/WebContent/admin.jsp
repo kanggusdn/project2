@@ -109,7 +109,7 @@ ArrayList<Member> adminList = (ArrayList<Member>) request.getAttribute("adminLis
 			</div>
 		</div>
 		<!-- 2020 12 23 haesu -->
-		<div>
+		<div class= "text-right">
 			<button class="navbar-toggler" type="button" data-toggle="collapse" id = "navSideBtn"
 				data-target="#infoDropdown" aria-controls="navbarNavDropdown"
 				aria-expanded="true" aria-label="Toggle navigation">
@@ -142,7 +142,7 @@ ArrayList<Member> adminList = (ArrayList<Member>) request.getAttribute("adminLis
 									<%} %>
 									</div>
 									<div class = "today__LSDelete">
-										<button class = "today__LSDelete-Btn" onclick="LSDelete()">전부 삭제</button>
+										<button class = "btn btn-danger today__LSDelete-Btn" onclick="LSDelete()">전부 삭제</button>
 								</div>
 								</div>
 							</div>

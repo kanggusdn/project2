@@ -11,19 +11,27 @@ public class NoticeWriteProService {
 
 	public boolean registArticle(NoticeBean noticeBean) throws Exception{
 		boolean isWriteSuccess = false;
-		Connection conn = getConnection();
-		NoticeDAO noticeDAO = NoticeDAO.getInstance();
-		noticeDAO.setConnection(conn);
-		int insertCount = noticeDAO.insertArticle(noticeBean);
-		
-		if(insertCount > 0) {
-			commit(conn);
-			isWriteSuccess = true;
-		} else {
-			rollback(conn);
+		Connection conn = null;
+		try {
+			conn = getConnection();
+			NoticeDAO noticeDAO = NoticeDAO.getInstance();
+			noticeDAO.setConnection(conn);
+			int insertCount = noticeDAO.insertArticle(noticeBean);
 			
+			if(insertCount > 0) {
+				commit(conn);
+				isWriteSuccess = true;
+			} else {
+				rollback(conn);
+				
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}finally {
+			close(conn);
 		}
-		close(conn);
+		
+		
 		return isWriteSuccess;
 	}
 	

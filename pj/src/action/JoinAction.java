@@ -52,6 +52,7 @@ public class JoinAction implements Action {
 			out.println("alert('회원가입 실패');");
 			out.println("history.back();");
 			out.println("</script>");
+			out.close();
 		}
 		return forward;
 	}

@@ -226,6 +226,7 @@ public class NoticeDAO {
 			System.out.println("noticeReply 에러: " + e);
 		} finally {
 			if(pstmt != null) close(pstmt);
+			if(rs != null) close(rs);
 		}
 		
 		return insertCount;
@@ -250,6 +251,7 @@ public class NoticeDAO {
 			System.out.println("isnoticeWriter 에러: " + e);
 		} finally {
 			if(pstmt != null) close(pstmt);
+			if(rs != null) close(rs);
 		}
 		
 		return isWriter;

@@ -226,6 +226,8 @@ public class RecommandDAO {
 			System.out.println("recommandReply 에러: " + e);
 		} finally {
 			if(pstmt != null) close(pstmt);
+			if(rs != null) close(rs);
+			
 		}
 		
 		return insertCount;
@@ -250,6 +252,7 @@ public class RecommandDAO {
 			System.out.println("isrecommandWriter 에러: " + e);
 		} finally {
 			if(pstmt != null) close(pstmt);
+			if(rs != null) close(rs);
 		}
 		
 		return isWriter;

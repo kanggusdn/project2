@@ -112,7 +112,7 @@ int cnt = 0;
 			</div>
 		</div>
 		<!-- 2020 12 23 haesu -->
-		<div>
+		<div class = "text-right">
 			<button class="navbar-toggler" type="button" data-toggle="collapse" id = "navSideBtn"
 				data-target="#infoDropdown" aria-controls="navbarNavDropdown"
 				aria-expanded="true" aria-label="Toggle navigation">
@@ -144,7 +144,7 @@ int cnt = 0;
 									<%} %>
 									</div>
 									<div class = "today__LSDelete">
-										<button class = "today__LSDelete-Btn" onclick="LSDelete()">전부 삭제</button>
+										<button class = "btn btn-danger today__LSDelete-Btn" onclick="LSDelete()">전부 삭제</button>
 								</div>
 								</div>
 							</div>
@@ -241,7 +241,7 @@ int cnt = 0;
 		<script>
 		var imgArr = new Array();
 		</script>
-		<div class="row row-cols-3">
+		<div class="row">
 		<%
 			for (int i = 0; i < goodsList.size(); i++) {
 		%>

@@ -29,3 +29,14 @@
 	top: -103px;
 	right: 0;
 }
+
+@media screen and (max-width:992px) {
+	.today__Range{
+		width: 100%;
+	}
+	.todayImagethumb {
+		width: 80px;
+		height: 50px;
+}
+	
+}

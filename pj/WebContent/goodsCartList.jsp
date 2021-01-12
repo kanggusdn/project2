@@ -114,7 +114,7 @@ if (request.getAttribute("totalMoney") != null)
 			</div>
 		</div>
 		<!-- 2020 12 23 haesu -->
-		<div>
+		<div class = "text-right">
 			<button class="navbar-toggler" type="button" data-toggle="collapse" id = "navSideBtn"
 				data-target="#infoDropdown" aria-controls="navbarNavDropdown"
 				aria-expanded="true" aria-label="Toggle navigation">
@@ -138,17 +138,17 @@ if (request.getAttribute("totalMoney") != null)
 							<h2>최근 본 상품</h2>
 							<div class="today__Range-margin">
 								<div class="today__Range-width">
-								<div class= "today__Range-div">
-									<%for(int i = 0; i <8 ; i++) {%>
-									
-									<div class="todayImagethumb">
-										<img src="img/todayIMG/gift.svg" alt="..." class="todayImageSize">
+									<div class= "today__Range-div">
+										<%for(int i = 0; i <8 ; i++) {%>
+										
+										<div class="todayImagethumb">
+											<img src="img/todayIMG/gift.svg" alt="..." class="todayImageSize">
+										</div>
+										<%} %>
 									</div>
-									<%} %>
+									<div class = "today__LSDelete mx-auto">
+										<button class = "btn btn-danger today__LSDelete-Btn" onclick="LSDelete()">전부 삭제</button>
 									</div>
-									<div class = "today__LSDelete">
-										<button class = "today__LSDelete-Btn" onclick="LSDelete()">전부 삭제</button>
-								</div>
 								</div>
 							</div>
 						</div></li>
@@ -201,7 +201,7 @@ if (request.getAttribute("totalMoney") != null)
 		<div class="startLine-view text-center">
 			<p class="startLine__text">장바구니</p>
 		</div>
-		<div class="row row-cols-3">
+		<div class="row">
 			<%
 				if (cartList != null && cartList.size() > 0) {
 				for (int i = 0; i < cartList.size(); i++) {
@@ -252,15 +252,15 @@ if (request.getAttribute("totalMoney") != null)
 
 	<footer class="text-center footer__color text-white">
 		<div class="footer-above">
-			<div class="pt-4">
+			<div class="container pt-4">
 				<div class="row">
-					<div class="footer-col col-4">
+					<div class="footer-col col-md-4">
 						<h3 style="color: white;">위치</h3>
 						<p>
 							영남기술교육원<br />대구광역시 달서구
 						</p>
 					</div>
-					<div class="footer-col col-4">
+					<div class="footer-col col-md-4">
 						<h3 style="color: white;">소셜 미디어</h3>
 						<a href="#" class="btn btn-light m-2"><img
 							src="img/facebook.svg"></a> <a href="#"
@@ -270,7 +270,7 @@ if (request.getAttribute("totalMoney") != null)
 							src="img/twitch.svg"></a> <a href="#" class="btn btn-light m-2"><img
 							src="img/instagram.svg"></a>
 					</div>
-					<div class="footer-col col-4">
+					<div class="footer-col col-md-4">
 						<h3 style="color: white;">개발자 한마디</h3>
 						<p>언제든지 연락주세요!!</p>
 					</div>
