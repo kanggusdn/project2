@@ -204,10 +204,10 @@ ArrayList<Member> adminList = (ArrayList<Member>) request.getAttribute("adminLis
 				<th scope="col">이름</th>
 				<th scope="col">나이</th>
 				<th scope="col">성별</th>
-				<th scope="col">E-mail</th>
-				<th scope="col">주소1</th>
-				<th scope="col">주소2</th>
-				<th scope="col">주소3</th>
+				<th scope="col" class = "adminHide">E-mail</th>
+				<th scope="col" class = "adminHide">주소1</th>
+				<th scope="col" class = "adminHide">주소2</th>
+				<th scope="col" class = "adminHide">주소3</th>
 				<th scope="col">탈퇴</th>
 			</tr>
 		</thead>
@@ -228,10 +228,10 @@ ArrayList<Member> adminList = (ArrayList<Member>) request.getAttribute("adminLis
 				<td><%=adminList.get(i).getName()%></td>
 				<td><%=adminList.get(i).getAge()%></td>
 				<td><%=adminList.get(i).getGender()%></td>
-				<td><%=adminList.get(i).getEmail()%></td>
-				<td><%=adminList.get(i).getAddr1()%></td>
-				<td><%=adminList.get(i).getAddr2()%></td>
-				<td><%=adminList.get(i).getAddr3()%></td>
+				<td class = "adminHide"><%=adminList.get(i).getEmail()%></td>
+				<td class = "adminHide"><%=adminList.get(i).getAddr1()%></td>
+				<td class = "adminHide"><%=adminList.get(i).getAddr2()%></td>
+				<td class = "adminHide"><%=adminList.get(i).getAddr3()%></td>
 				<%if(adminList.get(i).getId().equals("admin")) {%>
 				<td><a class="btn btn-primary disabled" 
 					href="adminDelete.do?id=<%=adminList.get(i).getId()%>"
@@ -250,17 +250,17 @@ ArrayList<Member> adminList = (ArrayList<Member>) request.getAttribute("adminLis
 	</table>
 
 	<!-- end -->
-	<footer class="text-center text-white footer__color">
+	<footer class="text-center footer__color text-white">
 		<div class="footer-above">
 			<div class="container pt-4">
 				<div class="row">
-					<div class="footer-col col">
+					<div class="footer-col col-md-4">
 						<h3 style="color: white;">위치</h3>
 						<p>
 							영남기술교육원<br />대구광역시 달서구
 						</p>
 					</div>
-					<div class="footer-col col">
+					<div class="footer-col col-md-4">
 						<h3 style="color: white;">소셜 미디어</h3>
 						<a href="#" class="btn btn-light m-2"><img
 							src="img/facebook.svg"></a> <a href="#"
@@ -270,7 +270,7 @@ ArrayList<Member> adminList = (ArrayList<Member>) request.getAttribute("adminLis
 							src="img/twitch.svg"></a> <a href="#" class="btn btn-light m-2"><img
 							src="img/instagram.svg"></a>
 					</div>
-					<div class="footer-col col">
+					<div class="footer-col col-md-4">
 						<h3 style="color: white;">개발자 한마디</h3>
 						<p>언제든지 연락주세요!!</p>
 					</div>
@@ -494,7 +494,15 @@ ArrayList<Member> adminList = (ArrayList<Member>) request.getAttribute("adminLis
 	var localIMG = new Array();
 	var cnt = 0;
 	var closeCnt = 0;
+	var windowchange =  window.matchMedia("screen and (max-width: 992px)");
 	$(function() {
+		windowchange.addListener(function(e) {
+			if(e.matches) {
+				$(".adminHide").hide();
+		    } else {
+		    	$(".adminHide").show();
+		    }
+		});
 		for (var i = 0; i < localStorage.length; i++) {
 			localStorage.getItem(localStorage.key(i));
 			console.log(localStorage.getItem(localStorage.key(i)));
