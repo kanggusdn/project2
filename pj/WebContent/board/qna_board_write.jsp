@@ -203,10 +203,11 @@ ArrayList<Goods> todayImageList = (ArrayList<Goods>) request.getAttribute("today
 								name="board_content" placeholder="내용을 적어 주세요." cols="30" rows="10"
 								style="resize: none;" required></textarea>
 						</div>
-						<div class="form-group">
-							<label for="board_file">파일 첨부</label> <input type="file"
-								class="form-control" name="board_file" id="board_file" accept="image/*"/>
-						</div>
+						<div class="custom-file">
+								<input type="file" class="custom-file-input" id="customFile"
+									accept="image/*"> <label class="custom-file-label"
+									for="customFile">파일 첨부</label>
+							</div>
 					</div>
 					<button type="submit" class="btn btn-primary">글 등록</button>
 					<button type="reset" class="btn btn-info">다시 쓰기</button>
