@@ -14,7 +14,7 @@ ArrayList<Goods> todayImageList = (ArrayList<Goods>) request.getAttribute("today
 %>
 <!DOCTYPE html>
 <html>
-<head>
+<head> 
 <!-- Required meta tags -->
 <meta charset="utf-8" />
 <meta name="viewport"
