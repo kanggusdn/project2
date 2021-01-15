@@ -6,4 +6,5 @@
 	loginDAO.setConnection(conn);
 	boolean isId = loginDAO.checkId(request.getParameter("joinId"));
 	out.println("[" + isId + "]");
+	JdbcUtil.close(conn);
 %>
