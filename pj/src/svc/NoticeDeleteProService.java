@@ -16,11 +16,12 @@ public class NoticeDeleteProService {
 			noticeDAO.setConnection(conn);
 			isArticleWriter = noticeDAO.isArticleNoticeWriter(notice_num, pass);
 		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
+			// TODO: handle exception
+		}finally {
 			if (conn != null)
 				close(conn);
 		}
+		
 		return isArticleWriter;
 	}
 
@@ -31,15 +32,16 @@ public class NoticeDeleteProService {
 			NoticeDAO noticeDAO = NoticeDAO.getInstance();
 			noticeDAO.setConnection(conn);
 			int deleteCount = noticeDAO.deleteArticle(notice_num);
-
-			if (deleteCount > 0) {
+			
+			if(deleteCount > 0) {
 				commit(conn);
-			} else {
+			}else {
 				rollback(conn);
 			}
+			
 		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
+			// TODO: handle exception
+		}finally {
 			close(conn);
 		}
 	}

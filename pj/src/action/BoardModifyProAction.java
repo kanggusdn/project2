@@ -41,6 +41,7 @@ public class BoardModifyProAction implements Action {
 				out.println("alert('수정실패');");
 				out.println("history.back();");
 				out.println("</script>");
+				out.close();
 			} else {
 				forward = new ActionForward();
 				forward.setRedirect(true);

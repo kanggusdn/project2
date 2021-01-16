@@ -39,8 +39,8 @@ int cnt = 0;
 	<nav
 		class="navbar navbar-expand-lg bg-light fixed-top navbar-light justify-content-between"
 		id="header">
-		<div>
-			<button class="navbar-toggler" type="button" data-toggle="collapse"
+		<div class = "text-left">
+			<button class="navbar-toggler" type="button" data-toggle="collapse" id = "navMainBtn"
 				data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
 				aria-expanded="true" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
@@ -112,8 +112,8 @@ int cnt = 0;
 			</div>
 		</div>
 		<!-- 2020 12 23 haesu -->
-		<div>
-			<button class="navbar-toggler" type="button" data-toggle="collapse"
+		<div class = "text-right">
+			<button class="navbar-toggler" type="button" data-toggle="collapse" id = "navSideBtn"
 				data-target="#infoDropdown" aria-controls="navbarNavDropdown"
 				aria-expanded="true" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
@@ -128,42 +128,28 @@ int cnt = 0;
 						id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
 						aria-haspopup="true" aria-expanded="false"><i
 							class="fas fa-business-time"></i></a>
+							
+							<!-- 2021 01 06 gang -->
+							
 						<div class="dropdown-menu dropdown-menu-right today__Range"
 							aria-labelledby="navbarDropdownMenuLink">
 							<h2>최근 본 상품</h2>
 							<div class="today__Range-margin">
 								<div class="today__Range-width">
+								<div class = "today__Range-div">
+									<%for(int i = 0; i <8 ; i++) {%>
 									<div class="todayImagethumb">
-										<img src="img/gift.svg" alt="..." class="todayImageSize">
+										<img src="img/todayIMG/gift.svg" alt="..." class="todayImageSize">
 									</div>
-									<div class="todayImagethumb">
-										<img src="img/gift.svg" alt="..." class="todayImageSize">
+									<%} %>
 									</div>
-
-									<div class="todayImagethumb">
-										<img src="img/gift.svg" alt="..." class="todayImageSize">
-									</div>
-
-									<div class="todayImagethumb">
-										<img src="img/gift.svg" alt="..." class="todayImageSize">
-									</div>
-									<div class="todayImagethumb">
-										<img src="img/gift.svg" alt="..." class="todayImageSize">
-									</div>
-
-									<div class="todayImagethumb">
-										<img src="img/gift.svg" alt="..." class="todayImageSize">
-									</div>
-									<div class="todayImagethumb">
-										<img src="img/gift.svg" alt="..." class="todayImageSize">
-									</div>
-									<div class="todayImagethumb">
-										<img src="img/gift.svg" alt="..." class="todayImageSize">
-									</div>
+									<div class = "today__LSDelete">
+										<button class = "btn btn-danger today__LSDelete-Btn" onclick="LSDelete()">전부 삭제</button>
+								</div>
 								</div>
 							</div>
 						</div></li>
-
+						<!-- end -->
 					<li class="nav-item dropdown"><a class="nav-link" href="#"
 						id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
 						aria-haspopup="true" aria-expanded="false"><i
@@ -207,8 +193,8 @@ int cnt = 0;
 				</ul>
 			</div>
 		</div>
-		<!-- end -->
 	</nav>
+	
 	<div class="container">
 		<section class="container__size" id="home">
 			<div class=" w-100 ">
@@ -256,7 +242,7 @@ int cnt = 0;
 		<script>
 		var imgArr = new Array();
 		</script>
-		<div class="row row-cols-3">
+		<div class="row">
 		<%
 			for (int i = 0; i < pcList.size(); i++) {
 		%>
@@ -534,43 +520,63 @@ int cnt = 0;
 	<script src="js/addr.js"></script>
 	<script src="https://kit.fontawesome.com/6478f529f2.js"
 		crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
 <%		for (int i = 0; i < pcList.size(); i++) {  %>
 		<script>
 			imgArr[<%=i %>] = "<%=pcList.get(i).getImage()%>";	
 		</script>
 <% 		} %>
+		
 	<script>
 			var cnt = 0;
 			var closeCnt = 0;
+			for (var cnt = 0; cnt < localStorage.length; cnt++) {
+				localStorage.getItem(localStorage.key(cnt));
+				$(".todayImagethumb").eq(cnt).empty();
+				$(".todayImagethumb").eq(cnt).append("<img src='./img/"+ localStorage.getItem(localStorage.key(cnt)) +"' alt= '...' class='todayImageSize'>");
+				$(".todayImagethumb").eq(cnt).append("<button type='button' class='close today__close closeBtn'><span>&times;</span></button>");
+				
+			}
 			$(function() {
+					$.cookie("cnt", 0);
 				var todayImage = [];
+				var temp = $.cookie("cnt");
 				$(".pcList").each(function(){
-					localStorage[closeCnt] = imgArr[closeCnt];
-					todayImage[closeCnt] = imgArr[closeCnt];
-					closeCnt++;
 					$(this).click(function(){
+						console.log($.cookie("cnt"));
+						localStorage[$(this).index()] = imgArr[$(this).index()];
+						todayImage[$(this).index()] = imgArr[$(this).index()];
 						//설정
 						$(".todayImagethumb").eq(cnt).empty();
 						$(".todayImagethumb").eq(cnt).append("<img class='todayImageSize' src='./img/" + todayImage[$(this).index()] + "'/>");
 						$(".todayImagethumb").eq(cnt++).append("<button type='button' class='close today__close closeBtn'><span>&times;</span></button>");
+							$.cookie("cnt", ++temp);
 						$(".closeBtn").unbind();
-						$(".closeBtn").click(function(){
-							$(".today__Range-width").append("<div class='todayImagethumb'><img class='todayImageSize' src='./img/gift.svg'/></div>");
-							$(".today__Range-width").find("div").eq($(this).parent().index()).remove();
-							cnt--;
 						});
 					});
+						$(".closeBtn").click(function(){
+							$(".today__Range-div").append("<div class='todayImagethumb'><img class='todayImageSize' src='./img/todayIMG/gift.svg'/></div>");
+							$(".today__Range-div").find("div").eq($(this).parent().index()).remove();
+							cnt--;
+							$.cookie("cnt", --temp);
 				});
-// 				$('#today__Range-close').mouseleave(function(){
-//					$('#today__Range-close').dropdown('hide');
-//				});
+				
 				$('#today__Range-close').on('hide.bs.dropdown', function (e) {
 				    if (e.clickEvent) {
 				      e.preventDefault();
 				    }
 				});
+// 				$('#today__Range-close').mouseleave(function(){
+//					$('#today__Range-close').dropdown('hide');
+//				});
 				
 			});
+			function LSDelete() {
+				localStorage.clear();
+				$(".today__Range-div").empty();
+				for(var i=0; i<8; i++)
+				$(".today__Range-div").append("<div class='todayImagethumb'><img class='todayImageSize' src='./img/todayIMG/gift.svg'/></div>");
+			}
 			</script>
 </body>
 </html>

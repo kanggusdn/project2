@@ -8,7 +8,7 @@
 	int selectArticle = Integer.parseInt(request.getParameter("selectArticle"));
 	NoticeBean article = noticeDAO.selectArticle(selectArticle);
 	int updateReadCount = noticeDAO.addCountArticle(selectArticle);
-	JdbcUtil.close(conn);
+	JdbcUtil.close(conn); 
 	out.println("[");
 	out.println("\""+article.getNotice_name().trim()+"\"");
 	out.println(",");

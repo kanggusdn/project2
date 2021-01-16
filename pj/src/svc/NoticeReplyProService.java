@@ -5,34 +5,35 @@ import java.sql.Connection;
 import dao.NoticeDAO;
 
 import static db.JdbcUtil.*;
+
 import vo.NoticeBean;
 
-public class NoticeWriteProService {
+public class NoticeReplyProService {
 
-	public boolean registArticle(NoticeBean noticeBean) throws Exception{
-		boolean isWriteSuccess = false;
+	public boolean replyArticle(NoticeBean article) throws Exception {
+		boolean isReplySuccess = false;
+		int insertCount = 0;
 		Connection conn = null;
 		try {
 			conn = getConnection();
 			NoticeDAO noticeDAO = NoticeDAO.getInstance();
 			noticeDAO.setConnection(conn);
-			int insertCount = noticeDAO.insertArticle(noticeBean);
-			
-			if(insertCount > 0) {
+			insertCount = noticeDAO.insertReplyArticle(article);
+
+			if (insertCount > 0) {
 				commit(conn);
-				isWriteSuccess = true;
+				isReplySuccess = true;
 			} else {
 				rollback(conn);
-				
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
-		}finally {
-			close(conn);
+		} finally {
+			if (conn != null)
+				close(conn);
 		}
-		
-		
-		return isWriteSuccess;
+
+		return isReplySuccess;
 	}
-	
+
 }

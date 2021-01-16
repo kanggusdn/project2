@@ -35,6 +35,7 @@ public class LoginAction implements Action {
 			out.println("alert('로그인실패');");
 			out.println("history.back();");
 			out.println("</script>");
+			out.close();
 		}
 		return forward;
 	}

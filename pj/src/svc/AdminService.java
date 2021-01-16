@@ -21,8 +21,9 @@ public class AdminService {
 			AdminDAO adminDAO = AdminDAO.getInstance();
 			adminDAO.setConnection(conn);
 			adminList = adminDAO.selectAdminList();
+
 		} catch (Exception e) {
-			e.printStackTrace();
+			// TODO: handle exception
 		} finally {
 			if (conn != null)
 				close(conn);

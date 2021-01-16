@@ -1,12 +1,17 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="vo.Member, vo.Goods, vo.PageInfo"%>
-<%@ page import="vo.NoticeBean"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="vo.Member, vo.Goods"%>
 <%@ page import="java.util.HashMap,java.util.ArrayList"%>
-
+<%@page import="vo.PageInfo"%>
+<%@page import="vo.BoardBean"%>
+<%@page import="vo.NoticeBean"%>
+<%@ page import="java.util.*"%>
+<%@ page import="java.text.SimpleDateFormat"%>
 <%
 	Member loginMember = (Member) session.getAttribute("loginMember");
-ArrayList<Member> adminList = (ArrayList<Member>) request.getAttribute("adminList");
+ArrayList<Goods> todayImageList = (ArrayList<Goods>) request.getAttribute("todayImageList");
 %>
 <!DOCTYPE html>
 <html>
@@ -16,28 +21,28 @@ ArrayList<Member> adminList = (ArrayList<Member>) request.getAttribute("adminLis
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <!-- title image -->
-<link href="img/EzIcon.jpg" rel="icon" type="image/x-icon">
+
 <!-- reset -->
 <link rel="stylesheet"
 	href="https://meyerweb.com/eric/tools/css/reset/reset.css">
 <!-- Bootstrap CSS -->
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 <!-- text -->
 <link
 	href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
 	rel="stylesheet">
 <!-- css origin -->
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 <link rel="stylesheet" href="css/style.css" />
 <title>컴퓨터 홈 쇼핑 사이트</title>
 </head>
-<body oncontextmenu="return false" ondragstart="return false"
-	onselectstart="return false">
+<body>
+	<!-- 2020-12-02 haesu -->
 	<nav
 		class="navbar navbar-expand-lg bg-light fixed-top navbar-light justify-content-between"
 		id="header">
-		<div class = "text-left">
-			<button class="navbar-toggler" type="button" data-toggle="collapse" id = "navMainBtn"
+		<div>
+			<button class="navbar-toggler" type="button" data-toggle="collapse"
 				data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
 				aria-expanded="true" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
@@ -109,45 +114,22 @@ ArrayList<Member> adminList = (ArrayList<Member>) request.getAttribute("adminLis
 			</div>
 		</div>
 		<!-- 2020 12 23 haesu -->
-		<div class= "text-right">
-			<button class="navbar-toggler" type="button" data-toggle="collapse" id = "navSideBtn"
+		<div>
+			<button class="navbar-toggler" type="button" data-toggle="collapse"
 				data-target="#infoDropdown" aria-controls="navbarNavDropdown"
 				aria-expanded="true" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
-			<div class="collapse navbar-collapse dropdown-menu-end" 
-				id="infoDropdown">
+			<div class="collapse navbar-collapse" id="infoDropdown">
 				<ul class="navbar-nav">
 					<li class="nav-item"><a class="nav-link"
 						href="goodsCartList.do"><i class="fas fa-cart-arrow-down"></i></a></li>
 
-					<li class="nav-item dropdown" id="today__Range-close"><a class="nav-link" href="#"
+					<li class="nav-item dropdown"><a class="nav-link" href="#"
 						id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
 						aria-haspopup="true" aria-expanded="false"><i
-							class="fas fa-business-time"></i></a>
-							
-							<!-- 2021 01 06 gang -->
-							
-						<div class="dropdown-menu dropdown-menu-right today__Range"
-							aria-labelledby="navbarDropdownMenuLink">
-							<h2>최근 본 상품</h2>
-							<div class="today__Range-margin">
-								<div class="today__Range-width">
-								<div class= "today__Range-div">
-									<%for(int i = 0; i <8 ; i++) {%>
-									
-									<div class="todayImagethumb">
-										<img src="img/todayIMG/gift.svg" alt="..." class="todayImageSize">
-									</div>
-									<%} %>
-									</div>
-									<div class = "today__LSDelete">
-										<button class = "btn btn-danger today__LSDelete-Btn" onclick="LSDelete()">전부 삭제</button>
-								</div>
-								</div>
-							</div>
-						</div></li>
-						<!-- end -->
+							class="fas fa-business-time"></i></a></li>
+
 					<li class="nav-item dropdown"><a class="nav-link" href="#"
 						id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
 						aria-haspopup="true" aria-expanded="false"><i
@@ -191,66 +173,100 @@ ArrayList<Member> adminList = (ArrayList<Member>) request.getAttribute("adminLis
 				</ul>
 			</div>
 		</div>
+		<!-- end -->
 	</nav>
-
-	<!-- haesu 2020-12-29 -->
-
-	<table class="table table-hover table__location container">
-		<thead>
-			<tr>
-				<th scope="col">번호</th>
-				<th scope="col">ID</th>
-				<th scope="col">PassWord</th>
-				<th scope="col">이름</th>
-				<th scope="col">나이</th>
-				<th scope="col">성별</th>
-				<th scope="col" class = "adminHide">E-mail</th>
-				<th scope="col" class = "adminHide">주소1</th>
-				<th scope="col" class = "adminHide">주소2</th>
-				<th scope="col" class = "adminHide">주소3</th>
-				<th scope="col">탈퇴</th>
-			</tr>
-		</thead>
-		<tbody>
-			<%
-				int cnt = 1;
-			%>
-			<%
-				for (int i = 0; i < adminList.size(); i++) {
-			%>
-
-			<tr>
-				<th scope="row"><%=cnt%></th>
-				<td><%=adminList.get(i).getId()%></td>
-				<td><input disabled="disabled"
-					class="password__size form-control" type="password"
-					value="<%=adminList.get(i).getPasswd()%>"></td>
-				<td><%=adminList.get(i).getName()%></td>
-				<td><%=adminList.get(i).getAge()%></td>
-				<td><%=adminList.get(i).getGender()%></td>
-				<td class = "adminHide"><%=adminList.get(i).getEmail()%></td>
-				<td class = "adminHide"><%=adminList.get(i).getAddr1()%></td>
-				<td class = "adminHide"><%=adminList.get(i).getAddr2()%></td>
-				<td class = "adminHide"><%=adminList.get(i).getAddr3()%></td>
-				<%if(adminList.get(i).getId().equals("admin")) {%>
-				<td><a class="btn btn-primary disabled" 
-					href="adminDelete.do?id=<%=adminList.get(i).getId()%>"
-					onclick="return confirm('삭제를 진행하시겠습니까?')">탈퇴</a></td>
-				<%} else {%>
-				<td><a class="btn btn-primary"
-					href="adminDelete.do?id=<%=adminList.get(i).getId()%>"
-					onclick="return confirm('삭제를 진행하시겠습니까?')">탈퇴</a></td>
-				<%} %>
-			</tr>
-			<%
-				cnt++;
-			}
-			%>
-		</tbody>
-	</table>
-
 	<!-- end -->
-	<footer class="text-center footer__color text-white">
+	<!-- 2020/12/7 강현우 게시판 글 등록 시작 -->
+	<section id="writeForm" class="body__margin-top">
+		<div class="container" style="width: 40%">
+			<div class="text-cente">
+				<h2>ezCom 글 등록</h2>
+				</div>
+				<form action="noticeWritePro.do" method="post"
+					enctype="multipart/form-data" name="noticeform">
+					<div class="form-col">
+						<div class="form-group">
+							<label for="notice_name">글쓴이</label> <input type="text"
+								class="form-control" id="notice_name" name="notice_name"
+								required="required" />
+						</div>
+						<div class="form-group">
+							<label for="notice_pass">비밀번호</label> <input type="password"
+								class="form-control" id="notice_pass" name="notice_pass"
+								required="required" />
+						</div>
+						<div class="form-group">
+							<label for="notice_subject">제 목</label> <input type="text"
+								class="form-control" id="notice_subject" name="notice_subject"
+								required="required" />
+						</div>
+						<div class="form-group">
+							<label for="notice_content">내 용</label>
+							<textarea class="form-control is-invalid" id="validationTextarea"
+								name="notice_content" placeholder="내용을 적어 주세요."
+								style="resize: none;" required></textarea>
+						</div>
+						<div class="form-group">
+							<label for="notice_file">파일 첨부</label> <input type="file"
+								class="form-control" name="notice_file" id="notice_file" accept="image/*"/>
+						</div>
+					</div>
+					<button type="submit" class="btn btn-primary">글 등록</button>
+					<button type="reset" class="btn btn-info">다시 쓰기</button>
+					<a class="btn btn-primary"
+							href="javascript:history.go(-1)" role="button">뒤로</a>
+				</form>
+			
+		</div>
+	</section>
+	<!-- 게시판 글 등록 끝 -->
+	<!-- 2020-12-02 haesu -->
+	<div class="controller">
+		<%
+			if (loginMember == null) {
+		%>
+		<div class="controller__menu">
+			<button type="button" class="btn btn-primary btn-sm btn-block"
+				data-toggle="modal" data-target="#loginModal">로그인</button>
+		</div>
+		<!-- 회원가입 modal만들기 -->
+		<div class="controller__menu">
+			<button type="button" class="btn btn-primary btn-sm btn-block"
+				data-toggle="modal" data-target="#joinModal">회원가입</button>
+		</div>
+
+		<%
+			} else {
+		%>
+		<div class="controller__menu">
+			<h6>
+				<%=loginMember.getId()%>님 환영합니다.
+			</h6>
+		</div>
+		<div class="controller__menu">
+			<button type="button" class="btn btn-primary btn-sm btn-block"
+				onclick="location.href='logout.do'">로그아웃</button>
+		</div>
+		<div class="controller__menu">
+			<button type="button" class="btn btn-primary btn-sm btn-block"
+				data-toggle="modal" data-target="#profileModal">프로필 수정</button>
+		</div>
+		<%
+			}
+		%>
+
+		<div class="controller__menu">
+			<a class="btn btn-primary btn-sm btn-block " href="goodsListCart.do">장바구니</a>
+		</div>
+		<div class="controller__menu ">
+			<span class="text-center">최근본상품</span>
+
+			<div></div>
+
+		</div>
+	</div>
+
+	<footer class="text-center text-white footer__color">
 		<div class="footer-above">
 			<div class="container pt-4">
 				<div class="row">
@@ -283,7 +299,7 @@ ArrayList<Member> adminList = (ArrayList<Member>) request.getAttribute("adminLis
 			</div>
 		</div>
 	</footer>
-
+	</div>
 	<!-- end -->
 
 	<!-- Login Modal  2020-12-03 haesu-->
@@ -293,7 +309,7 @@ ArrayList<Member> adminList = (ArrayList<Member>) request.getAttribute("adminLis
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">로그인</h5>
+					<h5 class="modal-title" id="exampleModalLabel">회원가입</h5>
 					<button type="button" class="close" data-dismiss="modal"
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
@@ -337,29 +353,14 @@ ArrayList<Member> adminList = (ArrayList<Member>) request.getAttribute("adminLis
 				<div class="modal-body">
 					<form action="joinPro.do" method="post">
 						<div class="form-group">
-							<input type="text" class="form-control" name="id" id="joinId"
+							<input type="text" class="form-control" name="id"
 								placeholder="아이디" maxlength="20" required="required"
 								autocomplete="off" />
 						</div>
-						<div class="form-group" id="LoginCheck">
-							<span class="form-control">중복 확인을 해주세요</span>
-						</div>
 						<div class="form-group">
 							<input type="password" class="form-control" name="passwd"
-								id="pass" placeholder="비밀번호" maxlength="20" required="required"
+								placeholder="비밀번호" maxlength="20" required="required"
 								autocomplete="off" />
-						</div>
-						<div class="form-group">
-							<input type="password" class="form-control" name="passwd"
-								id="password" placeholder="비밀번호 확인" maxlength="20"
-								required="required" autocomplete="off" />
-						</div>
-						<div class="form-group">
-							<div class="form-control" id="alert-success"
-								style="color: white; background: #738ED1;">비밀번호가 일치합니다.</div>
-							<div class="form-control" id="alert-danger"
-								style="color: white; background: #FC707D;">비밀번호가 일치하지
-								않습니다.</div>
 						</div>
 						<div class="form-group">
 							<input type="text" class="form-control" name="name"
@@ -398,8 +399,7 @@ ArrayList<Member> adminList = (ArrayList<Member>) request.getAttribute("adminLis
 								placeholder="이메일" maxlength="20" required="required"
 								autocomplete="no" />
 						</div>
-						<button type="submit" class="btn btn-primary form-control"
-							id="joinbutton">가입</button>
+						<button type="submit" class="btn btn-primary form-control">가입</button>
 					</form>
 				</div>
 			</div>
@@ -437,15 +437,15 @@ ArrayList<Member> adminList = (ArrayList<Member>) request.getAttribute("adminLis
 								autocomplete="off" />
 						</div>
 						<div class="form-group">
-							<input type="text" id="sample4_postcode2" placeholder="우편번호"
+							<input type="text" id="sample4_postcode" placeholder="우편번호"
 								class="form-control" name="addr1" required="required"
 								autocomplete="off"> <input type="button"
 								onclick="sample4_execDaumPostcode()" value="우편번호 찾기"
 								class="form-control"><input type="text"
-								id="sample4_roadAddress2" placeholder="도로명주소"
+								id="sample4_roadAddress" placeholder="도로명주소"
 								class="form-control" name="addr2" required="required"
 								autocomplete="off"> <input class="form-control"
-								type="text" id="sample4_jibunAddress2" placeholder="상세주소"
+								type="text" id="sample4_detailAddress" placeholder="상세주소"
 								name="addr3" required="required" autocomplete="off">
 						</div>
 						<div class="form-group">
@@ -476,60 +476,158 @@ ArrayList<Member> adminList = (ArrayList<Member>) request.getAttribute("adminLis
 		</div>
 	</div>
 
+	<!-- 프로필 수정 end -->
+
+	<!-- 2020-12-08 haesu -->
+	<div class="modal fade" id="Snote" tabindex="-1"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog__size">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">세부정보</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div>
+						<img style="width: 890px;"
+							src="http://ai.esmplus.com/gded/i/s/20201105/14/16045528895220704521.jpg">
+					</div>
+					<div>
+						<img style="width: 890px;"
+							src="http://ai.esmplus.com/gded/i/s/20201109/14/1604900967901eb863b2.jpg">
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="LGDesk" tabindex="-1"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog__size">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">세부정보</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div>
+						<img style="width: 890px;"
+							src="http://cms.ygoon.com/editorStore/file/202011/26/14c55f83e3154dbd8063f48934bbe884.jpg">
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="LEM70t" tabindex="-1"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog__size">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">세부정보</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div>
+						<img style="width: 890px;"
+							src="http://gi.esmplus.com/hpinvent/PC/LENOVO/M70T/11EVS00B00/11EVS00B00.png">
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
 
 
+	<div class="modal fade" id="BHP190ML" tabindex="-1"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog__size">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">세부정보</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div>
+						<img style="width: 890px;"
+							src="http://www.pc4all.co.kr/imgdata3/iteminfoimage/2019/12/17/rewq4321_5.jpg">
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+
+	<div class="modal fade" id="ADPC4-21300" tabindex="-1"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog__size">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">세부정보</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div>
+						<img style="width: 890px;"
+							src="https://shopping-phinf.pstatic.net/20200609_15_27/f9668473-82e6-431e-b712-f2c29a7cedb4/%EC%88%98%EC%A0%95%EB%90%A8_DDR4_detail_890_final.jpg">
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+
+	<div class="modal fade" id="CG6" tabindex="-1"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog__size">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">세부정보</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div>
+						<img style="width: 890px;"
+							src="https://ssl.pstatic.net/imgshopping/spec/157/30/27/15730273792_0_20181018115519.jpg">
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	<!-- end -->
 	<!-- Optional JavaScript -->
 	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js"></script>
 	<script src="js/header.js"></script>
 	<script src="js/main.js"></script>
 	<script
 		src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script src="js/addr.js"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js"></script>
-	<script src="https://kit.fontawesome.com/6478f529f2.js"></script>
-	<script type="text/javascript">
-	var localIMG = new Array();
-	var cnt = 0;
-	var closeCnt = 0;
-	var windowchange =  window.matchMedia("screen and (max-width: 992px)");
-	$(function() {
-		windowchange.addListener(function(e) {
-			if(e.matches) {
-				$(".adminHide").hide();
-		    } else {
-		    	$(".adminHide").show();
-		    }
-		});
-		for (var i = 0; i < localStorage.length; i++) {
-			localStorage.getItem(localStorage.key(i));
-			console.log(localStorage.getItem(localStorage.key(i)));
-			if(localStorage.getItem(localStorage.key(closeCnt)) != null){
-				$(".todayImagethumb").eq(closeCnt).empty();
-				$(".todayImagethumb").eq(closeCnt).append("<img src='./img/"+ localStorage.getItem(localStorage.key(closeCnt)) +"' alt= '...' class='todayImageSize'>");
-				$(".todayImagethumb").eq(closeCnt).append("<button type='button' class='close today__close closeBtn'><span>&times;</span></button>");
-				$(".closeBtn").unbind();
-				closeCnt++;
-		}
-				$(".closeBtn").click(function(){
-					$(".today__Range-div").append("<div class='todayImagethumb'><img class='todayImageSize' src='./img/todayIMG/gift.svg'/></div>");
-					$(".today__Range-div").find("div").eq($(this).parent().index()).remove();
-				});
-				$('#today__Range-close').on('hide.bs.dropdown', function (e) {
-				    if (e.clickEvent) {
-				      e.preventDefault();
-				    }
-				});
-			}
-	});
-	function LSDelete() {
-		localStorage.clear();
-		$(".today__Range-div").empty();
-		for(var i=0; i<8; i++)
-		$(".today__Range-div").append("<div class='todayImagethumb'><img class='todayImageSize' src='./img/todayIMG/gift.svg'/></div>");
-	}
-	</script>
 </body>
 </html>

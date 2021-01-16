@@ -43,18 +43,18 @@ String nowPage = (String) request.getAttribute("page");
 	<nav
 		class="navbar navbar-expand-lg bg-light fixed-top navbar-light justify-content-between"
 		id="header">
-		<div>
-			<button class="navbar-toggler" type="button" data-toggle="collapse"
+		<div class= "text-left">
+			<button class="navbar-toggler" id = "navMainBtn" type="button" data-toggle="collapse"
 				data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
 				aria-expanded="true" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
-			
+
 			<div class="collapse navbar-collapse mr-4" id="navbarNavDropdown">
-			<div class="navbar__icon d-lg-block d-none">
-				<a href="index.do"><img class="navbar__icon-image" alt="-"
-					src="img/EzIcon.jpg"></a>
-			</div>
+				<div class="navbar__icon d-lg-block d-none">
+					<a href="index.do"><img class="navbar__icon-image" alt="-"
+						src="img/EzIcon.jpg"></a>
+				</div>
 				<ul class="navbar-nav">
 					<li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle" href="#"
@@ -115,27 +115,28 @@ String nowPage = (String) request.getAttribute("page");
 				</ul>
 			</div>
 		</div>
+		<!-- 2020 12 23 haesu -->
 		<div>
-			<button class="navbar-toggler" type="button" data-toggle="collapse"
+			<button class="navbar-toggler" id = "navSideBtn"type="button" data-toggle="collapse"
 				data-target="#infoDropdown" aria-controls="navbarNavDropdown"
 				aria-expanded="true" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
-			<div class="collapse navbar-collapse dropdown-menu-end" id="infoDropdown">
+			<div class="collapse navbar-collapse" id="infoDropdown">
 				<ul class="navbar-nav">
 					<li class="nav-item"><a class="nav-link"
 						href="goodsCartList.do"><i class="fas fa-cart-arrow-down"></i></a></li>
-						
+
 					<li class="nav-item dropdown"><a class="nav-link" href="#"
 						id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
 						aria-haspopup="true" aria-expanded="false"><i
 							class="fas fa-business-time"></i></a></li>
-							
+
 					<li class="nav-item dropdown"><a class="nav-link" href="#"
 						id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
 						aria-haspopup="true" aria-expanded="false"><i
 							class="fas fa-user-alt"></i></a>
-						<div class="dropdown-menu"
+						<div class="dropdown-menu  dropdown-menu-right"
 							aria-labelledby="navbarDropdownMenuLink">
 							<%
 								if (loginMember == null) {
@@ -149,12 +150,23 @@ String nowPage = (String) request.getAttribute("page");
 							<%
 								} else {
 							%>
+
 							<button type="button"
 								class="dropdown-item btn btn-primary btn-sm btn-block"
 								onclick="location.href='logout.do'">로그아웃</button>
 							<button type="button"
 								class="dropdown-item btn btn-primary btn-sm btn-block"
 								data-toggle="modal" data-target="#profileModal">프로필 수정</button>
+							<%
+								if (loginMember.getId().equals("admin")) {
+							%>
+							<button type="button"
+								class="dropdown-item btn btn-primary btn-sm btn-block"
+								onclick="location.href='admin.do'">관리자 전용 페이지</button>
+
+							<%
+								}
+							%>
 							<%
 								}
 							%>
@@ -164,7 +176,6 @@ String nowPage = (String) request.getAttribute("page");
 			</div>
 		</div>
 	</nav>
-	<!-- end -->
 	<!-- 2020/12/8 글 삭제 시작 -->
 	<section id="passForm" class= "bbs__margin-top">
 		<div class="container pt-4 bbs__body">
@@ -360,15 +371,15 @@ String nowPage = (String) request.getAttribute("page");
 								autocomplete="off" />
 						</div>
 						<div class="form-group">
-							<input type="text" id="sample4_postcode" placeholder="우편번호"
+							<input type="text" id="sample4_postcode2" placeholder="우편번호"
 								class="form-control" name="addr1" required="required"
 								autocomplete="off"> <input type="button"
 								onclick="sample4_execDaumPostcode()" value="우편번호 찾기"
 								class="form-control"><input type="text"
-								id="sample4_roadAddress" placeholder="도로명주소"
+								id="sample4_roadAddress2" placeholder="도로명주소"
 								class="form-control" name="addr2" required="required"
 								autocomplete="off"> <input class="form-control"
-								type="text" id="sample4_detailAddress" placeholder="상세주소"
+								type="text" id="sample4_jibunAddress2" placeholder="상세주소"
 								name="addr3" required="required" autocomplete="off">
 						</div>
 						<div class="form-group">
@@ -401,145 +412,7 @@ String nowPage = (String) request.getAttribute("page");
 
 	<!-- 프로필 수정 end -->
 
-	<!-- 2020-12-08 haesu -->
-	<div class="modal fade" id="Snote" tabindex="-1"
-		aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog modal-dialog__size">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">세부정보</h5>
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body">
-					<div>
-						<img style="width: 890px;"
-							src="http://ai.esmplus.com/gded/i/s/20201105/14/16045528895220704521.jpg">
-					</div>
-					<div>
-						<img style="width: 890px;"
-							src="http://ai.esmplus.com/gded/i/s/20201109/14/1604900967901eb863b2.jpg">
-					</div>
-				</div>
-
-			</div>
-		</div>
-	</div>
-
-	<div class="modal fade" id="LGDesk" tabindex="-1"
-		aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog modal-dialog__size">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">세부정보</h5>
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body">
-					<div>
-						<img style="width: 890px;"
-							src="http://cms.ygoon.com/editorStore/file/202011/26/14c55f83e3154dbd8063f48934bbe884.jpg">
-					</div>
-				</div>
-
-			</div>
-		</div>
-	</div>
-
-	<div class="modal fade" id="LEM70t" tabindex="-1"
-		aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog modal-dialog__size">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">세부정보</h5>
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body">
-					<div>
-						<img style="width: 890px;"
-							src="http://gi.esmplus.com/hpinvent/PC/LENOVO/M70T/11EVS00B00/11EVS00B00.png">
-					</div>
-				</div>
-
-			</div>
-		</div>
-	</div>
-
-
-	<div class="modal fade" id="BHP190ML" tabindex="-1"
-		aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog modal-dialog__size">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">세부정보</h5>
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body">
-					<div>
-						<img style="width: 890px;"
-							src="http://www.pc4all.co.kr/imgdata3/iteminfoimage/2019/12/17/rewq4321_5.jpg">
-					</div>
-				</div>
-
-			</div>
-		</div>
-	</div>
-
-
-	<div class="modal fade" id="ADPC4-21300" tabindex="-1"
-		aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog modal-dialog__size">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">세부정보</h5>
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body">
-					<div>
-						<img style="width: 890px;"
-							src="https://shopping-phinf.pstatic.net/20200609_15_27/f9668473-82e6-431e-b712-f2c29a7cedb4/%EC%88%98%EC%A0%95%EB%90%A8_DDR4_detail_890_final.jpg">
-					</div>
-				</div>
-
-			</div>
-		</div>
-	</div>
-
-
-	<div class="modal fade" id="CG6" tabindex="-1"
-		aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog modal-dialog__size">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">세부정보</h5>
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body">
-					<div>
-						<img style="width: 890px;"
-							src="https://ssl.pstatic.net/imgshopping/spec/157/30/27/15730273792_0_20181018115519.jpg">
-					</div>
-				</div>
-
-			</div>
-		</div>
-	</div>
+	
 	<!-- end -->
 	<!-- Optional JavaScript -->
 	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>

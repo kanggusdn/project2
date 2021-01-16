@@ -18,11 +18,13 @@ public class NoticeListService {
 			noticeDAO.setConnection(conn);
 			listCount = noticeDAO.selectListCount();
 		} catch (Exception e) {
-			e.printStackTrace();
+			// TODO: handle finally clause
 		} finally {
 			if (conn != null)
 				close(conn);
+
 		}
+
 		return listCount;
 	}
 
@@ -35,11 +37,12 @@ public class NoticeListService {
 			noticeDAO.setConnection(conn);
 			articleList = noticeDAO.selectArticleList(page, limit);
 		} catch (Exception e) {
-			e.printStackTrace();
+			// TODO: handle exception
 		} finally {
 			if (conn != null)
 				close(conn);
 		}
+
 		return articleList;
 
 	}

@@ -134,47 +134,34 @@ ArrayList<Goods> todayImageList = (ArrayList<Goods>) request.getAttribute("today
 					<li class="nav-item"><a class="nav-link"
 						href="goodsCartList.do"><i class="fas fa-cart-arrow-down"></i></a></li>
 
-					<li class="nav-item dropdown"><a class="nav-link" href="#"
+					<li class="nav-item dropdown" id="today__Range-close"><a class="nav-link" href="#"
 						id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
 						aria-haspopup="true" aria-expanded="false"><i
 							class="fas fa-business-time"></i></a>
+					
+						<!-- 2021 01 06 gang -->
+							
 						<div class="dropdown-menu dropdown-menu-right today__Range"
 							aria-labelledby="navbarDropdownMenuLink">
 							<h2>최근 본 상품</h2>
 							<div class="today__Range-margin">
 								<div class="today__Range-width">
+								<div class= "today__Range-div">
+									<%for(int i = 0; i <8 ; i++) {%>
+									
 									<div class="todayImagethumb">
-										<img src="img/gift.svg" alt="..." class="todayImageSize">
+										<img src="img/todayIMG/gift.svg" alt="..." class="todayImageSize">
 									</div>
-									<div class="todayImagethumb">
-										<img src="img/gift.svg" alt="..." class="todayImageSize">
+									<%} %>
 									</div>
-
-									<div class="todayImagethumb">
-										<img src="img/gift.svg" alt="..." class="todayImageSize">
-									</div>
-
-									<div class="todayImagethumb">
-										<img src="img/gift.svg" alt="..." class="todayImageSize">
-									</div>
-									<div class="todayImagethumb">
-										<img src="img/gift.svg" alt="..." class="todayImageSize">
-									</div>
-
-									<div class="todayImagethumb">
-										<img src="img/gift.svg" alt="..." class="todayImageSize">
-									</div>
-									<div class="todayImagethumb">
-										<img src="img/gift.svg" alt="..." class="todayImageSize">
-									</div>
-									<div class="todayImagethumb">
-										<img src="img/gift.svg" alt="..." class="todayImageSize">
-									</div>
+									<div class = "today__LSDelete">
+										<button class = "today__LSDelete-Btn" onclick="LSDelete()">전부 삭제</button>
+								</div>
 								</div>
 							</div>
 						</div>	
 					</li>
-
+					
 					<li class="nav-item dropdown"><a class="nav-link" href="#"
 						id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
 						aria-haspopup="true" aria-expanded="false"><i
@@ -543,5 +530,38 @@ ArrayList<Goods> todayImageList = (ArrayList<Goods>) request.getAttribute("today
 		src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script src="js/addr.js"></script>
 	<script src="https://kit.fontawesome.com/6478f529f2.js"></script>
+		<script type="text/javascript">
+	var localIMG = new Array();
+	var cnt = 0;
+	var closeCnt = 0;
+	$(function() {
+		for (var i = 0; i < localStorage.length; i++) {
+			localStorage.getItem(localStorage.key(i));
+			console.log(localStorage.getItem(localStorage.key(i)));
+			if(localStorage.getItem(localStorage.key(closeCnt)) != null){
+				$(".todayImagethumb").eq(closeCnt).empty();
+				$(".todayImagethumb").eq(closeCnt).append("<img src='./img/"+ localStorage.getItem(localStorage.key(closeCnt)) +"' alt= '...' class='todayImageSize'>");
+				$(".todayImagethumb").eq(closeCnt).append("<button type='button' class='close today__close closeBtn'><span>&times;</span></button>");
+				$(".closeBtn").unbind();
+				closeCnt++;
+		}
+				$(".closeBtn").click(function(){
+					$(".today__Range-div").append("<div class='todayImagethumb'><img class='todayImageSize' src='./img/todayIMG/gift.svg'/></div>");
+					$(".today__Range-div").find("div").eq($(this).parent().index()).remove();
+				});
+				$('#today__Range-close').on('hide.bs.dropdown', function (e) {
+				    if (e.clickEvent) {
+				      e.preventDefault();
+				    }
+				});
+			}
+	});
+	function LSDelete() {
+		localStorage.clear();
+		$(".today__Range-div").empty();
+		for(var i=0; i<8; i++)
+		$(".today__Range-div").append("<div class='todayImagethumb'><img class='todayImageSize' src='./img/todayIMG/gift.svg'/></div>");
+	}
+	</script>
 </body>
 </html>

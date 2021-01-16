@@ -11,26 +11,27 @@ public class NoticeModifyProService {
 
 	public boolean modifyArticle(NoticeBean article) throws Exception {
 		boolean isModifySuccess = false;
-		Connection conn = null;
+		Connection con = null;
 		try {
-			conn = getConnection();
+			con = getConnection();
 			NoticeDAO noticeDAO = NoticeDAO.getInstance();
-			noticeDAO.setConnection(conn);
+			noticeDAO.setConnection(con);
 			int updateCount = noticeDAO.updateArticle(article);
 
 			if (updateCount > 0) {
-				commit(conn);
+				commit(con);
 				isModifySuccess = true;
 
 			} else {
-				rollback(conn);
+				rollback(con);
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			// TODO: handle exception
 		} finally {
-			if (conn != null)
-				close(conn);
+			if (con != null)
+				close(con);
 		}
+
 		return isModifySuccess;
 	}
 
@@ -48,12 +49,14 @@ public class NoticeModifyProService {
 				isModifySuccess = true;
 			} else {
 				rollback(conn);
+
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			// TODO: handle exception
 		} finally {
 			close(conn);
 		}
+
 		return isModifySuccess;
 	}
 

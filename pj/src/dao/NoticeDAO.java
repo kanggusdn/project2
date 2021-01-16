@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import javax.sql.DataSource;
 
 import vo.NoticeBean;
- 
+
 public class NoticeDAO {
 	DataSource ds;
 	Connection conn;
@@ -226,6 +226,7 @@ public class NoticeDAO {
 			System.out.println("noticeReply 에러: " + e);
 		} finally {
 			if(pstmt != null) close(pstmt);
+			if(rs != null) close(rs);
 		}
 		
 		return insertCount;
@@ -250,6 +251,7 @@ public class NoticeDAO {
 			System.out.println("isnoticeWriter 에러: " + e);
 		} finally {
 			if(pstmt != null) close(pstmt);
+			if(rs != null) close(rs);
 		}
 		
 		return isWriter;
@@ -292,7 +294,7 @@ public class NoticeDAO {
 		
 		return deleteCount;
 	}
-
+	
 	public int addCountArticle(int selectArticle) {
 		int updateCount = 0;
 		PreparedStatement pstmt = null;
@@ -309,4 +311,5 @@ public class NoticeDAO {
 		
 		return updateCount;
 	}
+
 }

@@ -30,9 +30,11 @@ public class GoodsViewService {
 			goods = goodsDAO.selectGoodsList(kind);
 		} catch (Exception e) {
 			e.printStackTrace();
+		}finally {
+			if(conn != null)close(conn);
 		}
 
-		close(conn);
+		
 
 		return goods;
 	}

@@ -13,10 +13,12 @@ public class AdminDeleteService {
 	public boolean removeAdmin(String id) throws Exception {
 
 		boolean isRemoveSuccess = false;
+
 		Connection conn = null;
 		try {
 			conn = getConnection();
 			AdminDAO adminDAO = AdminDAO.getInstance();
+
 			adminDAO.setConnection(conn);
 			int deleteCount = adminDAO.deleteAdmin(id);
 
@@ -25,10 +27,12 @@ public class AdminDeleteService {
 				isRemoveSuccess = true;
 			} else {
 				rollback(conn);
+
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			// TODO: handle exception
 		} finally {
+
 			close(conn);
 		}
 		return isRemoveSuccess;

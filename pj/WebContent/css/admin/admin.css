@@ -1,6 +1,9 @@
-.table__location{
-	margin-top:200px;
+.table__location {
+	margin-top: 200px;
+	width: 100%;
 }
-.password__size{
+
+.password__size {
 	width: 100px;
 }
+

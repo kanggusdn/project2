@@ -42,6 +42,7 @@ public class BoardWriteProAction implements Action {
 			out.println("alert('등록실패');");
 			out.println("history.back();");
 			out.println("</script>");
+			out.close();
 		} else {
 			forward = new ActionForward();
 			forward.setRedirect(true);

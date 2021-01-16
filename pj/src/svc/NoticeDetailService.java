@@ -11,23 +11,27 @@ public class NoticeDetailService {
 
 	public NoticeBean getArticle(int notice_num) throws Exception {
 		NoticeBean article = null;
-		Connection conn = null;
+		Connection con = null;
 		try {
-			conn = getConnection();
+			con = getConnection();
 			NoticeDAO noticeDAO = NoticeDAO.getInstance();
-			noticeDAO.setConnection(conn);
+			noticeDAO.setConnection(con);
 			int updateCount = noticeDAO.updateReadCount(notice_num);
-			article = noticeDAO.selectArticle(notice_num);
+
 			if (updateCount > 0) {
-				commit(conn);
+				commit(con);
 			} else {
-				rollback(conn);
+				rollback(con);
 			}
+
+			article = noticeDAO.selectArticle(notice_num);
 		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			close(conn);
+			// TODO: handle exception
+		}finally {
+			close(con);
+			
 		}
+		
 		return article;
 
 	}
