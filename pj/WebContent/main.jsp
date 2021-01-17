@@ -879,7 +879,7 @@ ArrayList<Goods> todayImageList = (ArrayList<Goods>) request.getAttribute("today
 									placeholder="내용을 적어 주세요." style="resize: none;" required></textarea>
 							</div>
 							<div class="custom-file">
-								<input type="file" class="custom-file-input" id="customFile"
+								<input type="file" class="custom-file-input" id="customFile" name="notice_file"
 									accept="image/*"> <label class="custom-file-label"
 									for="customFile">파일 첨부</label>
 							</div>

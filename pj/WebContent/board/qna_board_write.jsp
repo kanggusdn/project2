@@ -204,7 +204,7 @@ ArrayList<Goods> todayImageList = (ArrayList<Goods>) request.getAttribute("today
 								style="resize: none;" required></textarea>
 						</div>
 						<div class="custom-file">
-								<input type="file" class="custom-file-input" id="customFile"
+								<input type="file" class="custom-file-input" id="customFile" name="board_file"
 									accept="image/*"> <label class="custom-file-label"
 									for="customFile">파일 첨부</label>
 							</div>
