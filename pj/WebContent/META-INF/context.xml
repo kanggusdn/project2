@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Context>
-	<Resource 
-		name="jdbc/e1b_ezcom" 
+	<Resource
+		name="jdbc/e1b_ezcom"
 		auth="Container"
 		type="javax.sql.DataSource" 
 		username="e1bezcom" password="e1bezcom"
