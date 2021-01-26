@@ -1,12 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="vo.Member, vo.Goods"%>
 <%@ page import="java.util.HashMap,java.util.ArrayList"%>
-<%@ page import="vo.Member, vo.Goods, vo.Cart"%>
+<%@page import="vo.PageInfo"%>
+<%@page import="vo.BoardBean"%>
+<%@ page import="java.util.*"%>
+<%@ page import="java.text.SimpleDateFormat"%>
 <%
 	Member loginMember = (Member) session.getAttribute("loginMember");
-ArrayList<Goods> pcList = (ArrayList<Goods>) request.getAttribute("pcList");
 ArrayList<Goods> todayImageList = (ArrayList<Goods>) request.getAttribute("todayImageList");
-int cnt = 0;
 %>
 <!DOCTYPE html>
 <html>
@@ -16,7 +19,7 @@ int cnt = 0;
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <!-- title image -->
-<link href="img/EzIcon.jpg" rel="icon" type="image/x-icon">
+
 <!-- reset -->
 <link rel="stylesheet"
 	href="https://meyerweb.com/eric/tools/css/reset/reset.css">
@@ -29,21 +32,17 @@ int cnt = 0;
 	rel="stylesheet">
 <!-- css origin -->
 <link rel="stylesheet" href="css/style.css" />
-<!-- Optional JavaScript -->
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<title>컴퓨터 홈 쇼핑 사이트</title>
+<title>컴퓨터 상품 등록 페이지</title>
 </head>
-<body oncontextmenu="return false" ondragstart="return false"
-	onselectstart="return false">
-	<!-- 2020-12-07 haesu -->
+<body>
+<!-- 2020-12-02 haesu -->
 	<nav
 		class="navbar navbar-expand-lg bg-light fixed-top navbar-light justify-content-between"
 		id="header">
-		<div class="text-left">
-			<button class="navbar-toggler" type="button" data-toggle="collapse"
-				id="navMainBtn" data-target="#navbarNavDropdown"
-				aria-controls="navbarNavDropdown" aria-expanded="true"
-				aria-label="Toggle navigation">
+		<div class = "text-left">
+			<button class="navbar-toggler" type="button" data-toggle="collapse" id = "navMainBtn"
+				data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
+				aria-expanded="true" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
 
@@ -113,49 +112,44 @@ int cnt = 0;
 			</div>
 		</div>
 		<!-- 2020 12 23 haesu -->
-		<div class="text-right">
-			<button class="navbar-toggler" type="button" data-toggle="collapse"
-				id="navSideBtn" data-target="#infoDropdown"
-				aria-controls="navbarNavDropdown" aria-expanded="true"
-				aria-label="Toggle navigation">
+		<div class = "text-right">
+			<button class="navbar-toggler" type="button" data-toggle="collapse" id = "navSideBtn"
+				data-target="#infoDropdown" aria-controls="navbarNavDropdown"
+				aria-expanded="true" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
-			<div class="collapse navbar-collapse dropdown-menu-end"
+			<div class="collapse navbar-collapse dropdown-menu-end" 
 				id="infoDropdown">
 				<ul class="navbar-nav">
 					<li class="nav-item"><a class="nav-link"
 						href="goodsCartList.do"><i class="fas fa-cart-arrow-down"></i></a></li>
 
-					<li class="nav-item dropdown" id="today__Range-close"><a
-						class="nav-link" href="#" id="navbarDropdownMenuLink"
-						role="button" data-toggle="dropdown" aria-haspopup="true"
-						aria-expanded="false"><i class="fas fa-business-time"></i></a> <!-- 2021 01 06 gang -->
-
+					<li class="nav-item dropdown" id="today__Range-close"><a class="nav-link" href="#"
+						id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
+						aria-haspopup="true" aria-expanded="false"><i
+							class="fas fa-business-time"></i></a>
+							
+							<!-- 2021 01 06 gang -->
+							
 						<div class="dropdown-menu dropdown-menu-right today__Range"
 							aria-labelledby="navbarDropdownMenuLink">
 							<h2>최근 본 상품</h2>
 							<div class="today__Range-margin">
 								<div class="today__Range-width">
-									<div class="today__Range-div">
-										<%
-											for (int i = 0; i < 8; i++) {
-										%>
-										<div class="todayImagethumb">
-											<img src="img/todayIMG/gift.svg" alt="..."
-												class="todayImageSize">
-										</div>
-										<%
-											}
-										%>
+								<div class = "today__Range-div">
+									<%for(int i = 0; i <8 ; i++) {%>
+									<div class="todayImagethumb">
+										<img src="img/todayIMG/gift.svg" alt="..." class="todayImageSize">
 									</div>
-									<div class="today__LSDelete">
-										<button class="btn btn-danger today__LSDelete-Btn"
-											onclick="LSDelete()">전부 삭제</button>
+									<%} %>
 									</div>
+									<div class = "today__LSDelete">
+										<button class = "btn btn-danger today__LSDelete-Btn" onclick="LSDelete()">전부 삭제</button>
+								</div>
 								</div>
 							</div>
 						</div></li>
-					<!-- end -->
+						<!-- end -->
 					<li class="nav-item dropdown"><a class="nav-link" href="#"
 						id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
 						aria-haspopup="true" aria-expanded="false"><i
@@ -181,9 +175,6 @@ int cnt = 0;
 							<button type="button"
 								class="dropdown-item btn btn-primary btn-sm btn-block"
 								data-toggle="modal" data-target="#profileModal">프로필 수정</button>
-							<button type="button"
-								class="dropdown-item btn btn-primary btn-sm btn-block"
-								onclick="location.href='ListAdd.do'">상품등록</button>
 							<%
 								if (loginMember.getId().equals("admin")) {
 							%>
@@ -203,79 +194,79 @@ int cnt = 0;
 			</div>
 		</div>
 	</nav>
-
-	<div class="container">
-		<section class="container__size" id="home">
-			<div class=" w-100 ">
-				<div id="carouselExampleControls"
-					class="carousel slide w-100 container__center "
-					data-ride="carousel">
-					<div class="carousel-inner w-100 ">
-						<div class="carousel-item active w-100">
-							<a target="_blank"
-								href="https://www.nvidia.com/ko-kr/geforce/graphics-cards/30-series/rtx-3060-ti">
-								<img src="img/mainIMG/main3060.jpg" class="d-block w-100"
-								alt="..." style="height: 400px; z-index: 2;">
-							</a>
-						</div>
-						<div class="carousel-item w-100">
-							<a href="animation.jsp"> <img src="img/mainIMG/YB.jpg"
-								class="d-block w-100" alt="..."
-								style="height: 400px; z-index: 2;"></a>
-						</div>
-						<div class="carousel-item w-100">
-							<a target="_blank"
-								href="https://www.intel.co.kr/content/www/kr/ko/products/processors/core.html">
-								<img src="img/mainIMG/mainIntel.jpg" class="d-block w-100"
-								alt="..." style="height: 400px;">
-							</a>
-						</div>
+		
+	<!-- 2021/1/20 컴퓨터 상품 등록 시작 -->
+	<section id="listAddForm" class = "listadd__margin-top">
+		<div class="card container pt-4" style="width: 40%">
+			<div class="text-center m-3 ">
+				<h2>컴퓨터 상품 등록</h2>
+			</div>
+			<form action="ListAddPro.do" name="listAddform"
+				enctype="multipart/form-data" method="post">
+				<div class="form-col">
+					<div class="form-group">
+						<label for="PCselect">상품 종류</label> 
+							<select id="PCselect" name="kind">
+								<option value="select">선택</option>
+								<option value="goods">컴퓨터 부품</option>
+								<option value="comu">조립PC</option>
+								<option value="pc">브랜드PC</option>
+							</select> 
+							<select id="goods">
+								<option value="cpu">CPU</option>
+								<option value="cooler">쿨러/튜닝</option>
+								<option value="mainboard">메인보드</option>
+								<option value="memory">메모리</option>
+								<option value="graphic">그래픽카드</option>
+								<option value="ssd">SSd</option>
+								<option value="harddisk">하드디스크</option>
+								<option value="sidedisk">외장HDD/SSD</option>
+								<option value="case">케이스</option>
+								<option value="power">파워</option>
+								<option value="keyboard">키보드</option>
+								<option value="mouse">마우스</option>
+								<option value="odd">ODD</option>
+								<option value="monitor">모니터</option>
+								<option value="software">소프트웨어</option>
+							</select> 
+							<select id="comu">
+								<option value="user">유저 추천 조립PC</option>
+								<option value="owner">사장 추천 조립PC</option>
+								<option value="CEO">컴퓨터 부품 회사 추천 조립PC</option>
+							</select> 
+							<select id="pc">
+								<option value="SAMSUNG">SAMSUNG</option>
+								<option value="HP">HP</option>
+								<option value="LG">LG</option>
+								<option value="LENOVO">LENOVO</option>
+								<option value="DELL">DELL</option>
+								<option value="ASUS">ASUS</option>
+							</select>
 					</div>
-					<a class="carousel-control-prev carousel__z-index"
-						href="#carouselExampleControls" role="button" data-slide="prev">
-						<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-						<span class="sr-only">Previous</span>
-					</a> <a class="carousel-control-next carousel__z-index"
-						href="#carouselExampleControls" role="button" data-slide="next">
-						<span class="carousel-control-next-icon" aria-hidden="true"></span>
-						<span class="sr-only">Next</span>
-					</a>
+					<div class="form-group">
+						<label for="name">상품명</label> 
+							<input type="text" id="goodsName" name="name" class="form-control" required="required">
+					</div>
+					<div class="form-group">
+						<label for="price">가격</label> 
+						<input type="number" id="goodsPrice" name="price" class="form-control" required="required">
+					</div>
+					<div class="form-group">
+						<label for="goodsImage">상품 이미지</label> 
+						<input type="file" id="goodsImage" name="goodsImage" class="form-control" required="required">
+					</div>
+					<div class="form-group">
+						<label for="goodsModalImage">상품 상세 이미지</label> 
+						<input type="file" id="goodsModalImage" name="goodsModalImage" class="form-control" required="required">
+					</div>
+					<button type="submit" class="btn btn-primary">등록</button>
+					<button type="reset" class="btn btn-info">취소</button>
 				</div>
-			</div>
-		</section>
-
-		<div class="startLine text-center">
-			<p class="startLine__text"><%=pcList.get(1).getKind()%></p>
+			</form>
 		</div>
-		<br>
-		<script>
-		var imgArr = new Array();
-		</script>
-		<div class="row">
-			<%
-				for (int i = 0; i < pcList.size(); i++) {
-			%>
-			<div class="card goods__card-size pcList p-2 border-0">
-				<div class="border">
-					<a data-toggle="modal"
-						data-target="#<%=pcList.get(i).getModalip()%>"> <img
-						src="./img/<%=pcList.get(i).getImage()%>"
-						class="card-img-top card-img__size" alt="...">
-						<div class="card-body">
-							<p class="card-text">
-								상품명:
-								<%=pcList.get(i).getName()%><br /> 가격:
-								<%=pcList.get(i).getPrice()%><br />
-							</p>
-						</div>
-					</a>
-				</div>
-			</div>
-			<%
-				}
-			%>
-		</div>
-	</div>
+	</section>
+	<!-- 상품 등록 끝 -->
+	
 	<footer class="text-center footer__color text-white">
 		<div class="footer-above">
 			<div class="container pt-4">
@@ -310,13 +301,16 @@ int cnt = 0;
 		</div>
 	</footer>
 
+	<!-- end -->
+
+	<!-- Login Modal  2020-12-03 haesu-->
 
 	<div class="modal fade" id="loginModal" tabindex="-1"
 		aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">회원가입</h5>
+					<h5 class="modal-title" id="exampleModalLabel">로그인</h5>
 					<button type="button" class="close" data-dismiss="modal"
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
@@ -344,8 +338,8 @@ int cnt = 0;
 			</div>
 		</div>
 	</div>
-
 	<!-- Join Modal -->
+
 	<div class="modal fade" id="joinModal" tabindex="-1"
 		aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
@@ -360,14 +354,29 @@ int cnt = 0;
 				<div class="modal-body">
 					<form action="joinPro.do" method="post">
 						<div class="form-group">
-							<input type="text" class="form-control" name="id"
+							<input type="text" class="form-control" name="id" id="joinId"
 								placeholder="아이디" maxlength="20" required="required"
+								autocomplete="off" />
+						</div>
+						<div class="form-group" id="LoginCheck">
+							<span class="form-control">중복 확인을 해주세요</span>
+						</div>
+						<div class="form-group">
+							<input type="password" class="form-control" name="passwd"
+								id="pass" placeholder="비밀번호" maxlength="20" required="required"
 								autocomplete="off" />
 						</div>
 						<div class="form-group">
 							<input type="password" class="form-control" name="passwd"
-								placeholder="비밀번호" maxlength="20" required="required"
-								autocomplete="off" />
+								id="password" placeholder="비밀번호 확인" maxlength="20"
+								required="required" autocomplete="off" />
+						</div>
+						<div class="form-group">
+							<div class="form-control" id="alert-success"
+								style="color: white; background: #738ED1;">비밀번호가 일치합니다.</div>
+							<div class="form-control" id="alert-danger"
+								style="color: white; background: #FC707D;">비밀번호가 일치하지
+								않습니다.</div>
 						</div>
 						<div class="form-group">
 							<input type="text" class="form-control" name="name"
@@ -406,52 +415,20 @@ int cnt = 0;
 								placeholder="이메일" maxlength="20" required="required"
 								autocomplete="no" />
 						</div>
-
-
-						<!-- input타입 button은 value 값을 줘야함 -->
-						<button type="submit" class="btn btn-primary form-control">가입</button>
+						<button type="submit" class="btn btn-primary form-control"
+							id="joinbutton">가입</button>
 					</form>
 				</div>
-
 			</div>
 		</div>
 	</div>
-	<!-- end -->
-	<%
-		for (int i = 0; i < pcList.size(); i++) {
-	%>
-	<div class="modal fade" id="<%=pcList.get(i).getModalip()%>"
-		tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog modal-dialog__size">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">제품 소개</h5>
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body">
-					<%if(pcList.get(i).getModalimage().substring(0,4).equals("http")) {%>
-						<img class="modal-image__size" alt="-"
-							src="<%=pcList.get(i).getModalimage()%>">
-					<%} else { %>
-					<img class="modal-image__size" alt="-"
-							src="./img/<%=pcList.get(i).getModalimage()%>">
-					<%} %>
-				</div>
 
-			</div>
-		</div>
-		<div>
-			<a class="btn btn-primary button__lo"
-				href="goodsCartAdd.do?id=<%=pcList.get(i).getId()%>">장바구니에 담기</a>
-		</div>
-	</div>
-	<%
-		}
-	%>
 
+
+
+
+
+	<!-- 2020/12/04 강현우 프로필 수정 -->
 	<div class="modal fade" id="profileModal" data-backdrop="static"
 		data-keyboard="false" tabindex="-1"
 		aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -516,117 +493,237 @@ int cnt = 0;
 		</div>
 	</div>
 
+	<!-- 프로필 수정 end -->
+
+	<!-- 2020-12-08 haesu -->
+	<div class="modal fade" id="Snote" tabindex="-1"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog__size">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">세부정보</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div>
+						<img style="width: 100%;"
+							src="http://ai.esmplus.com/gded/i/s/20201105/14/16045528895220704521.jpg">
+					</div>
+					<div>
+						<img style="width: 100%;"
+							src="http://ai.esmplus.com/gded/i/s/20201109/14/1604900967901eb863b2.jpg">
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="LGDesk" tabindex="-1"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog__size">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">세부정보</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div>
+						<img style="width: 100%;"
+							src="http://cms.ygoon.com/editorStore/file/202011/26/14c55f83e3154dbd8063f48934bbe884.jpg">
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="LEM70t" tabindex="-1"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog__size">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">세부정보</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div>
+						<img style="width: 100%;"
+							src="http://gi.esmplus.com/hpinvent/PC/LENOVO/M70T/11EVS00B00/11EVS00B00.png">
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
 
 
+	<div class="modal fade" id="BHP190ML" tabindex="-1"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog__size">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">세부정보</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div>
+						<img style="width: 100%;"
+							src="http://www.pc4all.co.kr/imgdata3/iteminfoimage/2019/12/17/rewq4321_5.jpg">
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
 
 
+	<div class="modal fade" id="ADPC4-21300" tabindex="-1"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog__size">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">세부정보</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div>
+						<img style="width: 100%;"
+							src="https://shopping-phinf.pstatic.net/20200609_15_27/f9668473-82e6-431e-b712-f2c29a7cedb4/%EC%88%98%EC%A0%95%EB%90%A8_DDR4_detail_890_final.jpg">
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+
+	<div class="modal fade" id="CG6" tabindex="-1"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog__size">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">세부정보</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div>
+						<img style="width: 100%;"
+							src="https://ssl.pstatic.net/imgshopping/spec/157/30/27/15730273792_0_20181018115519.jpg">
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	<!-- end -->
+	
 	<!-- Optional JavaScript -->
-	<script
-		src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+
 	<script src="js/header.js"></script>
 	<script src="js/main.js"></script>
 	<script
 		src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script src="js/addr.js"></script>
-	<script src="https://kit.fontawesome.com/6478f529f2.js"
-		crossorigin="anonymous"></script>
 	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
-	<%
-		for (int i = 0; i < pcList.size(); i++) {
-	%>
-	<script>
-			imgArr[<%=i%>] = "<%=pcList.get(i).getImage()%>
-		";
-	</script>
-	<%
-		}
-	%>
-
-	<script>
-		var cnt = 0;
-		var closeCnt = 0;
-		for (var cnt = 0; cnt < localStorage.length; cnt++) {
-			localStorage.getItem(localStorage.key(cnt));
-			$(".todayImagethumb").eq(cnt).empty();
-			$(".todayImagethumb").eq(cnt).append(
-					"<img src='./img/"
-							+ localStorage.getItem(localStorage.key(cnt))
-							+ "' alt= '...' class='todayImageSize'>");
-			$(".todayImagethumb")
-					.eq(cnt)
-					.append(
-							"<button type='button' class='close today__close closeBtn'><span>&times;</span></button>");
-
-		}
+		src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+	<!-- notice modal용 부트스트랩 -->
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js"></script>
+	<script src="https://kit.fontawesome.com/6478f529f2.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+	<script type="text/javascript">
 		$(function() {
-			$.cookie("cnt", 0);
-			var todayImage = [];
-			var temp = $.cookie("cnt");
-			$(".pcList")
-					.each(
-							function() {
-								$(this)
-										.click(
-												function() {
-													console
-															.log($
-																	.cookie("cnt"));
-													localStorage[$(this)
-															.index()] = imgArr[$(
-															this).index()];
-													todayImage[$(this).index()] = imgArr[$(
-															this).index()];
-													//설정
-													$(".todayImagethumb").eq(
-															cnt).empty();
-													$(".todayImagethumb")
-															.eq(cnt)
-															.append(
-																	"<img class='todayImageSize' src='./img/"
-																			+ todayImage[$(
-																					this)
-																					.index()]
-																			+ "'/>");
-													$(".todayImagethumb")
-															.eq(cnt++)
-															.append(
-																	"<button type='button' class='close today__close closeBtn'><span>&times;</span></button>");
-													$.cookie("cnt", ++temp);
-													$(".closeBtn").unbind();
-												});
-							});
-			$(".closeBtn")
-					.click(
-							function() {
-								$(".today__Range-div")
-										.append(
-												"<div class='todayImagethumb'><img class='todayImageSize' src='./img/todayIMG/gift.svg'/></div>");
-								$(".today__Range-div").find("div").eq(
-										$(this).parent().index()).remove();
-								cnt--;
-								$.cookie("cnt", --temp);
-							});
-
-			$('#today__Range-close').on('hide.bs.dropdown', function(e) {
-				if (e.clickEvent) {
-					e.preventDefault();
+			$("#goods").hide();
+			$("#comu").hide();
+			$("#pc").hide();
+			$("#PCselect").change(function() {
+				if ($(this).val() == "goods") {
+					$("#goods").show();
+					$("#goods").attr("name","kind");
+					$("#comu").hide();
+					$("#comu").removeAttr("name","kind");
+					$("#pc").hide();
+					$("#pc").removeAttr("name","kind");
+				} else if ($(this).val() == "comu") {
+					$("#comu").show();
+					$("#comu").attr("name","kind");
+					$("#goods").hide();
+					$("#goods").removeAttr("name","kind");
+					$("#pc").hide();
+					$("#pc").removeAttr("name","kind");
+				} else if ($(this).val() == "pc") {
+					$("#pc").show();
+					$("#pc").attr("name","kind");
+					$("#goods").hide();
+					$("#goods").removeAttr("name","kind");
+					$("#comu").hide();
+					$("#comu").removeAttr("name","kind");
+				} else if ($(this).val() == "select") {
+					$("#goods").hide();
+					$("#goods").removeAttr("name","kind");
+					$("#comu").hide();
+					$("#comu").removeAttr("name","kind");
+					$("#pc").hide();
+					$("#pc").removeAttr("name","kind");
 				}
 			});
-			// 				$('#today__Range-close').mouseleave(function(){
-			//					$('#today__Range-close').dropdown('hide');
-			//				});
-
+		});
+		var localIMG = new Array();
+		var cnt = 0;
+		cnt = $.cookie("cnt");
+		var closeCnt = 0;
+		var temp = $.cookie("cnt");
+		$(function() {
+			//로컬스토리지 불러오기
+			for (var i = 0; i < localStorage.length; i++) {
+				localStorage.getItem(localStorage.key($.cookie("cnt")));
+				// 여기까지
+				console.log(localStorage.getItem(localStorage.key(i)));
+				
+					$(".todayImagethumb").eq(i).empty();
+					$(".todayImagethumb").eq(i).append("<img class='todayImageSize' src='./img/" + localStorage.getItem(localStorage.key(i)) + "'/>");
+					$(".todayImagethumb").eq(i).append("<button type='button' class='close today__close closeBtn'><span>&times;</span></button>");
+					$(".closeBtn").unbind();
+					$(".closeBtn").click(function(){
+						$(".today__Range-div").append("<div class='todayImagethumb'><img class='todayImageSize' src='./img/todayIMG/gift.svg'/></div>");
+						$(".today__Range-div").find("div").eq($(this).parent().index()).remove();
+						$.cookie("cnt", $.cookie("cnt")-1);
+					});
+				}
+			$('#today__Range-close').on('hide.bs.dropdown', function (e) {
+			    if (e.clickEvent) {
+			      e.preventDefault();
+			    }
+			});
 		});
 		function LSDelete() {
 			localStorage.clear();
 			$(".today__Range-div").empty();
-			for (var i = 0; i < 8; i++)
-				$(".today__Range-div")
-						.append(
-								"<div class='todayImagethumb'><img class='todayImageSize' src='./img/todayIMG/gift.svg'/></div>");
+			for(var i=0; i<8; i++)
+			$(".today__Range-div").append("<div class='todayImagethumb'><img class='todayImageSize' src='./img/todayIMG/gift.svg'/></div>");
 		}
 	</script>
 </body>

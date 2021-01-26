@@ -175,6 +175,9 @@ int cnt = 0;
 							<button type="button"
 								class="dropdown-item btn btn-primary btn-sm btn-block"
 								data-toggle="modal" data-target="#profileModal">프로필 수정</button>
+								<button type="button"
+								class="dropdown-item btn btn-primary btn-sm btn-block"
+								onclick="location.href='ListAdd.do'">상품등록</button>
 							<%
 								if (loginMember.getId().equals("admin")) {
 							%>
@@ -248,8 +251,8 @@ int cnt = 0;
 		<div class="card goods__card-size goodsList p-2 border-0">
 			<div class="border">
 				<a data-toggle="modal"
-					data-target="#<%=goodsList.get(i).getModalip()%>"> <img
-					src="./img/<%=goodsList.get(i).getImage()%>"
+					data-target="#<%=goodsList.get(i).getModalip()%>">
+					 <img src="./img/<%=goodsList.get(i).getImage()%>"
 					class="card-img-top card-img__size" alt="...">
 					<div class="card-body">
 						<p class="card-text">
@@ -421,10 +424,16 @@ int cnt = 0;
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
+				<%System.out.println(goodsList.get(i).getModalimage().substring(0,4)); %>
 				<div class="modal-body">
 					<div>
+					<%if(goodsList.get(i).getModalimage().substring(0,4).equals("http")) {%>
 						<img class="modal-image__size" alt="-"
 							src="<%=goodsList.get(i).getModalimage()%>">
+					<%} else { %>
+					<img class="modal-image__size" alt="-"
+							src="./img/<%=goodsList.get(i).getModalimage()%>">
+					<%} %>
 					</div>
 				</div>
 
@@ -462,7 +471,7 @@ int cnt = 0;
 		<script>
 			imgArr[<%=i %>] = "<%=goodsList.get(i).getImage()%>";	
 		</script>
-<% 		} %>
+<% } %>
 		
 	<script>
 			var cnt = 0;

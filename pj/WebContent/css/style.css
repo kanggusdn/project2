@@ -28,6 +28,9 @@ font-family: 'Noto Sans KR', sans-serif;
 /* today.css */
 @import "today/today.css";
 
+/* listAdd.css */
+@import "listadd/listAdd.css";
+
 h1, h2, h3, h4, .navbar-brand {
 	font-family: 'Do Hyeon', sans-serif;
 	color: #4A148C;

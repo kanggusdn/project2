@@ -18,9 +18,6 @@ public class GoodsDAO {
 	private GoodsDAO() {
 
 	}
-
-	
-
 	public void setConnection(Connection conn) {
 		this.conn = conn;
 	}
@@ -55,20 +52,39 @@ public class GoodsDAO {
 		return goodsList;
 	}
 
+	@SuppressWarnings("resource")
 	public int insertGoods(Goods goods) {
 		PreparedStatement pstmt = null;
 		int insertCount = 0;
 		String sql = "";
 
 		try {
-			sql = "insert into goods values(null,?,?,?,?)";
+			if(goods.getKind().equals("SAMSUNG") || goods.getKind().equals("HP") || goods.getKind().equals("LG") || goods.getKind().equals("LENOVO") || goods.getKind().equals("DELL") || goods.getKind().equals("ASUS")) {
+				sql = "insert into pc values(null,?,?,?,?,?,?)";
+			} else if(goods.getKind().equals("user") || goods.getKind().equals("CEO") || goods.getKind().equals("owner")) {
+				sql = "insert into comu values(null,?,?,?,?,?,?)";
+			} else {
+				sql = "insert into goods values(null,?,?,?,?,?,?)";
+			}
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, goods.getKind());
 			pstmt.setString(2, goods.getName());
 			pstmt.setInt(3, goods.getPrice());
 			pstmt.setString(4, goods.getImage());
+			pstmt.setString(5, goods.getModalip());
+			pstmt.setString(6, goods.getModalimage());
 			insertCount = pstmt.executeUpdate();
-
+			if(insertCount != 0) {
+				sql = "insert into samtb values(null,?,?,?,?,?,?)";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, goods.getKind());
+				pstmt.setString(2, goods.getName());
+				pstmt.setInt(3, goods.getPrice());
+				pstmt.setString(4, goods.getImage());
+				pstmt.setString(5, goods.getModalip());
+				pstmt.setString(6, goods.getModalimage());
+				pstmt.executeUpdate();
+			}
 		} catch (SQLException e) {
 			// TODO: handle exception
 			e.printStackTrace();

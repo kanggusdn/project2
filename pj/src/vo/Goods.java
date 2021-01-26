@@ -9,7 +9,9 @@ public class Goods {
 	private String modalip;
 	private String modalimage;
 	
-	
+	public Goods() {
+		
+	}
 	
 	public Goods(int id, String kind, String name, int price, String image, String modalip, String modalimage) {
 		super();

@@ -186,6 +186,9 @@ ArrayList<Goods> todayImageList = (ArrayList<Goods>) request.getAttribute("today
 							<button type="button"
 								class="dropdown-item btn btn-primary btn-sm btn-block"
 								data-toggle="modal" data-target="#profileModal">프로필 수정</button>
+							<button type="button"
+								class="dropdown-item btn btn-primary btn-sm btn-block"
+								onclick="location.href='ListAdd.do'">상품등록</button>
 							<%
 								if (loginMember.getId().equals("admin")) {
 							%>
@@ -879,7 +882,7 @@ ArrayList<Goods> todayImageList = (ArrayList<Goods>) request.getAttribute("today
 									placeholder="내용을 적어 주세요." style="resize: none;" required></textarea>
 							</div>
 							<div class="custom-file">
-								<input type="file" class="custom-file-input" id="customFile" name="notice_file"
+								<input type="file" class="custom-file-input" id="customFile" name = "notice_file"
 									accept="image/*"> <label class="custom-file-label"
 									for="customFile">파일 첨부</label>
 							</div>
@@ -889,6 +892,7 @@ ArrayList<Goods> todayImageList = (ArrayList<Goods>) request.getAttribute("today
 						<button type="button" class="btn btn-secondary"
 							data-dismiss="modal">닫기</button>
 					</form>
+
 				</div>
 			</div>
 		</div>

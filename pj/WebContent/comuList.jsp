@@ -175,6 +175,9 @@ int cnt = 0;
 							<button type="button"
 								class="dropdown-item btn btn-primary btn-sm btn-block"
 								data-toggle="modal" data-target="#profileModal">프로필 수정</button>
+								<button type="button"
+								class="dropdown-item btn btn-primary btn-sm btn-block"
+								onclick="location.href='ListAdd.do'">상품등록</button>
 							<%
 								if (loginMember.getId().equals("admin")) {
 							%>
@@ -424,8 +427,13 @@ int cnt = 0;
 				</div>
 				<div class="modal-body">
 					<div>
+						<%if(comuList.get(i).getModalimage().substring(0,4).equals("http")) {%>
 						<img class="modal-image__size" alt="-"
 							src="<%=comuList.get(i).getModalimage()%>">
+					<%} else { %>
+					<img class="modal-image__size" alt="-"
+							src="./img/<%=comuList.get(i).getModalimage()%>">
+					<%} %>
 					</div>
 				</div>
 			</div>
