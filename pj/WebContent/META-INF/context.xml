@@ -3,7 +3,7 @@
 	<Resource
 		name="jdbc/e1b_ezcom"
 		auth="Container"
-		type="javax.sql.DataSource" 
+		type="javax.sql.DataSource"
 		username="e1bezcom" password="e1bezcom"
 		driverClassName="com.mysql.cj.jdbc.Driver"
 		factory="org.apache.tomcat.jdbc.pool.DataSourceFactory"
