@@ -60,5 +60,4 @@ public class ListAddProAction implements Action {
 		}
 		return forward;
 	}
-
 }
