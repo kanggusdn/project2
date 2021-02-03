@@ -36,10 +36,11 @@ ArrayList<Member> adminList = (ArrayList<Member>) request.getAttribute("adminLis
 	<nav
 		class="navbar navbar-expand-lg bg-light fixed-top navbar-light justify-content-between"
 		id="header">
-		<div class = "text-left">
-			<button class="navbar-toggler" type="button" data-toggle="collapse" id = "navMainBtn"
-				data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
-				aria-expanded="true" aria-label="Toggle navigation">
+		<div class="text-left">
+			<button class="navbar-toggler" type="button" data-toggle="collapse"
+				id="navMainBtn" data-target="#navbarNavDropdown"
+				aria-controls="navbarNavDropdown" aria-expanded="true"
+				aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
 
@@ -109,45 +110,50 @@ ArrayList<Member> adminList = (ArrayList<Member>) request.getAttribute("adminLis
 			</div>
 		</div>
 		<!-- 2020 12 23 haesu -->
-		<div class= "text-right">
-			<button class="navbar-toggler" type="button" data-toggle="collapse" id = "navSideBtn"
-				data-target="#infoDropdown" aria-controls="navbarNavDropdown"
-				aria-expanded="true" aria-label="Toggle navigation">
+		<div class="text-right">
+			<button class="navbar-toggler" type="button" data-toggle="collapse"
+				id="navSideBtn" data-target="#infoDropdown"
+				aria-controls="navbarNavDropdown" aria-expanded="true"
+				aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
-			<div class="collapse navbar-collapse dropdown-menu-end" 
+			<div class="collapse navbar-collapse dropdown-menu-end"
 				id="infoDropdown">
 				<ul class="navbar-nav">
 					<li class="nav-item"><a class="nav-link"
 						href="goodsCartList.do"><i class="fas fa-cart-arrow-down"></i></a></li>
 
-					<li class="nav-item dropdown" id="today__Range-close"><a class="nav-link" href="#"
-						id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
-						aria-haspopup="true" aria-expanded="false"><i
-							class="fas fa-business-time"></i></a>
-							
-							<!-- 2021 01 06 gang -->
-							
+					<li class="nav-item dropdown" id="today__Range-close"><a
+						class="nav-link" href="#" id="navbarDropdownMenuLink"
+						role="button" data-toggle="dropdown" aria-haspopup="true"
+						aria-expanded="false"><i class="fas fa-business-time"></i></a> <!-- 2021 01 06 gang -->
+
 						<div class="dropdown-menu dropdown-menu-right today__Range"
 							aria-labelledby="navbarDropdownMenuLink">
 							<h2>최근 본 상품</h2>
 							<div class="today__Range-margin">
 								<div class="today__Range-width">
-								<div class= "today__Range-div">
-									<%for(int i = 0; i <8 ; i++) {%>
-									
-									<div class="todayImagethumb">
-										<img src="img/todayIMG/gift.svg" alt="..." class="todayImageSize">
+									<div class="today__Range-div">
+										<%
+											for (int i = 0; i < 8; i++) {
+										%>
+
+										<div class="todayImagethumb">
+											<img src="img/todayIMG/gift.svg" alt="..."
+												class="todayImageSize">
+										</div>
+										<%
+											}
+										%>
 									</div>
-									<%} %>
+									<div class="today__LSDelete">
+										<button class="btn btn-danger today__LSDelete-Btn"
+											onclick="LSDelete()">전부 삭제</button>
 									</div>
-									<div class = "today__LSDelete">
-										<button class = "btn btn-danger today__LSDelete-Btn" onclick="LSDelete()">전부 삭제</button>
-								</div>
 								</div>
 							</div>
 						</div></li>
-						<!-- end -->
+					<!-- end -->
 					<li class="nav-item dropdown"><a class="nav-link" href="#"
 						id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
 						aria-haspopup="true" aria-expanded="false"><i
@@ -173,6 +179,9 @@ ArrayList<Member> adminList = (ArrayList<Member>) request.getAttribute("adminLis
 							<button type="button"
 								class="dropdown-item btn btn-primary btn-sm btn-block"
 								data-toggle="modal" data-target="#profileModal">프로필 수정</button>
+							<button type="button"
+								class="dropdown-item btn btn-primary btn-sm btn-block"
+								onclick="location.href='ListAdd.do'">상품등록</button>
 							<%
 								if (loginMember.getId().equals("admin")) {
 							%>
@@ -195,6 +204,9 @@ ArrayList<Member> adminList = (ArrayList<Member>) request.getAttribute("adminLis
 
 	<!-- haesu 2020-12-29 -->
 
+	<div class="startLine-view text-center">
+		<p class="startLine__text">관리자 페이지</p>
+	</div>
 	<table class="table table-hover table__location container">
 		<thead>
 			<tr>
@@ -204,10 +216,10 @@ ArrayList<Member> adminList = (ArrayList<Member>) request.getAttribute("adminLis
 				<th scope="col">이름</th>
 				<th scope="col">나이</th>
 				<th scope="col">성별</th>
-				<th scope="col" class = "adminHide">E-mail</th>
-				<th scope="col" class = "adminHide">주소1</th>
-				<th scope="col" class = "adminHide">주소2</th>
-				<th scope="col" class = "adminHide">주소3</th>
+				<th scope="col" class="adminHide">E-mail</th>
+				<th scope="col" class="adminHide">주소1</th>
+				<th scope="col" class="adminHide">주소2</th>
+				<th scope="col" class="adminHide">주소3</th>
 				<th scope="col">탈퇴</th>
 			</tr>
 		</thead>
@@ -228,19 +240,25 @@ ArrayList<Member> adminList = (ArrayList<Member>) request.getAttribute("adminLis
 				<td><%=adminList.get(i).getName()%></td>
 				<td><%=adminList.get(i).getAge()%></td>
 				<td><%=adminList.get(i).getGender()%></td>
-				<td class = "adminHide"><%=adminList.get(i).getEmail()%></td>
-				<td class = "adminHide"><%=adminList.get(i).getAddr1()%></td>
-				<td class = "adminHide"><%=adminList.get(i).getAddr2()%></td>
-				<td class = "adminHide"><%=adminList.get(i).getAddr3()%></td>
-				<%if(adminList.get(i).getId().equals("admin")) {%>
-				<td><a class="btn btn-primary disabled" 
+				<td class="adminHide"><%=adminList.get(i).getEmail()%></td>
+				<td class="adminHide"><%=adminList.get(i).getAddr1()%></td>
+				<td class="adminHide"><%=adminList.get(i).getAddr2()%></td>
+				<td class="adminHide"><%=adminList.get(i).getAddr3()%></td>
+				<%
+					if (adminList.get(i).getId().equals("admin")) {
+				%>
+				<td><a class="btn btn-primary disabled"
 					href="adminDelete.do?id=<%=adminList.get(i).getId()%>"
 					onclick="return confirm('삭제를 진행하시겠습니까?')">탈퇴</a></td>
-				<%} else {%>
+				<%
+					} else {
+				%>
 				<td><a class="btn btn-primary"
 					href="adminDelete.do?id=<%=adminList.get(i).getId()%>"
 					onclick="return confirm('삭제를 진행하시겠습니까?')">탈퇴</a></td>
-				<%} %>
+				<%
+					}
+				%>
 			</tr>
 			<%
 				cnt++;
@@ -491,45 +509,60 @@ ArrayList<Member> adminList = (ArrayList<Member>) request.getAttribute("adminLis
 		src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js"></script>
 	<script src="https://kit.fontawesome.com/6478f529f2.js"></script>
 	<script type="text/javascript">
-	var localIMG = new Array();
-	var cnt = 0;
-	var closeCnt = 0;
-	var windowchange =  window.matchMedia("screen and (max-width: 992px)");
-	$(function() {
-		windowchange.addListener(function(e) {
-			if(e.matches) {
-				$(".adminHide").hide();
-		    } else {
-		    	$(".adminHide").show();
-		    }
-		});
-		for (var i = 0; i < localStorage.length; i++) {
-			localStorage.getItem(localStorage.key(i));
-			console.log(localStorage.getItem(localStorage.key(i)));
-			if(localStorage.getItem(localStorage.key(closeCnt)) != null){
-				$(".todayImagethumb").eq(closeCnt).empty();
-				$(".todayImagethumb").eq(closeCnt).append("<img src='./img/"+ localStorage.getItem(localStorage.key(closeCnt)) +"' alt= '...' class='todayImageSize'>");
-				$(".todayImagethumb").eq(closeCnt).append("<button type='button' class='close today__close closeBtn'><span>&times;</span></button>");
-				$(".closeBtn").unbind();
-				closeCnt++;
-		}
-				$(".closeBtn").click(function(){
-					$(".today__Range-div").append("<div class='todayImagethumb'><img class='todayImageSize' src='./img/todayIMG/gift.svg'/></div>");
-					$(".today__Range-div").find("div").eq($(this).parent().index()).remove();
-				});
-				$('#today__Range-close').on('hide.bs.dropdown', function (e) {
-				    if (e.clickEvent) {
-				      e.preventDefault();
-				    }
+		var localIMG = new Array();
+		var cnt = 0;
+		var closeCnt = 0;
+		var windowchange = window.matchMedia("screen and (max-width: 992px)");
+		$(function() {
+			windowchange.addListener(function(e) {
+				if (e.matches) {
+					$(".adminHide").hide();
+				} else {
+					$(".adminHide").show();
+				}
+
+			});
+			for (var i = 0; i < localStorage.length; i++) {
+				localStorage.getItem(localStorage.key(i));
+				console.log(localStorage.getItem(localStorage.key(i)));
+				if (localStorage.getItem(localStorage.key(closeCnt)) != null) {
+					$(".todayImagethumb").eq(closeCnt).empty();
+					$(".todayImagethumb").eq(closeCnt).append(
+							"<img src='./img/"
+									+ localStorage.getItem(localStorage
+											.key(closeCnt))
+									+ "' alt= '...' class='todayImageSize'>");
+					$(".todayImagethumb")
+							.eq(closeCnt)
+							.append(
+									"<button type='button' class='close today__close closeBtn'><span>&times;</span></button>");
+					$(".closeBtn").unbind();
+					closeCnt++;
+				}
+				$(".closeBtn")
+						.click(
+								function() {
+									$(".today__Range-div")
+											.append(
+													"<div class='todayImagethumb'><img class='todayImageSize' src='./img/todayIMG/gift.svg'/></div>");
+									$(".today__Range-div").find("div").eq(
+											$(this).parent().index()).remove();
+								});
+				$('#today__Range-close').on('hide.bs.dropdown', function(e) {
+					if (e.clickEvent) {
+						e.preventDefault();
+					}
 				});
 			}
-	});
-	function LSDelete() {
-		localStorage.clear();
-		$(".today__Range-div").empty();
-		for(var i=0; i<8; i++)
-		$(".today__Range-div").append("<div class='todayImagethumb'><img class='todayImageSize' src='./img/todayIMG/gift.svg'/></div>");
-	}
+		});
+		function LSDelete() {
+			localStorage.clear();
+			$(".today__Range-div").empty();
+			for (var i = 0; i < 8; i++)
+				$(".today__Range-div")
+						.append(
+								"<div class='todayImagethumb'><img class='todayImageSize' src='./img/todayIMG/gift.svg'/></div>");
+		}
 	</script>
 </body>
 </html>
