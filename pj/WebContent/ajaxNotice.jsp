@@ -19,11 +19,7 @@
 		out.println("\""+article.getNotice_content().trim()+"\"");
 		out.println("]");
 	} catch (Exception e){
-		// TODO: handle exception
 	} finally{
 		JdbcUtil.close(conn);
 	}
-	
-	
-	
 %>

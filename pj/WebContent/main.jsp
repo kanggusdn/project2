@@ -202,7 +202,6 @@ ArrayList<Goods> todayImageList = (ArrayList<Goods>) request.getAttribute("today
 							<%
 								}
 							%>
-
 						</div></li>
 				</ul>
 			</div>
@@ -355,7 +354,6 @@ ArrayList<Goods> todayImageList = (ArrayList<Goods>) request.getAttribute("today
 										class="noticeViewLink"> <%=articleList.get(i).getNotice_subject()%>
 									</a>
 									</td>
-
 									<td><%=articleList.get(i).getNotice_name()%></td>
 									<td><%=articleList.get(i).getNotice_date()%></td>
 									<td><%=articleList.get(i).getNotice_readcount()%></td>
