@@ -421,11 +421,6 @@ ArrayList<Goods> todayImageList = (ArrayList<Goods>) request.getAttribute("today
 		</div>
 	</div>
 
-
-
-
-
-
 	<!-- 2020/12/04 강현우 프로필 수정 -->
 	<div class="modal fade" id="profileModal" data-backdrop="static"
 		data-keyboard="false" tabindex="-1"
