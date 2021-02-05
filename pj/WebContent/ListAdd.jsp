@@ -299,7 +299,6 @@ ArrayList<Goods> todayImageList = (ArrayList<Goods>) request.getAttribute("today
 			</div>
 		</div>
 	</footer>
-
 	<!-- end -->
 
 	<!-- Login Modal  2020-12-03 haesu-->
