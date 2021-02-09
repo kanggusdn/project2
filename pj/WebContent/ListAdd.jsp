@@ -620,7 +620,6 @@ ArrayList<Goods> todayImageList = (ArrayList<Goods>) request.getAttribute("today
 							src="https://ssl.pstatic.net/imgshopping/spec/157/30/27/15730273792_0_20181018115519.jpg">
 					</div>
 				</div>
-
 			</div>
 		</div>
 	</div>
