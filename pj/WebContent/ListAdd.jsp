@@ -627,8 +627,6 @@ ArrayList<Goods> todayImageList = (ArrayList<Goods>) request.getAttribute("today
 	
 	<!-- Optional JavaScript -->
 	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-
-
 	<script src="js/header.js"></script>
 	<script src="js/main.js"></script>
 	<script
