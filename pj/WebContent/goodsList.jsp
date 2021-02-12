@@ -183,7 +183,6 @@ int cnt = 0;
 							<button type="button"
 								class="dropdown-item btn btn-primary btn-sm btn-block"
 								onclick="location.href='admin.do'">관리자 전용 페이지</button>
-
 							<%
 								}
 							%>
