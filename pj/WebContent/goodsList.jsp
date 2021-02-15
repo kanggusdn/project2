@@ -509,8 +509,7 @@ int cnt = 0;
 				});
 // 				$('#today__Range-close').mouseleave(function(){
 //					$('#today__Range-close').dropdown('hide');
-//				});
-				
+//				});		
 			});
 			function LSDelete() {
 				localStorage.clear();
