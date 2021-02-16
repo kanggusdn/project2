@@ -314,7 +314,6 @@ if (request.getAttribute("totalMoney") != null)
 							data-dismiss="modal">취소</button>
 					</form>
 				</div>
-
 			</div>
 		</div>
 	</div>
