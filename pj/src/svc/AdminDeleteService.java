@@ -37,5 +37,4 @@ public class AdminDeleteService {
 		}
 		return isRemoveSuccess;
 	}
-
 }
