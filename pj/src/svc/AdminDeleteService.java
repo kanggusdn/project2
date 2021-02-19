@@ -32,7 +32,6 @@ public class AdminDeleteService {
 		} catch (Exception e) {
 			// TODO: handle exception
 		} finally {
-
 			close(conn);
 		}
 		return isRemoveSuccess;
