@@ -27,7 +27,6 @@ public class AdminDeleteService {
 				isRemoveSuccess = true;
 			} else {
 				rollback(conn);
-
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
