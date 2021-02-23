@@ -167,7 +167,6 @@ ArrayList<Goods> todayImageList = (ArrayList<Goods>) request.getAttribute("today
 							<%
 								}
 							%>
-
 						</div></li>
 				</ul>
 			</div>
