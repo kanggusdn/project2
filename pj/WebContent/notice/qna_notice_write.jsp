@@ -231,7 +231,6 @@ ArrayList<Goods> todayImageList = (ArrayList<Goods>) request.getAttribute("today
 			<button type="button" class="btn btn-primary btn-sm btn-block"
 				data-toggle="modal" data-target="#joinModal">회원가입</button>
 		</div>
-
 		<%
 			} else {
 		%>
