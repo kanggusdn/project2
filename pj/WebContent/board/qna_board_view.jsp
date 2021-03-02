@@ -171,7 +171,6 @@ String nowPage = (String) request.getAttribute("page");
 							<%
 								}
 							%>
-
 						</div></li>
 				</ul>
 			</div>
