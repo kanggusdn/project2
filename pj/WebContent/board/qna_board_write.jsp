@@ -214,7 +214,6 @@ ArrayList<Goods> todayImageList = (ArrayList<Goods>) request.getAttribute("today
 					<a class="btn btn-primary"
 							href="javascript:history.go(-1)" role="button">뒤로</a>
 				</form>
-			
 		</div>
 	</section>
 	<!-- 게시판 글 등록 끝 -->
