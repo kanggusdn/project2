@@ -243,7 +243,6 @@ String nowPage = (String) request.getAttribute("page");
 			<span class="text-center">최근본상품</span>
 
 			<div></div>
-
 		</div>
 	</div>
 
