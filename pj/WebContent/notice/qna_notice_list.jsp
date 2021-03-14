@@ -193,7 +193,6 @@ ArrayList<Goods> todayImageList = (ArrayList<Goods>) request.getAttribute("today
 				<br>
 
 				<table class="table table-hover">
-
 					<thead>
 						<tr>
 							<td>번호</td>
