@@ -293,7 +293,6 @@ ArrayList<Goods> todayImageList = (ArrayList<Goods>) request.getAttribute("today
 					<span class="text-center">최근본상품</span>
 
 					<div></div>
-
 				</div>
 			</div>
 
