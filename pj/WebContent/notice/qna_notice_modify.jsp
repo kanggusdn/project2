@@ -270,7 +270,6 @@ NoticeBean article = (NoticeBean) request.getAttribute("article");
 			<span class="text-center">최근본상품</span>
 
 			<div></div>
-
 		</div>
 	</div>
 
