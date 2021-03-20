@@ -340,7 +340,6 @@ NoticeBean article = (NoticeBean) request.getAttribute("article");
 							data-dismiss="modal">취소</button>
 					</form>
 				</div>
-
 			</div>
 		</div>
 	</div>
