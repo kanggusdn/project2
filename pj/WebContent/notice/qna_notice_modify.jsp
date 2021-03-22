@@ -505,7 +505,6 @@ NoticeBean article = (NoticeBean) request.getAttribute("article");
 							src="http://ai.esmplus.com/gded/i/s/20201109/14/1604900967901eb863b2.jpg">
 					</div>
 				</div>
-
 			</div>
 		</div>
 	</div>
