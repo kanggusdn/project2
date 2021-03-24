@@ -547,7 +547,6 @@ NoticeBean article = (NoticeBean) request.getAttribute("article");
 							src="http://gi.esmplus.com/hpinvent/PC/LENOVO/M70T/11EVS00B00/11EVS00B00.png">
 					</div>
 				</div>
-
 			</div>
 		</div>
 	</div>
