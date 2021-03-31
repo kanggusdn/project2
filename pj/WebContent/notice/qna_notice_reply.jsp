@@ -607,7 +607,6 @@ String nowPage = (String) request.getAttribute("page");
 							src="https://ssl.pstatic.net/imgshopping/spec/157/30/27/15730273792_0_20181018115519.jpg">
 					</div>
 				</div>
-
 			</div>
 		</div>
 	</div>
