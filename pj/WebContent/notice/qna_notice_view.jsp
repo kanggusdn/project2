@@ -580,7 +580,6 @@ String nowPage = (String) request.getAttribute("page");
 							src="https://shopping-phinf.pstatic.net/20200609_15_27/f9668473-82e6-431e-b712-f2c29a7cedb4/%EC%88%98%EC%A0%95%EB%90%A8_DDR4_detail_890_final.jpg">
 					</div>
 				</div>
-
 			</div>
 		</div>
 	</div>
