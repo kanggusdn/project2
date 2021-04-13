@@ -263,7 +263,6 @@ RecommandBean article = (RecommandBean) request.getAttribute("article");
 			</div>
 		</div>
 	</footer>
-	</div>
 	<!-- end -->
 
 	<!-- Login Modal  2020-12-03 haesu-->
