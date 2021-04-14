@@ -296,7 +296,6 @@ RecommandBean article = (RecommandBean) request.getAttribute("article");
 							data-dismiss="modal">취소</button>
 					</form>
 				</div>
-
 			</div>
 		</div>
 	</div>
