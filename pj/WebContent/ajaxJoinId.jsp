@@ -15,5 +15,4 @@
 		JdbcUtil.close(conn);	
 	}
 	
-	
 %>
