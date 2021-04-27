@@ -334,7 +334,6 @@ int cnt = 0;
 							data-dismiss="modal">취소</button>
 					</form>
 				</div>
-
 			</div>
 		</div>
 	</div>
