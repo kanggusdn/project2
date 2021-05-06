@@ -528,7 +528,6 @@ ArrayList<Goods> todayImageList = (ArrayList<Goods>) request.getAttribute("today
 							src="http://cms.ygoon.com/editorStore/file/202011/26/14c55f83e3154dbd8063f48934bbe884.jpg">
 					</div>
 				</div>
-
 			</div>
 		</div>
 	</div>
