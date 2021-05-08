@@ -536,7 +536,6 @@ ArrayList<Goods> todayImageList = (ArrayList<Goods>) request.getAttribute("today
 							data-dismiss="modal">취소</button>
 					</form>
 				</div>
-
 			</div>
 		</div>
 	</div>
