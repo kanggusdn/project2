@@ -759,7 +759,6 @@ ArrayList<Goods> todayImageList = (ArrayList<Goods>) request.getAttribute("today
 							src="http://gi.esmplus.com/hpinvent/PC/LENOVO/M70T/11EVS00B00/11EVS00B00.png">
 					</div>
 				</div>
-
 			</div>
 		</div>
 	</div>
