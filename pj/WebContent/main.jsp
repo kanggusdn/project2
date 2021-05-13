@@ -781,7 +781,6 @@ ArrayList<Goods> todayImageList = (ArrayList<Goods>) request.getAttribute("today
 							src="http://www.pc4all.co.kr/imgdata3/iteminfoimage/2019/12/17/rewq4321_5.jpg">
 					</div>
 				</div>
-
 			</div>
 		</div>
 	</div>
