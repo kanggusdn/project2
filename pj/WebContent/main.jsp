@@ -882,7 +882,6 @@ ArrayList<Goods> todayImageList = (ArrayList<Goods>) request.getAttribute("today
 						<button type="button" class="btn btn-secondary"
 							data-dismiss="modal">닫기</button>
 					</form>
-
 				</div>
 			</div>
 		</div>
