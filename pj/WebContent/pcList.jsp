@@ -438,7 +438,6 @@ int cnt = 0;
 							src="./img/<%=pcList.get(i).getModalimage()%>">
 					<%} %>
 				</div>
-
 			</div>
 		</div>
 		<div>
