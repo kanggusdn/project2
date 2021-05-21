@@ -508,7 +508,6 @@ int cnt = 0;
 						<button type="submit" class="btn btn-primary form-control">변경</button>
 					</form>
 				</div>
-
 			</div>
 		</div>
 	</div>
