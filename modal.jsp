@@ -298,7 +298,6 @@ ArrayList<Member> adminList = (ArrayList<Member>) request.getAttribute("adminLis
 							data-dismiss="modal">취소</button>
 					</form>
 				</div>
-
 			</div>
 		</div>
 	</div>
