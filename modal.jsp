@@ -451,7 +451,6 @@ ArrayList<Member> adminList = (ArrayList<Member>) request.getAttribute("adminLis
 						<button type="submit" class="btn btn-primary form-control">변경</button>
 					</form>
 				</div>
-
 			</div>
 		</div>
 	</div>
