@@ -14,7 +14,6 @@ public class AdminAction implements Action {
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ArrayList<Member> adminList = new ArrayList<Member>();
-		
 		AdminService adminListService = new AdminService();
 		adminList = adminListService.getAdminList();
 		request.setAttribute("adminList", adminList);
