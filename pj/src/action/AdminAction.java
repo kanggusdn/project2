@@ -21,5 +21,4 @@ public class AdminAction implements Action {
 		forward.setPath("admin.jsp");
 		return forward;
 	}
-
 }
