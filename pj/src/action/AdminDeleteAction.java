@@ -35,5 +35,4 @@ public class AdminDeleteAction implements Action {
 		
 		return forward;
 	}
-
 }
