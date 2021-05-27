@@ -32,7 +32,6 @@ public class AdminDeleteAction implements Action {
 				forward.setRedirect(true);
 				forward.setPath("admin.do");
 			}
-		
 		return forward;
 	}
 }
