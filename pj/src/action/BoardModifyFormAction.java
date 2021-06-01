@@ -19,5 +19,4 @@ public class BoardModifyFormAction implements Action {
 		forward.setPath("/board/qna_board_modify.jsp");
 		return forward;
 	}
-
 }
