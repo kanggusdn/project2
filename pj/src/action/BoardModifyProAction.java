@@ -50,5 +50,4 @@ public class BoardModifyProAction implements Action {
 		}
 		return forward;
 	}
-
 }
