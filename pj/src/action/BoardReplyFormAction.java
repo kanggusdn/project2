@@ -21,6 +21,5 @@ public class BoardReplyFormAction implements Action {
 		forward.setPath("/board/qna_board_reply.jsp");
 		return forward;
 	}
-
 }
 
