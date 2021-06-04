@@ -40,7 +40,6 @@ public class BoardReplyProAction implements Action {
 			out.println("</script>");
 			out.close();
 		}
-
 		return forward;
 	}
 
