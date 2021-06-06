@@ -51,5 +51,4 @@ public class BoardWriteProAction implements Action {
 		}
 		return forward;
 	}
-
 }
