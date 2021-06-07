@@ -35,5 +35,4 @@ public class ComuListAction implements Action {
 		ActionForward forward = new ActionForward("comuList.jsp", false);
 		return forward;
 	}
-
 }
