@@ -18,5 +18,4 @@ public class GoodsCartAddAction implements Action {
 		ActionForward forward = new ActionForward("goodsCartList.do",true);
 		return forward;
 	}
-
 }
