@@ -43,5 +43,4 @@ public class GoodsCartSearchAction implements Action {
 		ActionForward forward = new ActionForward("goodsCartList.jsp", false);
 		return forward;
 	}
-
 }
