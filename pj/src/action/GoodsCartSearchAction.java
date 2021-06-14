@@ -17,7 +17,6 @@ public class GoodsCartSearchAction implements Action {
 		int startMoney = 0;
 		int endMoney = Integer.MAX_VALUE;
 		try {
-
 			startMoney = Integer.parseInt(request.getParameter("startMoney"));
 		} catch (Exception e) {
 			// TODO: handle exception
