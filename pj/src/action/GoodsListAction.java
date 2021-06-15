@@ -35,5 +35,4 @@ public class GoodsListAction implements Action {
 		ActionForward forward = new ActionForward("goodsList.jsp", false);
 		return forward;
 	}
-
 }
