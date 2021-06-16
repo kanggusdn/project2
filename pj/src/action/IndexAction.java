@@ -43,5 +43,4 @@ public class IndexAction implements Action {
 		forward.setPath("/main.jsp");
 		return forward;
 	}
-
 }
