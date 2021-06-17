@@ -56,5 +56,4 @@ public class JoinAction implements Action {
 		}
 		return forward;
 	}
-
 }
