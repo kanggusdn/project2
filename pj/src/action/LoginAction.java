@@ -39,5 +39,4 @@ public class LoginAction implements Action {
 		}
 		return forward;
 	}
-
 }
