@@ -39,5 +39,4 @@ public class NoticeDeleteProAction implements Action {
 		}
 		return forward;
 	}
-
 }
