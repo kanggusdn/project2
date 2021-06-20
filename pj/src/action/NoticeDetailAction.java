@@ -20,7 +20,6 @@ public class NoticeDetailAction implements Action {
 			request.setAttribute("article", article);
 			forward.setPath("/notice/qna_notice_view.jsp");
 			return forward;
-			
 	}
 
 }
