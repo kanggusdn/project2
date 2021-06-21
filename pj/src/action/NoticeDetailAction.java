@@ -21,5 +21,4 @@ public class NoticeDetailAction implements Action {
 			forward.setPath("/notice/qna_notice_view.jsp");
 			return forward;
 	}
-
 }
