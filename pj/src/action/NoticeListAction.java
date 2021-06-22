@@ -43,5 +43,4 @@ public class NoticeListAction implements Action {
 		forward.setPath("/notice/qna_notice_list.jsp");
 		return forward;
 	}
-
 }
