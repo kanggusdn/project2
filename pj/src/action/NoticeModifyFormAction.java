@@ -19,5 +19,4 @@ public class NoticeModifyFormAction implements Action {
 		forward.setPath("/notice/qna_notice_modify.jsp");
 		return forward;
 	}
-
 }
