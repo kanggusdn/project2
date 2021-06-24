@@ -40,5 +40,4 @@ public class NoticeModifyProAction implements Action {
 			}
 		return forward;
 	}
-
 }
