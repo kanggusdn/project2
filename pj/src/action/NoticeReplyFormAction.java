@@ -21,6 +21,5 @@ public class NoticeReplyFormAction implements Action {
 		forward.setPath("/notice/qna_notice_reply.jsp");
 		return forward;
 	}
-
 }
 
