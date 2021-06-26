@@ -40,7 +40,6 @@ public class NoticeReplyProAction implements Action {
 			out.println("</script>");
 			out.close();
 		}
-
 		return forward;
 	}
 
