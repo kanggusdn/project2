@@ -42,5 +42,4 @@ public class NoticeReplyProAction implements Action {
 		}
 		return forward;
 	}
-
 }
