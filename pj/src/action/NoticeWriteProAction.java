@@ -51,5 +51,4 @@ public class NoticeWriteProAction implements Action {
 		}
 		return forward;
 	}
-
 }
