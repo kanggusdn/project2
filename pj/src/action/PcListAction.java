@@ -35,5 +35,4 @@ public class PcListAction implements Action {
 		ActionForward forward = new ActionForward("pcList.jsp", false);
 		return forward;
 	}
-
 }
