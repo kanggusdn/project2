@@ -45,5 +45,4 @@ public class RecommandDeleteProAction implements Action {
 		}
 		return forward;
 	}
-
 }
