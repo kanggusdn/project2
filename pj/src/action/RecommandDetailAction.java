@@ -20,7 +20,6 @@ public class RecommandDetailAction implements Action {
 			request.setAttribute("article", article);
 			forward.setPath("/recommand/qna_recommand_view.jsp");
 			return forward;
-			
 	}
 
 }
