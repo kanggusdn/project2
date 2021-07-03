@@ -43,5 +43,4 @@ public class RecommandListAction implements Action {
 		forward.setPath("/recommand/qna_recommand_list.jsp");
 		return forward;
 	}
-
 }
