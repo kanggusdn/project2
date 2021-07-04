@@ -19,5 +19,4 @@ public class RecommandModifyFormAction implements Action {
 		forward.setPath("/recommand/qna_recommand_modify.jsp");
 		return forward;
 	}
-
 }
