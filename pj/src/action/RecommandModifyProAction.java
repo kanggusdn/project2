@@ -49,5 +49,4 @@ public class RecommandModifyProAction implements Action {
 		}
 		return forward;
 	}
-
 }
