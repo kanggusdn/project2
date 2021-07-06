@@ -21,6 +21,5 @@ public class RecommandReplyFormAction implements Action {
 		forward.setPath("/recommand/qna_recommand_reply.jsp");
 		return forward;
 	}
-
 }
 
