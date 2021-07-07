@@ -40,7 +40,6 @@ public class RecommandReplyProAction implements Action {
 			out.println("</script>");
 			out.close();
 		}
-
 		return forward;
 	}
 
