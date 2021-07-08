@@ -42,5 +42,4 @@ public class RecommandReplyProAction implements Action {
 		}
 		return forward;
 	}
-
 }
