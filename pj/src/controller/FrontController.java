@@ -298,7 +298,7 @@ public class FrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}  else if (command.equals("/noticeModifyPro.do")) {
+		} else if (command.equals("/noticeModifyPro.do")) {
 			action = new NoticeModifyProAction();
 			try {
 				forward = action.execute(request, response);
