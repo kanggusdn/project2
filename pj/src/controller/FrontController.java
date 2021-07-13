@@ -323,7 +323,7 @@ public class FrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 			/*admin*/
-		}  else if (command.equals("/admin.do")) {
+		} else if (command.equals("/admin.do")) {
 			action = new AdminAction();
 			try {
 				forward = action.execute(request, response);
