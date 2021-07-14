@@ -330,7 +330,7 @@ public class FrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}  else if (command.equals("/adminDelete.do")) {
+		} else if (command.equals("/adminDelete.do")) {
 			action = new AdminDeleteAction();
 			try {
 				forward = action.execute(request, response);
