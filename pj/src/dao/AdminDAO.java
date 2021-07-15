@@ -60,7 +60,6 @@ public class AdminDAO {
 			close(rs);
 			close(pstmt);
 		}
-
 		return adminList;
 	}
 	
