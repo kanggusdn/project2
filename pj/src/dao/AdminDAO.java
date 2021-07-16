@@ -79,7 +79,6 @@ public class AdminDAO {
 			if(pstmt != null) close(pstmt);
 			if(rs != null) close(rs);
 		}
-		
 		return deleteCount;
 	}
 }
