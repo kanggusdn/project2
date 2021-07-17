@@ -40,7 +40,6 @@ public class BoardDAO {
 			
 			if(rs.next()) {
 				listCount = rs.getInt(1);
-				
 			}
 		} catch (Exception e) {
 			System.out.println("getListCount 에러: " + e);
