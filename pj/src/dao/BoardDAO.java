@@ -84,7 +84,6 @@ public class BoardDAO {
 			close(rs);
 			close(pstmt);
 		}
-		
 		return articleList;
 	}
 	
