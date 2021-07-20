@@ -110,7 +110,7 @@ public class BoardDAO {
 				boardBean.setBoard_readcount(rs.getInt("board_readcount"));
 				boardBean.setBoard_date(rs.getDate("board_date"));
 			}
-		}catch (Exception e) {
+		} catch (Exception e) {
 			System.out.println("getDetail 에러: " + e);
 		} finally {
 			close(rs);
