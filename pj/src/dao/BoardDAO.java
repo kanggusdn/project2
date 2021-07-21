@@ -116,7 +116,6 @@ public class BoardDAO {
 			close(rs);
 			close(pstmt);
 		}
-		
 		return boardBean;
 	}
 	
