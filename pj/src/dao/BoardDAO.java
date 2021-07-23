@@ -172,7 +172,6 @@ public class BoardDAO {
 		} finally {
 			if(pstmt != null) close(pstmt);
 		}
-		
 		return updateCount;
 	}
 
