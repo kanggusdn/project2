@@ -16,7 +16,6 @@ public class GoodsDAO {
 	private PreparedStatement pstmt;
 
 	private GoodsDAO() {
-
 	}
 	public void setConnection(Connection conn) {
 		this.conn = conn;
