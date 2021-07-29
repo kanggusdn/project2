@@ -196,7 +196,6 @@ public class GoodsDAO {
 	}
 
 
-
 	public static GoodsDAO getInstance() {
 			if (boardDAO == null) {
 				boardDAO = new GoodsDAO();
