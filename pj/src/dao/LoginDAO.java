@@ -14,7 +14,6 @@ public class LoginDAO {
 	private PreparedStatement pstmt;
 
 	public LoginDAO() {
-
 	}
 
 	public static LoginDAO getInstance() {
