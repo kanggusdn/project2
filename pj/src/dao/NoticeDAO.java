@@ -47,7 +47,6 @@ public class NoticeDAO {
 			close(rs);
 			close(pstmt);
 		}
-		
 		return listCount;
 	}
 	
