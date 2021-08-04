@@ -110,7 +110,7 @@ public class NoticeDAO {
 				noticeBean.setNotice_readcount(rs.getInt("notice_readcount"));
 				noticeBean.setNotice_date(rs.getDate("notice_date"));
 			}
-		}catch (Exception e) {
+		} catch (Exception e) {
 			System.out.println("getDetail 에러: " + e);
 		} finally {
 			close(rs);
