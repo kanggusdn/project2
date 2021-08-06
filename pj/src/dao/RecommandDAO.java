@@ -113,7 +113,7 @@ public class RecommandDAO {
 				recommandBean.setRecommand_readcount(rs.getInt("recommand_readcount"));
 				recommandBean.setRecommand_date(rs.getDate("recommand_date"));
 			}
-		}catch (Exception e) {
+		} catch (Exception e) {
 			System.out.println("getDetail 에러: " + e);
 		} finally {
 			close(rs);
