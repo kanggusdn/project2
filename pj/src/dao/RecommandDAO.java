@@ -227,7 +227,6 @@ public class RecommandDAO {
 		} finally {
 			if(pstmt != null) close(pstmt);
 			if(rs != null) close(rs);
-			
 		}
 		
 		return insertCount;
