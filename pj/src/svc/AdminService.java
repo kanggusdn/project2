@@ -31,5 +31,4 @@ public class AdminService {
 		return adminList;
 
 	}
-
 }
