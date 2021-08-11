@@ -47,5 +47,4 @@ public class BoardDeleteProService {
 		}
 		return isRemoveSuccess;
 	}
-
 }
